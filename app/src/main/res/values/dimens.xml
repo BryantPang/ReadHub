@@ -1,0 +1,27 @@
+<resources>
+  <!-- margin -->
+  <dimen name="app_margin">64dp</dimen>
+  <dimen name="margin_30">30dp</dimen>
+  <dimen name="margin_20">20dp</dimen>
+  <dimen name="margin_10">10dp</dimen>
+
+  <!-- padding -->
+  <dimen name="padding_20">20dp</dimen>
+
+  <!-- height -->
+  <dimen name="bottom_navigation_view_height">56dp</dimen>
+  <dimen name="divider_height">1dp</dimen>
+  <dimen name="logo_height">56dp</dimen>
+
+  <!-- elevation -->
+  <dimen name="bottom_navigation_view_elevation">8dp</dimen>
+
+  <!-- text size -->
+  <dimen name="text_size_18">18sp</dimen>
+  <dimen name="text_size_16">16sp</dimen>
+  <dimen name="text_size_14">14sp</dimen>
+
+  <!-- img size -->
+  <dimen name="avatar_size">60dp</dimen>
+
+</resources>

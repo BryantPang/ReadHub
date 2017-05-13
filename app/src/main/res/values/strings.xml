@@ -1,0 +1,13 @@
+<resources>
+  <string name="app_name">Readhub</string>
+  <string name="hot_topic">热门话题</string>
+  <string name="news">最新资讯</string>
+  <string name="more">更多</string>
+  <string name="domain">Readhub.me</string>
+
+  <string name="author_time_format">%1$s·%2$s</string>
+  <string name="app_author">作者：ChihoPang</string>
+  <string name="sponsor">Readhub 赞助商：</string>
+  <string name="network_error">网络错误</string>
+  <string name="access_success">访问成功</string>
+</resources>
