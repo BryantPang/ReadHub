@@ -2,14 +2,14 @@ package com.chihopang.readhub.model;
 
 import java.util.List;
 
-public class TopicData {
+public class ApiData {
   private List<Topic> data;
   private int pageSize;
   private int totalItems;
   private int totalPages;
 
   @Override public String toString() {
-    return "TopicData{" +
+    return "ApiData{" +
         "data=" + data +
         ", pageSize=" + pageSize +
         ", totalItems=" + totalItems +

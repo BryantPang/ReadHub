@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.OnItemClickListener;
 import com.chihopang.readhub.feature.main.MainActivity;
+import com.chihopang.readhub.model.ApiData;
 import com.chihopang.readhub.model.Topic;
-import com.chihopang.readhub.model.TopicData;
 
 public class HotTopicFragment extends Fragment {
   public static final String TAG = "HotTopicFragment";
@@ -48,7 +48,7 @@ public class HotTopicFragment extends Fragment {
     mRecyclerView.setLayoutManager(mManager);
   }
 
-  public void onSuccess(final TopicData data) {
+  public void onSuccess(final ApiData data) {
     getActivity().runOnUiThread(new Runnable() {
       @Override public void run() {
         mAdapter.addItems(data.getData());

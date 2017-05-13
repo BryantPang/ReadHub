@@ -2,7 +2,7 @@ package com.chihopang.readhub.feature.topic;
 
 import android.util.Log;
 import com.chihopang.readhub.app.Navigator;
-import com.chihopang.readhub.model.TopicData;
+import com.chihopang.readhub.model.ApiData;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class HotTopicPresenter {
       @Override public void onResponse(Call call, Response response) throws IOException {
         String jsonStr = response.body().string();
         Gson gson = new GsonBuilder().create();
-        TopicData data = gson.fromJson(jsonStr, TopicData.class);
+        ApiData data = gson.fromJson(jsonStr, ApiData.class);
         fragment.onSuccess(data);
         Log.d("HotTopicPresenter", data.toString());
       }

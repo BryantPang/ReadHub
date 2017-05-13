@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.feature.main.MainActivity;
-import com.chihopang.readhub.model.TopicData;
+import com.chihopang.readhub.model.ApiData;
 
 public class NewsFragment extends Fragment {
   public static final String TAG = "NewsFragment";
@@ -39,7 +39,7 @@ public class NewsFragment extends Fragment {
     mRecyclerView.setAdapter(mAdapter);
   }
 
-  public void onSuccess(final TopicData data) {
+  public void onSuccess(final ApiData data) {
     getActivity().runOnUiThread(new Runnable() {
       @Override public void run() {
         mAdapter.addItems(data.getData());
