@@ -12,11 +12,13 @@ import com.chihopang.readhub.R;
 import com.chihopang.readhub.feature.more.MoreFragment;
 import com.chihopang.readhub.feature.news.NewsFragment;
 import com.chihopang.readhub.feature.topic.HotTopicFragment;
+import mehdi.sakout.dynamicbox.DynamicBox;
 
 public class MainActivity extends AppCompatActivity {
   private Toolbar mToolbar;
   private BottomNavigationView mBottomNavigationView;
   private FrameLayout mFrameContainer;
+  public DynamicBox mBox;
 
   private FragmentManager mFragmentManager = getSupportFragmentManager();
 
@@ -33,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
     mToolbar = (Toolbar) findViewById(R.id.toolbar);
     mFrameContainer = (FrameLayout) findViewById(R.id.frame_main);
     mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+    mBox = new DynamicBox(this, mFrameContainer);
   }
 
   private void initContent() {
+    mToolbar.setTitle("");
+    setSupportActionBar(mToolbar);
     if (mFragmentManager.findFragmentById(R.id.frame_main) == null) {
       mFragmentManager.beginTransaction()
           .replace(R.id.frame_main, HotTopicFragment.newInstance(), HotTopicFragment.TAG)

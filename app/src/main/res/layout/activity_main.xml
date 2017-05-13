@@ -6,6 +6,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:background="@android:color/white"
     tools:context="com.chihopang.readhub.feature.main.MainActivity">
+
   <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
       android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
       android:background="@color/colorPrimary" app:layout_scrollFlags="scroll|enterAlways"
@@ -15,12 +16,14 @@
         android:text="@string/domain" android:layout_gravity="center_horizontal"/>
   </android.support.v7.widget.Toolbar>
 
-  <FrameLayout android:id="@+id/frame_main"
-      android:layout_width="match_parent" android:layout_height="match_parent"
-      android:layout_below="@id/toolbar"
-      android:layout_marginTop="?attr/actionBarSize"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior"
-      android:layout_marginBottom="@dimen/bottom_navigation_view_height"/>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+      android:layout_below="@id/toolbar" android:layout_marginTop="?attr/actionBarSize"
+      android:layout_marginBottom="@dimen/bottom_navigation_view_height">
+    <FrameLayout android:id="@+id/frame_main"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+  </LinearLayout>
+
 
   <android.support.design.widget.BottomNavigationView android:id="@+id/bottom_navigation_view"
       android:layout_width="match_parent"

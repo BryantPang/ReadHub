@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chihopang.readhub.R;
+import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.model.TopicData;
 
 public class NewsFragment extends Fragment {
@@ -29,6 +30,7 @@ public class NewsFragment extends Fragment {
     mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
     initRecycler();
     NewsPresenter.getData(this);
+    ((MainActivity) getActivity()).mBox.showLoadingLayout();
     return v;
   }
 
@@ -42,6 +44,7 @@ public class NewsFragment extends Fragment {
       @Override public void run() {
         mAdapter.addItems(data.getData());
         mAdapter.notifyDataSetChanged();
+        ((MainActivity) getActivity()).mBox.hideAll();
       }
     });
   }

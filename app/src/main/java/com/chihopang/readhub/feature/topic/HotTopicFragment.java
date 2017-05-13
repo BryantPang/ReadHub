@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.OnItemClickListener;
+import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.model.TopicData;
 
@@ -32,6 +33,7 @@ public class HotTopicFragment extends Fragment {
     mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
     initRecycler();
     HotTopicPresenter.getData(this);
+    ((MainActivity) getActivity()).mBox.showLoadingLayout();
     return v;
   }
 
@@ -51,6 +53,7 @@ public class HotTopicFragment extends Fragment {
       @Override public void run() {
         mAdapter.addItems(data.getData());
         mAdapter.notifyDataSetChanged();
+        ((MainActivity) getActivity()).mBox.hideAll();
       }
     });
   }
