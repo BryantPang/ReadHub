@@ -32,20 +32,4 @@ public class TopicData {
   public int getTotalPages() {
     return totalPages;
   }
-
-  public void setData(List<Topic> data) {
-    this.data = data;
-  }
-
-  public void setPageSize(int pageSize) {
-    this.pageSize = pageSize;
-  }
-
-  public void setTotalItems(int totalItems) {
-    this.totalItems = totalItems;
-  }
-
-  public void setTotalPages(int totalPages) {
-    this.totalPages = totalPages;
-  }
 }
