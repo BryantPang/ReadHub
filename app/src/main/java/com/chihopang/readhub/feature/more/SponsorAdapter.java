@@ -55,7 +55,7 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.SponsorV
     }
 
     public void bind(Sponsor value) {
-      mTxtSponsorName.setText(value.getName());
+      mTxtSponsorName.setText(value.getSponsor());
     }
   }
 }

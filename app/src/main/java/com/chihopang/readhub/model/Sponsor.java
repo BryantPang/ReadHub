@@ -1,13 +1,22 @@
 package com.chihopang.readhub.model;
 
 public class Sponsor {
-  private String name;
+  private String sponsor;
   private String slogan;
   private String pageUrl;
   private String imgUrl;
 
-  public String getName() {
-    return name;
+  @Override public String toString() {
+    return "Sponsor{" +
+        "sponsor='" + sponsor + '\'' +
+        ", slogan='" + slogan + '\'' +
+        ", pageUrl='" + pageUrl + '\'' +
+        ", imgUrl='" + imgUrl + '\'' +
+        '}';
+  }
+
+  public String getSponsor() {
+    return sponsor;
   }
 
   public String getSlogan() {
@@ -20,9 +29,5 @@ public class Sponsor {
 
   public String getImgUrl() {
     return imgUrl;
-  }
-
-  public void setName(String name) {
-    this.name = name;
   }
 }

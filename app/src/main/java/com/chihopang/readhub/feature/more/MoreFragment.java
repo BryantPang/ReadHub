@@ -29,7 +29,7 @@ public class MoreFragment extends Fragment {
     View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_more, container, false);
     findView(v);
     initRecycler();
-    initData();
+    MorePresenter.getSponsorData(this);
     return v;
   }
 
@@ -42,9 +42,15 @@ public class MoreFragment extends Fragment {
     mRecyclerSponsors.setLayoutManager(mLayoutManager);
   }
 
-  private void initData() {
-    Sponsor s = new Sponsor();
-    s.setName("得到");
-    mAdapter.addItem(s);
+  public void onSuccess(final Sponsor[] sponsors) {
+    getActivity().runOnUiThread(new Runnable() {
+      @Override public void run() {
+        for (Sponsor sponsor : sponsors) {
+          mAdapter.addItem(sponsor);
+          mAdapter.notifyDataSetChanged();
+        }
+      }
+    });
+
   }
 }
