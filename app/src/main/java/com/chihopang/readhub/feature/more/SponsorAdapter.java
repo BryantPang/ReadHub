@@ -1,13 +1,16 @@
 package com.chihopang.readhub.feature.more;
 
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.OnItemClickListener;
 import com.chihopang.readhub.model.Sponsor;
+import com.facebook.drawee.view.SimpleDraweeView;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,14 +51,22 @@ public class SponsorAdapter extends RecyclerView.Adapter<SponsorAdapter.SponsorV
 
   class SponsorViewHolder extends RecyclerView.ViewHolder {
     private TextView mTxtSponsorName;
+    private SimpleDraweeView mImgSponsor;
 
     public SponsorViewHolder(View itemView) {
       super(itemView);
       mTxtSponsorName = (TextView) itemView.findViewById(R.id.txt_sponsor_name);
+      mImgSponsor = (SimpleDraweeView) itemView.findViewById(R.id.img_sponsor);
     }
 
-    public void bind(Sponsor value) {
+    public void bind(final Sponsor value) {
       mTxtSponsorName.setText(value.getSponsor());
+      mImgSponsor.setImageURI(Uri.parse(value.getImgUrl()));
+      mImgSponsor.setOnClickListener(new View.OnClickListener() {
+        @Override public void onClick(View view) {
+          Toast.makeText(mImgSponsor.getContext(), value.getSlogan(), Toast.LENGTH_SHORT).show();
+        }
+      });
     }
   }
 }
