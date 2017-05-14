@@ -4,8 +4,9 @@ import android.util.Log;
 import com.chihopang.readhub.app.Navigator;
 import com.chihopang.readhub.model.Sponsor;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -27,8 +28,9 @@ public class MorePresenter {
       @Override public void onResponse(Call call, Response response) throws IOException {
         String jsonStr = response.body().string();
         Gson gson = new Gson();
-        Sponsor[] sponsorList = gson.fromJson(jsonStr, Sponsor[].class);
-        Log.d("MorePresenter", Arrays.toString(sponsorList));
+        List<Sponsor> sponsorList = gson.fromJson(jsonStr, new TypeToken<List<Sponsor>>() {
+        }.getType());
+        Log.d("MorePresenter", sponsorList.toString());
         fragment.onSuccess(sponsorList);
       }
     });

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.model.Sponsor;
+import java.util.List;
 
 public class MoreFragment extends Fragment {
   public static final String TAG = "MoreFragment";
@@ -42,13 +43,11 @@ public class MoreFragment extends Fragment {
     mRecyclerSponsors.setLayoutManager(mLayoutManager);
   }
 
-  public void onSuccess(final Sponsor[] sponsors) {
+  public void onSuccess(final List<Sponsor> sponsors) {
     getActivity().runOnUiThread(new Runnable() {
       @Override public void run() {
-        for (Sponsor sponsor : sponsors) {
-          mAdapter.addItem(sponsor);
-          mAdapter.notifyDataSetChanged();
-        }
+        mAdapter.addItems(sponsors);
+        mAdapter.notifyDataSetChanged();
       }
     });
 
