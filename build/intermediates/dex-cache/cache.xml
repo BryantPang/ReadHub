@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/d8c6c6331e2ca477cbb2b993d7bc7a5972598285/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="95519720620b553f63afc789beba9ad582807f7c">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fa54ef920d85874bedd397880a4abe78ce4f8554/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/fe522df5ad57fe2a01aaa7b0f7664bce2e8400a9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_30f486750d3e85a17290bf864fa88fc6544d8f87/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.0_81a64d52d06c603220eb2bd2de220ec049a5c5ee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/70c10f5673f649d177852c49e7f4618dcf9f47ad/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_13296340b2593a087f259278bc76dd8198edb10d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/35fb6302a3e88b6278ef13fda33c8b0dfe9be713/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="38789e20ace9ab7dbd00554bd2673ab424478d3b">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e0f16a7c4ba036f9d55e06004a10f78940ad77bb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/b05fef2299d2fccdb50c2e09e62cccf63e4dc79b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7848da7bb7a0fee06a836c2b53cd4e001c6a0a56/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/3ae0522d56851ab66b89cac586e8d99da312bbfc/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f8f64cdebfba13a8d82f8257a96b921b57e8ba6f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="f5391e553701b1a62d295a4e6408e3f36c274c5f">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_f085f3a53a79ca587abac880e474b8ee2b132e49/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/9befa5e7854d0cc3f53190433b41e4bdb7fbf837/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f22f998c22f5c3bdc9d1909a87be1ea93d3fc545/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_e101f95aa789cfb832fe733d7fe9d6f8e4d4b0fd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/e9970b7571671277a48d0ef195e144167bd3f72e/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_3ddf0b8dabec9642964b4ef62ea15ea4a0e2424d/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/7b19fca059b03d839622a826007f3505905c18f5/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7c6fdff6008906f80803cc701b2789319fbbe882/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.12.0/3742beff8024d0a0073d284b7c5e4cbf73d99b25/okio-1.12.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3742beff8024d0a0073d284b7c5e4cbf73d99b25">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.12.0_df20b2a141063ee16999dbf54375af0ef073ac75/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/b44c669f7892c0245e18535bf7f8bce84e838294/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d4cf6227dd6a2ceff0f7dcf0c324380b7abf2c28">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ded1b1465e12482e72aed6ac828563a3a7aa7dc5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.7.0/6edbebdd8868708db718d15c09c4b28037fd487e/okhttp-3.7.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6edbebdd8868708db718d15c09c4b28037fd487e">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.7.0_a36234827c92243994bd9035a48b325c2bc721f8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/66e9d96b0dca67779074d9f5fccd0c9cf31c119f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="721a764760e366ebe85794496026cb74157a4f6e">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_7f4f66e45960406837517ef8b72c999e33ea1792/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/ea17c5268a63cd7e2e37ebe1e09b5f3af2373d6d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="efb8cb62d47d157c29d1521daac7eefd4cb881ee">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ef7ffed536d34fdfed706eaeaaf9a6345f0914f3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/dec307e298dd9907add82e237bb97785b86836ab/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="47635644d0d5c103c1dd8360549eb9ba3225c7d3">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8548d7dcb0621b009377d073753366a842c41547/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_12cafdf7a92f9edd025a84bd2c6d0c911df4e65e/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/8863ddf656c5cd4ca03080a3d1238b5a1069562e/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_275978b18ed9f27b9b68c2d61057d986d3b723a1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/3826293725e91a8eb77d07c1598cffc4446118c7/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_cc393b7adae7d1e2532f976a06451c42ac95fb72/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/2d73a2bf37a86e8b97af64804d2137bec01bcc4c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="150252b33b00274cc868578ade018fda0d43a3eb">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_80e6b063024dedaf314c693577b2d3718cf8e1bf/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/599c7e31b6c40da90e25b8fd6a6740b1b892b29c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d83c18e1bd5052446e85748625e99bc5de8acd0a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.android/build-cache/c52d6b0e86fb9bab33c1e1a37f42509648e01c4e/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_6a501d5680466878daf480ef7e781a69693c3ecb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/chiho_pang/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/home/chiho_pang/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/bolts-tasks-1.4.0_1e8d3436ca17a2a87eb8d67b30c632712fd921cf/classes.dex" />
+    </item>
+
+</items>
