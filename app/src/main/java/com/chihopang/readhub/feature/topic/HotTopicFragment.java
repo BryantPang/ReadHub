@@ -1,60 +1,33 @@
 package com.chihopang.readhub.feature.topic;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
-import com.chihopang.readhub.R;
-import com.chihopang.readhub.app.OnItemClickListener;
+import com.chihopang.readhub.base.BaseListFragment;
+import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.feature.main.MainActivity;
-import com.chihopang.readhub.model.ApiData;
 import com.chihopang.readhub.model.Topic;
+import java.util.List;
 
-public class HotTopicFragment extends Fragment {
+public class HotTopicFragment extends BaseListFragment<Topic> {
   public static final String TAG = "HotTopicFragment";
 
   public static HotTopicFragment newInstance() {
     return new HotTopicFragment();
   }
 
-  private RecyclerView mRecyclerView;
-  private HotTopicAdapter mAdapter;
-  private LinearLayoutManager mManager = new LinearLayoutManager(getActivity());
-
-  @Nullable @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View v = inflater.inflate(R.layout.fragment_hot_topic, container, false);
-    mRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view);
-    initRecycler();
+  @Override protected void requestData() {
     HotTopicPresenter.getData(this);
     ((MainActivity) getActivity()).mBox.showLoadingLayout();
-    return v;
   }
 
-  private void initRecycler() {
-    mAdapter = new HotTopicAdapter();
-    mAdapter.setOnItemClickListener(new OnItemClickListener() {
-      @Override public void onClick(Object value) {
-        Toast.makeText(getActivity(), ((Topic) value).getTitle(), Toast.LENGTH_SHORT).show();
-      }
-    });
-    mRecyclerView.setAdapter(mAdapter);
-    mRecyclerView.setLayoutManager(mManager);
-  }
-
-  public void onSuccess(final ApiData data) {
+  @Override protected void onSuccess(final List<Topic> itemList) {
     getActivity().runOnUiThread(new Runnable() {
       @Override public void run() {
-        mAdapter.addItems(data.getData());
-        mAdapter.notifyDataSetChanged();
+        getAdapter().addItems(itemList);
         ((MainActivity) getActivity()).mBox.hideAll();
       }
     });
+  }
+
+  @Override public BaseViewHolder provideViewHolder() {
+    return new HotTopicViewHolder(getActivity());
   }
 }

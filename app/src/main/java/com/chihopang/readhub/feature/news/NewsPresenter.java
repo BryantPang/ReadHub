@@ -27,7 +27,7 @@ public class NewsPresenter {
         Gson gson = new Gson();
         String jsonStr = response.body().string();
         ApiData data = gson.fromJson(jsonStr, ApiData.class);
-        fragment.onSuccess(data);
+        fragment.onSuccess(data.getData());
         Log.d("HotTopicPresenter", data.toString());
       }
     });

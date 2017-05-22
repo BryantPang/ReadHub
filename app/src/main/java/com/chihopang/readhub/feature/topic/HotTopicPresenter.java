@@ -28,7 +28,7 @@ public class HotTopicPresenter {
         String jsonStr = response.body().string();
         Gson gson = new GsonBuilder().create();
         ApiData data = gson.fromJson(jsonStr, ApiData.class);
-        fragment.onSuccess(data);
+        fragment.onSuccess(data.getData());
         Log.d("HotTopicPresenter", data.toString());
       }
     });
