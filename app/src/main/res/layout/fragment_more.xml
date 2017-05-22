@@ -32,7 +32,8 @@
         android:textColor="@color/textGrey" android:textSize="@dimen/text_size_14"/>
 
     <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view_sponsors"
-        android:layout_width="match_parent" android:layout_height="match_parent"/>
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        android:background="@color/background_grey"/>
 
   </LinearLayout>
 </ScrollView>
