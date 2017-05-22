@@ -16,7 +16,7 @@ public class NewsFragment extends BaseListFragment<Topic> {
     NewsPresenter.getData(this);
   }
 
-  @Override public BaseViewHolder provideViewHolder(ViewGroup parent, int viewType) {
+  @Override public BaseViewHolder<Topic> provideViewHolder(ViewGroup parent, int viewType) {
     return new NewsViewHolder(getActivity(), parent);
   }
 }

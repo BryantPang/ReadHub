@@ -37,7 +37,7 @@ public abstract class BaseListFragment<T> extends Fragment {
 
   protected abstract void requestData();
 
-  public abstract BaseViewHolder provideViewHolder(ViewGroup parent, int viewType);
+  public abstract BaseViewHolder<T> provideViewHolder(ViewGroup parent, int viewType);
 
   private void initContent() {
     mRecyclerView.setAdapter(mAdapter);
