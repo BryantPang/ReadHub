@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
+public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder<T>> {
   private List<T> mItemList = new ArrayList<>();
 
-  @Override public void onBindViewHolder(BaseViewHolder holder, int position) {
+  @Override public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
     if (position + 1 >= mItemList.size()) return;
     holder.bindTo(mItemList.get(position));
   }

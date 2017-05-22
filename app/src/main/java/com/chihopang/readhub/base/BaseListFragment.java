@@ -35,6 +35,10 @@ public abstract class BaseListFragment<T> extends Fragment {
     return view;
   }
 
+  protected abstract void requestData();
+
+  public abstract BaseViewHolder provideViewHolder(ViewGroup parent, int viewType);
+
   private void initContent() {
     mRecyclerView.setAdapter(mAdapter);
     mRecyclerView.setLayoutManager(mManager);
@@ -43,9 +47,13 @@ public abstract class BaseListFragment<T> extends Fragment {
         requestData();
       }
     });
+    mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+      @Override public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        super.onScrollStateChanged(recyclerView, newState);
+        mRecyclerView.getChildCount();
+      }
+    });
   }
-
-  protected abstract void requestData();
 
   public void onSuccess(final List<T> itemList) {
     getActivity().runOnUiThread(new Runnable() {
@@ -61,6 +69,4 @@ public abstract class BaseListFragment<T> extends Fragment {
   public BaseAdapter getAdapter() {
     return mAdapter;
   }
-
-  public abstract BaseViewHolder provideViewHolder(ViewGroup parent, int viewType);
 }
