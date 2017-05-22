@@ -1,5 +1,6 @@
 package com.chihopang.readhub.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import com.chihopang.readhub.feature.main.MainActivity;
 import java.util.List;
 
 public abstract class BaseListFragment<T> extends Fragment {
+  private Context mContext;
   private RecyclerView mRecyclerView;
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private BaseAdapter<T> mAdapter = new BaseAdapter<T>() {
@@ -30,9 +32,16 @@ public abstract class BaseListFragment<T> extends Fragment {
     mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
     mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
     initContent();
-    ((MainActivity) getActivity()).mBox.showLoadingLayout();
+    if (mContext instanceof MainActivity) {
+      ((MainActivity) mContext).mBox.showLoadingLayout();
+    }
     requestData();
     return view;
+  }
+
+  @Override public void onAttach(Context context) {
+    super.onAttach(context);
+    mContext = context;
   }
 
   protected abstract void requestData();

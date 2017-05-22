@@ -26,6 +26,6 @@
       android:layout_height="@dimen/bottom_navigation_view_height"
       android:layout_gravity="bottom" android:background="@android:color/white"
       app:menu="@menu/menu_navigation_view" app:itemTextColor="@color/colorPrimary"
-      app:elevation="@dimen/bottom_navigation_view_elevation"
+      app:elevation="@dimen/bottom_navigation_view_elevation" app:itemIconTint="@color/colorPrimary"
       app:layout_scrollFlags="scroll|enterAlways"/>
 </LinearLayout>
