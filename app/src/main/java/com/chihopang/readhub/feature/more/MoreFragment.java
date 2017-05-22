@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chihopang.readhub.R;
+import com.chihopang.readhub.base.BaseAdapter;
+import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.model.Sponsor;
 import java.util.List;
 
@@ -22,7 +24,11 @@ public class MoreFragment extends Fragment {
   private RecyclerView mRecyclerSponsors;
   private LinearLayoutManager mLayoutManager =
       new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-  private SponsorAdapter mAdapter = new SponsorAdapter();
+  private BaseAdapter<Sponsor> mAdapter = new BaseAdapter<Sponsor>() {
+    @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      return new SponsorViewHolder(getActivity(), parent);
+    }
+  };
 
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,

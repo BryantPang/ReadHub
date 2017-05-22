@@ -9,13 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.chihopang.readhub.R;
+import com.chihopang.readhub.feature.main.MainActivity;
 import java.util.List;
 
 public abstract class BaseListFragment<T> extends Fragment {
   private RecyclerView mRecyclerVIew;
   private BaseAdapter<T> mAdapter = new BaseAdapter<T>() {
     @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-      return provideViewHolder();
+      return provideViewHolder(parent, viewType);
     }
   };
   private LinearLayoutManager mManager = new LinearLayoutManager(getActivity());
@@ -27,17 +28,25 @@ public abstract class BaseListFragment<T> extends Fragment {
     mRecyclerVIew = (RecyclerView) view.findViewById(R.id.recycler_view);
     mRecyclerVIew.setAdapter(mAdapter);
     mRecyclerVIew.setLayoutManager(mManager);
+    ((MainActivity) getActivity()).mBox.showLoadingLayout();
     requestData();
     return view;
   }
 
   protected abstract void requestData();
 
-  protected abstract void onSuccess(List<T> itemList);
+  public void onSuccess(final List<T> itemList) {
+    getActivity().runOnUiThread(new Runnable() {
+      @Override public void run() {
+        mAdapter.addItems(itemList);
+        ((MainActivity) getActivity()).mBox.hideAll();
+      }
+    });
+  }
 
   public BaseAdapter getAdapter() {
     return mAdapter;
   }
 
-  public abstract BaseViewHolder provideViewHolder();
+  public abstract BaseViewHolder provideViewHolder(ViewGroup parent, int viewType);
 }

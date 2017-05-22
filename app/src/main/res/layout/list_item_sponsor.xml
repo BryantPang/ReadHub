@@ -7,5 +7,6 @@
       android:layout_width="@dimen/sponsor_logo_width"
       android:layout_height="@dimen/sponsor_logo_height"/>
   <TextView android:id="@+id/txt_sponsor_name"
-      android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+      android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:textColor="@color/textDark"/>
 </LinearLayout> 

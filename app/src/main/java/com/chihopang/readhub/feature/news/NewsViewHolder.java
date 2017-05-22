@@ -1,6 +1,7 @@
 package com.chihopang.readhub.feature.news;
 
-import android.app.Activity;
+import android.content.Context;
+import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.chihopang.readhub.R;
@@ -12,8 +13,8 @@ public class NewsViewHolder extends BaseViewHolder<Topic> {
   private TextView mTxtTitle, mTxtSummary, mTxtTime;
   RelativeLayout mItemContainer;
 
-  public NewsViewHolder(Activity activity) {
-    super(activity.getLayoutInflater().inflate(R.layout.list_item_news, null));
+  public NewsViewHolder(Context context, ViewGroup parent) {
+    super(context, parent, R.layout.list_item_news);
     mTxtTitle = (TextView) itemView.findViewById(R.id.txt_news_title);
     mTxtSummary = (TextView) itemView.findViewById(R.id.txt_news_summary);
     mTxtTime = (TextView) itemView.findViewById(R.id.txt_news_time);
