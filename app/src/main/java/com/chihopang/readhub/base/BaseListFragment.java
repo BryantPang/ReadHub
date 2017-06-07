@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
-import com.chihopang.readhub.feature.main.MainActivity;
 import java.util.List;
 
 public abstract class BaseListFragment<T> extends Fragment {
@@ -92,21 +91,13 @@ public abstract class BaseListFragment<T> extends Fragment {
   }
 
   public void onSuccess(final List<T> itemList) {
-    mActivity.runOnUiThread(new Runnable() {
-      @Override public void run() {
-        if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
-        mAdapter.addItems(itemList);
-        ((MainActivity) mActivity).mBox.hideAll();
-      }
-    });
+    if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
+    mAdapter.addItems(itemList);
+    mActivity.mBox.hideAll();
   }
 
   public void onError() {
-    mActivity.runOnUiThread(new Runnable() {
-      @Override public void run() {
-        ((MainActivity) mActivity).mBox.showExceptionLayout();
-      }
-    });
+    mActivity.mBox.showExceptionLayout();
   }
 
   public BaseListPresenter<T> getPresenter() {
@@ -114,11 +105,11 @@ public abstract class BaseListFragment<T> extends Fragment {
   }
 
   public void requestData() {
-    getPresenter().request();
+    getPresenter().start();
   }
 
   public void requestMore() {
-    getPresenter().requestMore();
+    getPresenter().startRequstMore();
   }
 
   public abstract boolean hasMore();

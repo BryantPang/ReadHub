@@ -48,12 +48,21 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\ChihoPang\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.1.6\2586312cd2b8a511e4c6236736f5a039fc0f2273\rxjava-1.1.6.jar"
+        jar="C:\Users\ChihoPang\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\adapter-rxjava2\2.3.0\f436637f9500ab5b8bc32afe556373180894b4a5\adapter-rxjava2-2.3.0.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="2586312cd2b8a511e4c6236736f5a039fc0f2273">
-        <dex dex="C:\Users\ChihoPang\StudioProjects\ReadHub\app\build\intermediates\transforms\dex\debug\folders\1000\10\rxjava-1.1.6_d030a336a7361f1973ee5a6fc5a9b10822e1b2be\classes.dex" />
+        sha1="f436637f9500ab5b8bc32afe556373180894b4a5">
+        <dex dex="C:\Users\ChihoPang\StudioProjects\ReadHub\app\build\intermediates\transforms\dex\debug\folders\1000\10\adapter-rxjava2-2.3.0_7d864763f5e07eef42d3c4870d38e23772cf69fc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ChihoPang\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.3.0\9e09011e9767bb76b5e27c9b8223476b93b14631\converter-gson-2.3.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9e09011e9767bb76b5e27c9b8223476b93b14631">
+        <dex dex="C:\Users\ChihoPang\StudioProjects\ReadHub\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.3.0_27900acbf72c23e6221fe5aace9e104f28b3cccb\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -63,15 +72,6 @@
         revision="25.0.2"
         sha1="48efa6f14074e1a6b16e02ac05eba3fc5c7c7ec8">
         <dex dex="C:\Users\ChihoPang\StudioProjects\ReadHub\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-annotations-8.6.0_831b150e628b135432409ea9f54924d2eef49e43\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\ChihoPang\.android\build-cache\cf25cc2b2fa61543b5b0cccccc466baead33acec\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="C:\Users\ChihoPang\StudioProjects\ReadHub\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f6d09e1f96f89399a64b66a5f7d4c651e4aa0516\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -108,6 +108,15 @@
         revision="25.0.2"
         sha1="d3defb48a63aa0591117d0cec09f47a13fffda19">
         <dex dex="C:\Users\ChihoPang\StudioProjects\ReadHub\app\build\intermediates\transforms\dex\debug\folders\1000\10\butterknife-compiler-8.6.0_17d4171bb154cd2f32232676e64a69d6707ea90e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\ChihoPang\.android\build-cache\4d264c645cc9c712b0e8c4fc6dedc7d9c34336bf\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="4119ea97a7191ff9b8f33b534ea220448f62f491">
+        <dex dex="C:\Users\ChihoPang\StudioProjects\ReadHub\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f4c74933508342ad96d7460bc82101858ec3e580\classes.dex" />
     </item>
     <item
         is-multidex="true"

@@ -3,6 +3,7 @@ package com.chihopang.readhub.feature.main;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -20,6 +21,8 @@ public class MainActivity extends BaseActivity {
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.bottom_navigation_view) BottomNavigationView mBottomNavigationView;
   @BindView(R.id.frame_main) FrameLayout mFrameContainer;
+
+  private Fragment showingFragment;
 
   private FragmentManager mFragmentManager = getSupportFragmentManager();
 
@@ -49,18 +52,27 @@ public class MainActivity extends BaseActivity {
           @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
               case R.id.menu_item_hot_topic:
+                if (showingFragment instanceof HotTopicFragment) return true;
+                showingFragment = mFragmentManager.findFragmentByTag(HotTopicFragment.TAG);
+                if (showingFragment == null) showingFragment = HotTopicFragment.newInstance();
                 mFragmentManager.beginTransaction()
-                    .replace(R.id.frame_main, HotTopicFragment.newInstance(), HotTopicFragment.TAG)
+                    .replace(R.id.frame_main, showingFragment, HotTopicFragment.TAG)
                     .commit();
                 return true;
               case R.id.menu_item_news:
+                if (showingFragment instanceof NewsFragment) return true;
+                showingFragment = mFragmentManager.findFragmentByTag(NewsFragment.TAG);
+                if (showingFragment == null) showingFragment = NewsFragment.newInstance();
                 mFragmentManager.beginTransaction()
-                    .replace(R.id.frame_main, NewsFragment.newInstance(), NewsFragment.TAG)
+                    .replace(R.id.frame_main, showingFragment, NewsFragment.TAG)
                     .commit();
                 return true;
               case R.id.menu_item_more:
+                if (showingFragment instanceof MoreFragment) return true;
+                showingFragment = mFragmentManager.findFragmentByTag(MoreFragment.TAG);
+                if (showingFragment == null) showingFragment = MoreFragment.newInstance();
                 mFragmentManager.beginTransaction()
-                    .replace(R.id.frame_main, MoreFragment.newInstance(), MoreFragment.TAG)
+                    .replace(R.id.frame_main, showingFragment, MoreFragment.TAG)
                     .commit();
                 return true;
             }

@@ -1,57 +1,59 @@
 package com.chihopang.readhub.base;
 
-import android.util.Log;
 import com.chihopang.readhub.model.ApiData;
-import com.google.gson.Gson;
-import java.io.IOException;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import java.util.List;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
-public abstract class BaseListPresenter<T> implements Callback {
-  private String requestMoreKey;
-  private OkHttpClient mClient = new OkHttpClient();
-  private Request mRequest = new Request.Builder()
-      .url(provideUrl()).build();
+public abstract class BaseListPresenter<T> {
   private BaseListFragment<T> mFragment;
-
+  private long lastCursor;
   public BaseListPresenter(BaseListFragment<T> fragment) {
     mFragment = fragment;
   }
 
-  public abstract String provideUrl();
-
-  public void request() {
-    Call mCall = mClient.newCall(mRequest);
-    mCall.enqueue(this);
+  public void start() {
+    request().observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Consumer<ApiData>() {
+          @Override public void accept(@NonNull ApiData apiData) throws Exception {
+            getFragment().onSuccess((List<T>) apiData.getData());
+            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getOrder();
+          }
+        }, new Consumer<Throwable>() {
+          @Override public void accept(@NonNull Throwable throwable) throws Exception {
+            getFragment().onError();
+          }
+        });
   }
 
-  public void requestMore() {
-    Request request = new Request.Builder()
-        .url(provideUrl() + requestMoreKey)
-        .build();
-    Call mCall = mClient.newCall(request);
-    mCall.enqueue(this);
+  public void startRequstMore() {
+    requestMore().observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Consumer<ApiData>() {
+          @Override public void accept(@NonNull ApiData apiData) throws Exception {
+            getFragment().onSuccess((List<T>) apiData.getData());
+            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getOrder();
+          }
+        }, new Consumer<Throwable>() {
+          @Override public void accept(@NonNull Throwable throwable) throws Exception {
+            getFragment().onError();
+          }
+        });
   }
 
-  @Override public void onFailure(Call call, IOException e) {
-    getFragment().onError();
-    e.printStackTrace();
-  }
+  public abstract Observable<ApiData> request();
 
-  @Override public void onResponse(Call call, Response response) throws IOException {
-    Gson gson = new Gson();
-    String jsonStr = response.body().string();
-    ApiData data = gson.fromJson(jsonStr, ApiData.class);
-    requestMoreKey = data.getNextPageUrl();
-    getFragment().onSuccess((List<T>) data.getData());
-    Log.d("BaseListPresenter", data.toString());
-  }
+  public abstract Observable<ApiData> requestMore();
 
   public BaseListFragment<T> getFragment() {
     return mFragment;
+  }
+
+  public long getLastCursor() {
+    return lastCursor;
   }
 }
