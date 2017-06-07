@@ -4,21 +4,22 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
+import com.chihopang.readhub.base.BaseActivity;
 import com.chihopang.readhub.feature.more.MoreFragment;
 import com.chihopang.readhub.feature.news.NewsFragment;
 import com.chihopang.readhub.feature.topic.HotTopicFragment;
 import mehdi.sakout.dynamicbox.DynamicBox;
 
-public class MainActivity extends AppCompatActivity {
-  private Toolbar mToolbar;
-  private BottomNavigationView mBottomNavigationView;
-  private FrameLayout mFrameContainer;
-  public DynamicBox mBox;
+public class MainActivity extends BaseActivity {
+  @BindView(R.id.toolbar) Toolbar mToolbar;
+  @BindView(R.id.bottom_navigation_view) BottomNavigationView mBottomNavigationView;
+  @BindView(R.id.frame_main) FrameLayout mFrameContainer;
 
   private FragmentManager mFragmentManager = getSupportFragmentManager();
 
@@ -26,21 +27,15 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    findView();
+    ButterKnife.bind(this);
     initContent();
     initListener();
-  }
-
-  private void findView() {
-    mToolbar = (Toolbar) findViewById(R.id.toolbar);
-    mFrameContainer = (FrameLayout) findViewById(R.id.frame_main);
-    mBottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
-    mBox = new DynamicBox(this, mFrameContainer);
   }
 
   private void initContent() {
     mToolbar.setTitle("");
     setSupportActionBar(mToolbar);
+    mBox = new DynamicBox(this, mFrameContainer);
     if (mFragmentManager.findFragmentById(R.id.frame_main) == null) {
       mFragmentManager.beginTransaction()
           .replace(R.id.frame_main, HotTopicFragment.newInstance(), HotTopicFragment.TAG)

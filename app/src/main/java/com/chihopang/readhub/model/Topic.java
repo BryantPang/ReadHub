@@ -1,16 +1,22 @@
 package com.chihopang.readhub.model;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.parceler.Parcel;
 
-public class Topic {
-  private long id;
-  private String title;
-  private String siteName;
-  private String authorName;
-  private String url;
-  private String summary;
-  private List<ArticlePage> newsArray;
-  private String publishDate;
+@Parcel public class Topic {
+  long id;
+  long order;
+  String title;
+  String siteName;
+  String authorName;
+  String url;
+  String summary;
+  ArrayList<ArticlePage> newsArray;
+  String publishDate;
+
+  public Topic() {
+  }
 
   @Override public String toString() {
     return "Topic{" +
@@ -55,5 +61,9 @@ public class Topic {
 
   public String getPublishDate() {
     return publishDate;
+  }
+
+  public long getOrder() {
+    return order;
   }
 }

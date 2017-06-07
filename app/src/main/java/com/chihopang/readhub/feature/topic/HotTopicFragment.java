@@ -2,6 +2,7 @@ package com.chihopang.readhub.feature.topic;
 
 import android.view.ViewGroup;
 import com.chihopang.readhub.base.BaseListFragment;
+import com.chihopang.readhub.base.BaseListPresenter;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.model.Topic;
 
@@ -12,11 +13,15 @@ public class HotTopicFragment extends BaseListFragment<Topic> {
     return new HotTopicFragment();
   }
 
-  @Override protected void requestData() {
-    HotTopicPresenter.getData(this);
+  @Override public boolean hasMore() {
+    return true;
   }
 
   @Override public BaseViewHolder<Topic> provideViewHolder(ViewGroup parent, int viewType) {
     return new HotTopicViewHolder(getActivity(), parent);
+  }
+
+  @Override public BaseListPresenter<Topic> createPresenter() {
+    return new HotTopicPresenter(this);
   }
 }

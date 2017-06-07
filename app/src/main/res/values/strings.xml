@@ -10,4 +10,5 @@
   <string name="sponsor">Readhub 赞助商：</string>
   <string name="network_error">网络错误</string>
   <string name="access_success">访问成功</string>
+  <string name="no_more_to_load">已经到底啦~</string>
 </resources>

@@ -1,35 +1,16 @@
 package com.chihopang.readhub.feature.news;
 
-import android.util.Log;
 import com.chihopang.readhub.app.Navigator;
-import com.chihopang.readhub.model.ApiData;
-import com.google.gson.Gson;
-import java.io.IOException;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import com.chihopang.readhub.base.BaseListFragment;
+import com.chihopang.readhub.base.BaseListPresenter;
+import com.chihopang.readhub.model.Topic;
 
-public class NewsPresenter {
-  public static void getData(final NewsFragment fragment) {
-    OkHttpClient client = new OkHttpClient.Builder().build();
-    Request request = new Request.Builder()
-        .url(Navigator.NEWS_API)
-        .build();
-    Call call = client.newCall(request);
-    call.enqueue(new Callback() {
-      @Override public void onFailure(Call call, IOException e) {
-        e.printStackTrace();
-      }
+public class NewsPresenter extends BaseListPresenter<Topic> {
+  public NewsPresenter(BaseListFragment<Topic> fragment) {
+    super(fragment);
+  }
 
-      @Override public void onResponse(Call call, Response response) throws IOException {
-        Gson gson = new Gson();
-        String jsonStr = response.body().string();
-        ApiData data = gson.fromJson(jsonStr, ApiData.class);
-        fragment.onSuccess(data.getData());
-        Log.d("HotTopicPresenter", data.toString());
-      }
-    });
+  @Override public String provideUrl() {
+    return Navigator.NEWS_API;
   }
 }

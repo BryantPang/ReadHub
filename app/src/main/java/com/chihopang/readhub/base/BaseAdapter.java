@@ -19,12 +19,12 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
   public void addItem(T value) {
     mItemList.add(value);
-    notifyItemInserted(mItemList.size() - 1);
+    notifyItemInserted(mItemList.size());
   }
 
   public void addItems(Collection<T> valueCollection) {
     mItemList.addAll(valueCollection);
-    notifyItemRangeChanged(mItemList.size() - valueCollection.size(), mItemList.size());
+    notifyDataSetChanged();//TODO 所有刷新方法都需要重新检查
   }
 
   public void clear() {

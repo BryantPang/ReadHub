@@ -3,6 +3,7 @@ package com.chihopang.readhub.base;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,18 +11,38 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.feature.main.MainActivity;
 import java.util.List;
 
 public abstract class BaseListFragment<T> extends Fragment {
-  private Context mContext;
-  private RecyclerView mRecyclerView;
-  private SwipeRefreshLayout mSwipeRefreshLayout;
+  private static final int VIEW_TYPE_LAST_ITEM = 1;
+
+  private BaseActivity mActivity;
+  private BaseListPresenter<T> mPresenter = createPresenter();
+
+  @BindView(R.id.fab) FloatingActionButton mFAB;
+  @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
+  @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
   private BaseAdapter<T> mAdapter = new BaseAdapter<T>() {
     @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+      if (viewType == VIEW_TYPE_LAST_ITEM) return new LoadingViewHolder(parent, hasMore());
       return provideViewHolder(parent, viewType);
     }
+
+    @Override public int getItemCount() {
+      return super.getItemCount() + 1;
+    }
+
+    @Override public int getItemViewType(int position) {
+      if (position == getItemCount() - 1) {
+        return VIEW_TYPE_LAST_ITEM;
+      }
+      return super.getItemViewType(position);
+    }
+
   };
   private LinearLayoutManager mManager = new LinearLayoutManager(getActivity());
 
@@ -29,53 +50,80 @@ public abstract class BaseListFragment<T> extends Fragment {
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_base_list, container, false);
-    mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
-    mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+    ButterKnife.bind(this, view);
     initContent();
-    if (mContext instanceof MainActivity) {
-      ((MainActivity) mContext).mBox.showLoadingLayout();
-    }
+    mActivity.mBox.showLoadingLayout();
     requestData();
     return view;
   }
 
   @Override public void onAttach(Context context) {
     super.onAttach(context);
-    mContext = context;
+    mActivity = (BaseActivity) context;
   }
-
-  protected abstract void requestData();
-
-  public abstract BaseViewHolder<T> provideViewHolder(ViewGroup parent, int viewType);
 
   private void initContent() {
     mRecyclerView.setAdapter(mAdapter);
     mRecyclerView.setLayoutManager(mManager);
+    mFAB.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        mManager.smoothScrollToPosition(mRecyclerView, null, 0);
+      }
+    });
     mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override public void onRefresh() {
+        mAdapter.clear();
         requestData();
       }
     });
     mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-      @Override public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-        super.onScrollStateChanged(recyclerView, newState);
-        mRecyclerView.getChildCount();
+      @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        super.onScrolled(recyclerView, dx, dy);
+        mFAB.setVisibility(
+            (mManager.findFirstVisibleItemPosition() > 0) ? View.VISIBLE : View.GONE);
+        if (!mSwipeRefreshLayout.isRefreshing()
+            && hasMore()
+            && mManager.findLastVisibleItemPosition() == mAdapter.getItemCount() - 1) {
+          mSwipeRefreshLayout.setRefreshing(true);
+          requestMore();
+        }
       }
     });
   }
 
   public void onSuccess(final List<T> itemList) {
-    getActivity().runOnUiThread(new Runnable() {
+    mActivity.runOnUiThread(new Runnable() {
       @Override public void run() {
         if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
-        mAdapter.clear();
         mAdapter.addItems(itemList);
-        ((MainActivity) getActivity()).mBox.hideAll();
+        ((MainActivity) mActivity).mBox.hideAll();
       }
     });
   }
 
-  public BaseAdapter getAdapter() {
-    return mAdapter;
+  public void onError() {
+    mActivity.runOnUiThread(new Runnable() {
+      @Override public void run() {
+        ((MainActivity) mActivity).mBox.showExceptionLayout();
+      }
+    });
   }
+
+  public BaseListPresenter<T> getPresenter() {
+    return mPresenter;
+  }
+
+  public void requestData() {
+    getPresenter().request();
+  }
+
+  public void requestMore() {
+    getPresenter().requestMore();
+  }
+
+  public abstract boolean hasMore();
+
+  public abstract BaseViewHolder<T> provideViewHolder(ViewGroup parent, int viewType);
+
+  public abstract BaseListPresenter<T> createPresenter();
 }

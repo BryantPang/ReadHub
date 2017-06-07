@@ -6,6 +6,7 @@
   <dimen name="margin_10">10dp</dimen>
 
   <!-- padding -->
+  <dimen name="padding_10">10dp</dimen>
   <dimen name="padding_20">20dp</dimen>
 
   <!-- height -->
@@ -27,5 +28,6 @@
 
   <!-- img size -->
   <dimen name="avatar_size">60dp</dimen>
+  <dimen name="fab_size">56dp</dimen>
 
 </resources>

@@ -1,12 +1,15 @@
 package com.chihopang.readhub.model;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class ArticlePage {
-  private long id;
-  private String url;
-  private String mobileUrl;
-  private String title;
-  private String siteName;
-  private String authorName;
+  long id;
+  String url;
+  String mobileUrl;
+  String title;
+  String siteName;
+  String authorName;
 
   @Override public String toString() {
     return "ArticlePage{" +
@@ -17,6 +20,9 @@ public class ArticlePage {
         ", siteName='" + siteName + '\'' +
         ", authorName='" + authorName + '\'' +
         '}';
+  }
+
+  public ArticlePage() {
   }
 
   public long getId() {

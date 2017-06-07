@@ -32,4 +32,8 @@ public class ApiData {
   public int getTotalPages() {
     return totalPages;
   }
+
+  public String getNextPageUrl() {
+    return "?lastCursor=" + data.get(data.size() - 1).getOrder() + "&pageSize=10";
+  }
 }

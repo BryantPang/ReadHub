@@ -2,6 +2,7 @@ package com.chihopang.readhub.feature.news;
 
 import android.view.ViewGroup;
 import com.chihopang.readhub.base.BaseListFragment;
+import com.chihopang.readhub.base.BaseListPresenter;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.model.Topic;
 
@@ -12,11 +13,15 @@ public class NewsFragment extends BaseListFragment<Topic> {
     return new NewsFragment();
   }
 
-  @Override protected void requestData() {
-    NewsPresenter.getData(this);
+  @Override public boolean hasMore() {
+    return false;
   }
 
   @Override public BaseViewHolder<Topic> provideViewHolder(ViewGroup parent, int viewType) {
     return new NewsViewHolder(getActivity(), parent);
+  }
+
+  @Override public BaseListPresenter<Topic> createPresenter() {
+    return new NewsPresenter(this);
   }
 }

@@ -8,7 +8,6 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseViewHolder;
@@ -16,14 +15,12 @@ import com.chihopang.readhub.model.Topic;
 
 public class HotTopicViewHolder extends BaseViewHolder<Topic> {
   private TextView mTxtTitle, mTxtSummary, mTxtTime;
-  private RelativeLayout mItemContainer;
 
   public HotTopicViewHolder(Context context, ViewGroup parent) {
     super(context, parent, R.layout.list_item_news);
     mTxtTitle = (TextView) itemView.findViewById(R.id.txt_news_title);
     mTxtSummary = (TextView) itemView.findViewById(R.id.txt_news_summary);
     mTxtTime = (TextView) itemView.findViewById(R.id.txt_news_time);
-    mItemContainer = (RelativeLayout) itemView.findViewById(R.id.list_item_container);
   }
 
   @Override public void bindTo(Topic value) {
