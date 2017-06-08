@@ -14,9 +14,10 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
+import com.chihopang.readhub.base.mvp.INetworkView;
 import java.util.List;
 
-public abstract class BaseListFragment<T> extends Fragment {
+public abstract class BaseListFragment<T> extends Fragment implements INetworkView {
   private static final int VIEW_TYPE_LAST_ITEM = 1;
 
   private BaseActivity mActivity;
@@ -90,13 +91,15 @@ public abstract class BaseListFragment<T> extends Fragment {
     });
   }
 
-  public void onSuccess(final List<T> itemList) {
+  @Override public void onSuccess(Object t) {
+    List<T> itemList = (List<T>) t;
     if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
     mAdapter.addItems(itemList);
     mActivity.mBox.hideAll();
   }
 
-  public void onError() {
+  @Override public void onError(Exception e) {
+    mActivity.mBox.setOtherExceptionMessage(e.getMessage());
     mActivity.mBox.showExceptionLayout();
   }
 
@@ -104,12 +107,12 @@ public abstract class BaseListFragment<T> extends Fragment {
     return mPresenter;
   }
 
-  public void requestData() {
+  private void requestData() {
     getPresenter().start();
   }
 
-  public void requestMore() {
-    getPresenter().startRequstMore();
+  private void requestMore() {
+    getPresenter().startRequestMore();
   }
 
   public abstract boolean hasMore();

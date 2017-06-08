@@ -1,55 +1,55 @@
 package com.chihopang.readhub.base;
 
+import com.chihopang.readhub.base.mvp.INetworkPresenter;
 import com.chihopang.readhub.model.ApiData;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import java.util.List;
 
-public abstract class BaseListPresenter<T> {
+public abstract class BaseListPresenter<T> implements INetworkPresenter {
   private BaseListFragment<T> mFragment;
   private long lastCursor;
   public BaseListPresenter(BaseListFragment<T> fragment) {
     mFragment = fragment;
   }
 
-  public void start() {
+  @Override public void start() {
     request().observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
         .subscribe(new Consumer<ApiData>() {
           @Override public void accept(@NonNull ApiData apiData) throws Exception {
-            getFragment().onSuccess((List<T>) apiData.getData());
+            getView().onSuccess(apiData.getData());
             lastCursor = apiData.getData().get(apiData.getData().size() - 1).getOrder();
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
-            getFragment().onError();
+            getView().onError(new Exception("请求错误"));
           }
         });
   }
 
-  public void startRequstMore() {
+  @Override public void startRequestMore() {
     requestMore().observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
         .subscribe(new Consumer<ApiData>() {
           @Override public void accept(@NonNull ApiData apiData) throws Exception {
-            getFragment().onSuccess((List<T>) apiData.getData());
+            getView().onSuccess(apiData.getData());
             lastCursor = apiData.getData().get(apiData.getData().size() - 1).getOrder();
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
-            getFragment().onError();
+            getView().onError(new Exception("请求错误"));
           }
         });
   }
 
-  public abstract Observable<ApiData> request();
+  @Override public abstract Observable<ApiData> request();
 
-  public abstract Observable<ApiData> requestMore();
+  @Override public abstract Observable<ApiData> requestMore();
 
-  public BaseListFragment<T> getFragment() {
+  @Override public BaseListFragment<T> getView() {
     return mFragment;
   }
 
