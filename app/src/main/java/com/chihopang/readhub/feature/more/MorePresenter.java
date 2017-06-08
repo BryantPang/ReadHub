@@ -1,38 +1,50 @@
 package com.chihopang.readhub.feature.more;
 
-import android.util.Log;
-import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.base.mvp.INetworkPresenter;
+import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.model.Sponsor;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import java.io.IOException;
+import com.chihopang.readhub.network.ApiService;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import java.util.List;
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
-public class MorePresenter {
-  public static void getSponsorData(final MoreFragment fragment) {
-    OkHttpClient client = new OkHttpClient();
-    Request request = new Request.Builder()
-        .url(Navigator.SPONSOR_API)
-        .build();
-    Call call = client.newCall(request);
-    call.enqueue(new Callback() {
-      @Override public void onFailure(Call call, IOException e) {
+public class MorePresenter implements INetworkPresenter {
+  private INetworkView view;
 
-      }
+  public MorePresenter(INetworkView view) {
+    this.view = view;
+  }
 
-      @Override public void onResponse(Call call, Response response) throws IOException {
-        String jsonStr = response.body().string();
-        Gson gson = new Gson();
-        List<Sponsor> sponsorList = gson.fromJson(jsonStr, new TypeToken<List<Sponsor>>() {
-        }.getType());
-        Log.d("MorePresenter", sponsorList.toString());
-        fragment.onSuccess(sponsorList);
-      }
-    });
+  @Override public INetworkView getView() {
+    return view;
+  }
+
+  @Override public void start() {
+    request().observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Consumer<List<Sponsor>>() {
+          @Override public void accept(@NonNull List<Sponsor> sponsors) throws Exception {
+            getView().onSuccess(sponsors);
+          }
+        }, new Consumer<Throwable>() {
+          @Override public void accept(@NonNull Throwable throwable) throws Exception {
+            getView().onError(new Exception("请求错误"));
+          }
+        });
+  }
+
+  @Override public void startRequestMore() {
+
+  }
+
+  @Override public Observable request() {
+    return ApiService.createSponsorService().getSponsors();
+  }
+
+  @Override public Observable requestMore() {
+    return null;
   }
 }

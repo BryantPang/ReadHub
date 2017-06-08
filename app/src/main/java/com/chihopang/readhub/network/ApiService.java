@@ -7,7 +7,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiService {
   private static Retrofit retrofit = new Retrofit.Builder()
-      .baseUrl(Navigator.BASE_URL)
+      .baseUrl(Navigator.API_HOST)
+      .addConverterFactory(GsonConverterFactory.create())
+      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+      .build();
+
+  private static Retrofit sponsorRetrofit = new Retrofit.Builder()
+      .baseUrl(Navigator.SPONSOR_API_HOST)
       .addConverterFactory(GsonConverterFactory.create())
       .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
       .build();
@@ -18,5 +24,9 @@ public class ApiService {
 
   public static NewsService createNewsService() {
     return retrofit.create(NewsService.class);
+  }
+
+  public static SponsorService createSponsorService() {
+    return sponsorRetrofit.create(SponsorService.class);
   }
 }

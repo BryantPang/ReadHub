@@ -8,20 +8,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseAdapter;
 import com.chihopang.readhub.base.BaseViewHolder;
+import com.chihopang.readhub.base.mvp.INetworkPresenter;
+import com.chihopang.readhub.base.mvp.INetworkView;
+import com.chihopang.readhub.base.mvp.IPresenter;
 import com.chihopang.readhub.model.Sponsor;
 import java.util.List;
 
-public class MoreFragment extends Fragment {
+public class MoreFragment extends Fragment implements INetworkView {
   public static final String TAG = "MoreFragment";
 
   public static MoreFragment newInstance() {
     return new MoreFragment();
   }
 
-  private RecyclerView mRecyclerSponsors;
+  @BindView(R.id.recycler_view_sponsors) RecyclerView mRecyclerSponsors;
   private LinearLayoutManager mLayoutManager =
       new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
   private BaseAdapter<Sponsor> mAdapter = new BaseAdapter<Sponsor>() {
@@ -30,18 +36,17 @@ public class MoreFragment extends Fragment {
     }
   };
 
+  private INetworkPresenter mPresenter;
+
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
     View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_more, container, false);
-    findView(v);
+    ButterKnife.bind(this, v);
     initRecycler();
-    MorePresenter.getSponsorData(this);
+    mPresenter = new MorePresenter(this);
+    mPresenter.start();
     return v;
-  }
-
-  private void findView(View v) {
-    mRecyclerSponsors = (RecyclerView) v.findViewById(R.id.recycler_view_sponsors);
   }
 
   private void initRecycler() {
@@ -49,13 +54,17 @@ public class MoreFragment extends Fragment {
     mRecyclerSponsors.setLayoutManager(mLayoutManager);
   }
 
-  public void onSuccess(final List<Sponsor> sponsors) {
-    getActivity().runOnUiThread(new Runnable() {
-      @Override public void run() {
-        mAdapter.addItems(sponsors);
-        mAdapter.notifyDataSetChanged();
-      }
-    });
+  @Override public IPresenter getPresenter() {
+    return mPresenter;
+  }
 
+  @Override public void onSuccess(Object t) {
+    List<Sponsor> sponsors = (List<Sponsor>) t;
+    mAdapter.addItems(sponsors);
+    mAdapter.notifyDataSetChanged();
+  }
+
+  @Override public void onError(Exception e) {
+    Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
   }
 }
