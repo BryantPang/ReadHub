@@ -14,6 +14,9 @@
   <dimen name="divider_height">1dp</dimen>
   <dimen name="logo_height">56dp</dimen>
   <dimen name="sponsor_logo_height">60dp</dimen>
+  <dimen name="horizontal_progress_bar_height">4dp</dimen>
+  <dimen name="height_35">35dp</dimen>
+  <dimen name="height_70">70dp</dimen>
 
   <!-- width -->
   <dimen name="sponsor_logo_width">120dp</dimen>
