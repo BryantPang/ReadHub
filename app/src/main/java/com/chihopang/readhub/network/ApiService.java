@@ -26,6 +26,10 @@ public class ApiService {
     return retrofit.create(NewsService.class);
   }
 
+  public static TechNewsService createTechNewsService() {
+    return retrofit.create(TechNewsService.class);
+  }
+
   public static SponsorService createSponsorService() {
     return sponsorRetrofit.create(SponsorService.class);
   }

@@ -12,4 +12,5 @@
   <string name="access_success">访问成功</string>
   <string name="no_more_to_load">已经到底啦~</string>
   <string name="aritcle">文章</string>
+  <string name="developer_news">开发者资讯</string>
 </resources>

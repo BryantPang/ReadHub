@@ -22,7 +22,7 @@
   <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
       android:layout_marginTop="?attr/actionBarSize"
       android:layout_marginBottom="@dimen/bottom_navigation_view_height">
-    <FrameLayout android:id="@+id/frame_main"
+    <android.support.v4.view.ViewPager android:id="@+id/view_pager_main"
         android:layout_width="match_parent" android:layout_height="match_parent"/>
   </LinearLayout>
 

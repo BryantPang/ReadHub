@@ -28,8 +28,7 @@ public class MoreFragment extends Fragment implements INetworkView {
   }
 
   @BindView(R.id.recycler_view_sponsors) RecyclerView mRecyclerSponsors;
-  private LinearLayoutManager mLayoutManager =
-      new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+  private LinearLayoutManager mLayoutManager;
   private BaseAdapter<Sponsor> mAdapter = new BaseAdapter<Sponsor>() {
     @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       return new SponsorViewHolder(getActivity(), parent);
@@ -51,6 +50,7 @@ public class MoreFragment extends Fragment implements INetworkView {
 
   private void initRecycler() {
     mRecyclerSponsors.setAdapter(mAdapter);
+    mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
     mRecyclerSponsors.setLayoutManager(mLayoutManager);
   }
 

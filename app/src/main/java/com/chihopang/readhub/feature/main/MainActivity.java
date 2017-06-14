@@ -5,13 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseActivity;
+import com.chihopang.readhub.feature.developer.news.TechNewsFragment;
 import com.chihopang.readhub.feature.more.MoreFragment;
 import com.chihopang.readhub.feature.news.NewsFragment;
 import com.chihopang.readhub.feature.topic.HotTopicFragment;
@@ -20,7 +22,7 @@ import mehdi.sakout.dynamicbox.DynamicBox;
 public class MainActivity extends BaseActivity {
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.bottom_navigation_view) BottomNavigationView mBottomNavigationView;
-  @BindView(R.id.frame_main) FrameLayout mFrameContainer;
+  @BindView(R.id.view_pager_main) ViewPager mViewPager;
 
   private Fragment showingFragment;
 
@@ -38,46 +40,66 @@ public class MainActivity extends BaseActivity {
   private void initContent() {
     mToolbar.setTitle("");
     setSupportActionBar(mToolbar);
-    mBox = new DynamicBox(this, mFrameContainer);
-    if (mFragmentManager.findFragmentById(R.id.frame_main) == null) {
-      mFragmentManager.beginTransaction()
-          .replace(R.id.frame_main, HotTopicFragment.newInstance(), HotTopicFragment.TAG)
-          .commit();
-    }
+    mBox = new DynamicBox(this, mViewPager);
+    mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+      @Override public Fragment getItem(int position) {
+        switch (position) {
+          case 0:
+            return HotTopicFragment.newInstance();
+          case 1:
+            return NewsFragment.newInstance();
+          case 2:
+            return TechNewsFragment.newInstance();
+          case 3:
+            return MoreFragment.newInstance();
+        }
+        return null;
+      }
+
+      @Override public int getCount() {
+        return 4;
+      }
+    });
   }
 
   private void initListener() {
     mBottomNavigationView.setOnNavigationItemSelectedListener(
         new BottomNavigationView.OnNavigationItemSelectedListener() {
           @Override public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            int currentItem;
             switch (item.getItemId()) {
               case R.id.menu_item_hot_topic:
-                if (showingFragment instanceof HotTopicFragment) return true;
-                showingFragment = mFragmentManager.findFragmentByTag(HotTopicFragment.TAG);
-                if (showingFragment == null) showingFragment = HotTopicFragment.newInstance();
-                mFragmentManager.beginTransaction()
-                    .replace(R.id.frame_main, showingFragment, HotTopicFragment.TAG)
-                    .commit();
-                return true;
+                currentItem = 0;
+                break;
               case R.id.menu_item_news:
-                if (showingFragment instanceof NewsFragment) return true;
-                showingFragment = mFragmentManager.findFragmentByTag(NewsFragment.TAG);
-                if (showingFragment == null) showingFragment = NewsFragment.newInstance();
-                mFragmentManager.beginTransaction()
-                    .replace(R.id.frame_main, showingFragment, NewsFragment.TAG)
-                    .commit();
-                return true;
+                currentItem = 1;
+                break;
+              case R.id.menu_item_tech_news:
+                currentItem = 2;
+                break;
               case R.id.menu_item_more:
-                if (showingFragment instanceof MoreFragment) return true;
-                showingFragment = mFragmentManager.findFragmentByTag(MoreFragment.TAG);
-                if (showingFragment == null) showingFragment = MoreFragment.newInstance();
-                mFragmentManager.beginTransaction()
-                    .replace(R.id.frame_main, showingFragment, MoreFragment.TAG)
-                    .commit();
-                return true;
+                currentItem = 3;
+                break;
+              default:
+                currentItem = 0;
             }
-            return false;
+            mViewPager.setCurrentItem(currentItem);
+            return true;
           }
         });
+    mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+      @Override
+      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+      }
+
+      @Override public void onPageSelected(int position) {
+        mBottomNavigationView.getMenu().getItem(position).setChecked(true);
+      }
+
+      @Override public void onPageScrollStateChanged(int state) {
+
+      }
+    });
   }
 }

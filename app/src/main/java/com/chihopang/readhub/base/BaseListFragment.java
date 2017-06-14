@@ -44,7 +44,7 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
     }
 
   };
-  private LinearLayoutManager mManager = new LinearLayoutManager(getActivity());
+  private LinearLayoutManager mManager;
 
   @Nullable @Override
   public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -54,7 +54,20 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
     initContent();
     mActivity.mBox.showLoadingLayout();
     requestData();
+    setRetainInstance(true);
     return view;
+  }
+
+  @Override public void onResume() {
+    super.onResume();
+  }
+
+  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+  }
+
+  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
   }
 
   @Override public void onAttach(Context context) {
@@ -64,6 +77,7 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
 
   private void initContent() {
     mRecyclerView.setAdapter(mAdapter);
+    mManager = new LinearLayoutManager(mActivity);
     mRecyclerView.setLayoutManager(mManager);
     mFAB.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
@@ -100,7 +114,7 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
 
   @Override public void onError(Exception e) {
     mActivity.mBox.setOtherExceptionMessage(e.getMessage());
-    mActivity.mBox.showExceptionLayout();
+    //mActivity.mBox.showExceptionLayout();
   }
 
   public BaseListPresenter<T> getPresenter() {

@@ -25,6 +25,7 @@ public abstract class BaseListPresenter<T> implements INetworkPresenter {
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
+            throwable.printStackTrace();
             getView().onError(new Exception("请求错误"));
           }
         });
