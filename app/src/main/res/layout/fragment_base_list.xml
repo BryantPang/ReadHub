@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-  <android.support.v4.widget.SwipeRefreshLayout
-      xmlns:android="http://schemas.android.com/apk/res/android"
-      android:id="@+id/swipe_refresh_layout"
+  <FrameLayout android:id="@+id/frame_list_container"
       android:layout_width="match_parent" android:layout_height="match_parent">
-    <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
-        android:layout_width="match_parent" android:layout_height="match_parent"/>
-  </android.support.v4.widget.SwipeRefreshLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+      <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view"
+          android:layout_width="match_parent" android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-  <android.support.design.widget.FloatingActionButton
-      android:id="@+id/fab"
-      android:layout_width="@dimen/fab_size" android:layout_height="@dimen/fab_size"
-      android:layout_gravity="bottom|right" android:layout_margin="@dimen/margin_20"
-      android:src="@drawable/ic_go_top" android:visibility="gone"/>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="@dimen/fab_size" android:layout_height="@dimen/fab_size"
+        android:layout_gravity="bottom|right" android:layout_margin="@dimen/margin_20"
+        android:src="@drawable/ic_go_top" android:visibility="gone"/>
+  </FrameLayout>
+
 </FrameLayout>

@@ -11,21 +11,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import java.util.List;
+import mehdi.sakout.dynamicbox.DynamicBox;
 
 public abstract class BaseListFragment<T> extends Fragment implements INetworkView {
   private static final int VIEW_TYPE_LAST_ITEM = 1;
 
   private BaseActivity mActivity;
   private BaseListPresenter<T> mPresenter = createPresenter();
+  public DynamicBox mBox;
 
   @BindView(R.id.fab) FloatingActionButton mFAB;
   @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
+  @BindView(R.id.frame_list_container) FrameLayout mFrameContainer;
   private BaseAdapter<T> mAdapter = new BaseAdapter<T>() {
     @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       if (viewType == VIEW_TYPE_LAST_ITEM) return new LoadingViewHolder(parent, hasMore());
@@ -52,7 +56,7 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
     View view = inflater.inflate(R.layout.fragment_base_list, container, false);
     ButterKnife.bind(this, view);
     initContent();
-    mActivity.mBox.showLoadingLayout();
+    mBox.showLoadingLayout();
     requestData();
     setRetainInstance(true);
     return view;
@@ -76,6 +80,13 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
   }
 
   private void initContent() {
+    mBox = new DynamicBox(mActivity, mFrameContainer);
+    mBox.setClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        mAdapter.clear();
+        requestData();
+      }
+    });
     mRecyclerView.setAdapter(mAdapter);
     mManager = new LinearLayoutManager(mActivity);
     mRecyclerView.setLayoutManager(mManager);
@@ -109,12 +120,12 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
     List<T> itemList = (List<T>) t;
     if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
     mAdapter.addItems(itemList);
-    mActivity.mBox.hideAll();
+    mBox.hideAll();
   }
 
   @Override public void onError(Exception e) {
-    mActivity.mBox.setOtherExceptionMessage(e.getMessage());
-    //mActivity.mBox.showExceptionLayout();
+    mBox.setOtherExceptionMessage(e.getMessage());
+    mBox.showExceptionLayout();
   }
 
   public BaseListPresenter<T> getPresenter() {
