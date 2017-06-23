@@ -5,7 +5,7 @@ import java.util.List;
 import org.parceler.Parcel;
 
 @Parcel public class Topic {
-  long id;
+  String id;
   long order;
   String title;
   String siteName;
@@ -43,7 +43,7 @@ import org.parceler.Parcel;
     return url;
   }
 
-  public long getId() {
+  public String getId() {
     return id;
   }
 

@@ -15,6 +15,7 @@
       android:layout_width="wrap_content" android:layout_height="wrap_content"
       android:textColor="@color/textLightGrey" android:textSize="@dimen/text_size_16"
       android:layout_below="@id/txt_news_title" android:layout_marginTop="@dimen/margin_10"
+      android:maxLines="3" android:ellipsize="end"
       tools:text="这位对道家学说领悟颇深的 CMO，要怎么诠释属于年轻人的高端机呢？"/>
 
   <TextView android:id="@+id/txt_news_time"
