@@ -108,8 +108,10 @@
     <orderEntry type="library" exported="" name="imagepipeline-base-1.3.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-library-1.3" level="project" />
     <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
+    <orderEntry type="library" exported="" name="fragmentation-core-1.1.9" level="project" />
     <orderEntry type="library" exported="" name="fbcore-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="rxandroid-2.0.1" level="project" />
+    <orderEntry type="library" exported="" name="fragmentation-1.1.9" level="project" />
     <orderEntry type="library" exported="" name="rxjava-2.1.0" level="project" />
     <orderEntry type="library" exported="" name="dynamicbox-1.2" level="project" />
     <orderEntry type="library" exported="" name="reactive-streams-1.0.0" level="project" />
@@ -133,6 +135,7 @@
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="drawee-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="auto-common-0.6" level="project" />
+    <orderEntry type="library" exported="" name="fragmentation-swipeback-1.1.9" level="project" />
     <orderEntry type="library" exported="" name="butterknife-compiler-8.6.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="jsr305-2.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-25.3.1" level="project" />
@@ -152,6 +155,5 @@
     <orderEntry type="library" exported="" name="parceler-api-1.1.8" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="animated-vector-drawable-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="android-android-25" level="project" />
   </component>
 </module>

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="dynamicbox-1.2">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/e30bb9e76289e926f5b1d2a03ae87c72281ceddf/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/e30bb9e76289e926f5b1d2a03ae87c72281ceddf/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/e4d2b79bfc48fae5dcafa4b2bf9cd7e71f3c9585/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/e4d2b79bfc48fae5dcafa4b2bf9cd7e71f3c9585/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

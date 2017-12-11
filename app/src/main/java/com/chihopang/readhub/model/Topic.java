@@ -1,5 +1,6 @@
 package com.chihopang.readhub.model;
 
+import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.List;
 import org.parceler.Parcel;
@@ -11,8 +12,9 @@ import org.parceler.Parcel;
   String siteName;
   String authorName;
   String url;
+  String mobileUrl;
   String summary;
-  ArrayList<ArticlePage> newsArray;
+  ArrayList<Topic> newsArray;
   String publishDate;
 
   public Topic() {
@@ -40,6 +42,7 @@ import org.parceler.Parcel;
   }
 
   public String getUrl() {
+    if (!TextUtils.isEmpty(mobileUrl)) return mobileUrl;
     return url;
   }
 
@@ -55,7 +58,7 @@ import org.parceler.Parcel;
     return summary;
   }
 
-  public List<ArticlePage> getNewsArray() {
+  public List<Topic> getNewsArray() {
     return newsArray;
   }
 

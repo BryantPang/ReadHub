@@ -23,7 +23,7 @@ public class HotTopicViewHolder extends BaseViewHolder<Topic> {
     mTxtTime = (TextView) itemView.findViewById(R.id.txt_news_time);
   }
 
-  @Override public void bindTo(Topic value) {
+  @Override public void bindTo(final Topic value) {
     String date = value.getPublishDate();
     SpannableString spannableString = new SpannableString(value.getTitle() + date);
     spannableString.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),
@@ -36,5 +36,11 @@ public class HotTopicViewHolder extends BaseViewHolder<Topic> {
 
     mTxtTime.setVisibility(View.GONE);
     mTxtSummary.setText(value.getSummary());
+
+    itemView.setOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        TopicDetailActivity.start(v.getContext(), value);
+      }
+    });
   }
 }
