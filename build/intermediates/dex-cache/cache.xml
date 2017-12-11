@@ -21,6 +21,15 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/joshbryant/.android/build-cache/849b48fe0768241719eb04e8e343db7c9fdcaad6/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="d457f90b612c1babbe74c5f204e1d13765e9333e">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_ee64a9685619f7a8725fd231f4d72efe09452656/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/joshbryant/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
         jumboMode="true"
         optimize="true"
@@ -93,11 +102,20 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/joshbryant/.android/build-cache/58e7b1317ab5196d8423f3a5c39de4e140d7ca0b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="410fb54f7b02d93e213ad44fe61aad926c880485">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_8f47072597df156d129d98ddda5885c21458fb90/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="ab741c901dad9eec8203dec698d2177e86d22705">
+        sha1="2edc9947d5270088549b10b7cd27843f3167f2df">
         <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c991b5e7a69c37910d27abbf3a18c11766bb0223/classes.dex" />
     </item>
     <item
@@ -216,6 +234,15 @@
         revision="25.0.2"
         sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
         <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_fc55933c090a930fbc85bfb82f45b24db3f5ad09/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/joshbryant/.android/build-cache/56980ca46d995cb6a17115dae655c3c5c555d70d/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1946c98d29895a4ee465426769a726bab4aa582f">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a08f2903b4becc3c1da7a70b3948fbe103664fe9/classes.dex" />
     </item>
     <item
         is-multidex="true"

@@ -1,6 +1,5 @@
 package com.chihopang.readhub.feature.news;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +7,9 @@ import android.widget.TextView;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.ReadhubApplication;
 import com.chihopang.readhub.base.BaseViewHolder;
+import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Topic;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class NewsViewHolder extends BaseViewHolder<Topic> {
   private Context mContext;
@@ -30,7 +31,8 @@ public class NewsViewHolder extends BaseViewHolder<Topic> {
             value.getPublishDate()));
     itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        ArticlePageActivity.start((Activity) mContext, value);
+        ((SupportActivity) v.getContext()).findFragment(MainFragment.class)
+            .start(ArticlePageFragment.newInstance(value));
       }
     });
   }

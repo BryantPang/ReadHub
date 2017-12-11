@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,12 +16,14 @@ import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import java.util.List;
+import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportFragment;
 import mehdi.sakout.dynamicbox.DynamicBox;
 
-public abstract class BaseListFragment<T> extends Fragment implements INetworkView {
+public abstract class BaseListFragment<T> extends SupportFragment implements INetworkView {
   private static final int VIEW_TYPE_LAST_ITEM = 1;
 
-  private BaseActivity mActivity;
+  private SupportActivity mActivity;
   private BaseListPresenter<T> mPresenter = createPresenter();
   public DynamicBox mBox;
 
@@ -76,7 +77,7 @@ public abstract class BaseListFragment<T> extends Fragment implements INetworkVi
 
   @Override public void onAttach(Context context) {
     super.onAttach(context);
-    mActivity = (BaseActivity) context;
+    mActivity = (SupportActivity) context;
   }
 
   private void initContent() {

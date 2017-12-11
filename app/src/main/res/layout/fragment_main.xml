@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+      android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
+      android:background="@color/colorPrimary">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_18" android:textColor="@android:color/white"
+        android:text="@string/domain" android:layout_gravity="center_horizontal"/>
+  </android.support.v7.widget.Toolbar>
+
+  <android.support.design.widget.BottomNavigationView android:id="@+id/bottom_navigation_view"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/bottom_navigation_view_height"
+      android:layout_alignParentBottom="true" android:background="@android:color/white"
+      app:menu="@menu/menu_navigation_view" app:itemTextColor="@color/colorPrimary"
+      app:elevation="@dimen/bottom_navigation_view_elevation" app:itemIconTint="@color/colorPrimary"
+      app:layout_scrollFlags="scroll|enterAlways"/>
+
+  <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+      android:layout_above="@id/bottom_navigation_view"
+      android:layout_below="@id/toolbar">
+    <android.support.v4.view.ViewPager android:id="@+id/view_pager_main"
+        android:layout_width="match_parent" android:layout_height="match_parent"/>
+  </LinearLayout>
+</RelativeLayout>
