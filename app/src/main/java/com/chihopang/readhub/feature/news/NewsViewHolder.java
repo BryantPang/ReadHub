@@ -1,6 +1,7 @@
 package com.chihopang.readhub.feature.news;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ public class NewsViewHolder extends BaseViewHolder<Topic> {
   @Override public void bindTo(final Topic value) {
     mTxtTitle.setText(value.getTitle());
     mTxtSummary.setText(value.getSummary());
-    mTxtTime.setText(
+    mTxtTime.setText(TextUtils.isEmpty(value.getAuthorName()) ? value.getPublishDate() :
         ReadhubApplication.mContext.getString(R.string.author_time_format, value.getAuthorName(),
             value.getPublishDate()));
     itemView.setOnClickListener(new View.OnClickListener() {
@@ -35,5 +36,8 @@ public class NewsViewHolder extends BaseViewHolder<Topic> {
             .start(ArticlePageFragment.newInstance(value));
       }
     });
+
+    mTxtTitle.setVisibility(TextUtils.isEmpty(value.getTitle()) ? View.GONE : View.VISIBLE);
+    mTxtSummary.setVisibility(TextUtils.isEmpty(value.getSummary()) ? View.GONE : View.VISIBLE);
   }
 }

@@ -2,7 +2,6 @@ package com.chihopang.readhub.feature.more;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,8 +18,9 @@ import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.base.mvp.IPresenter;
 import com.chihopang.readhub.model.Sponsor;
 import java.util.List;
+import me.yokeyword.fragmentation.SupportFragment;
 
-public class MoreFragment extends Fragment implements INetworkView {
+public class MoreFragment extends SupportFragment implements INetworkView {
   public static final String TAG = "MoreFragment";
 
   public static MoreFragment newInstance() {

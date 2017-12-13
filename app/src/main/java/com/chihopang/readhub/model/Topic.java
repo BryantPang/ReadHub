@@ -1,6 +1,7 @@
 package com.chihopang.readhub.model;
 
 import android.text.TextUtils;
+import com.chihopang.readhub.util.TimeUtil;
 import java.util.ArrayList;
 import java.util.List;
 import org.parceler.Parcel;
@@ -51,11 +52,11 @@ import org.parceler.Parcel;
   }
 
   public String getTitle() {
-    return title;
+    return title.trim();
   }
 
   public String getSummary() {
-    return summary;
+    return summary.trim();
   }
 
   public List<Topic> getNewsArray() {
@@ -63,7 +64,7 @@ import org.parceler.Parcel;
   }
 
   public String getPublishDate() {
-    return publishDate;
+    return TimeUtil.countDown(publishDate);
   }
 
   public long getOrder() {
