@@ -1,7 +1,7 @@
 <resources>
   <string name="app_name">Readhub</string>
   <string name="hot_topic">热门话题</string>
-  <string name="news">最新资讯</string>
+  <string name="news">科技动态</string>
   <string name="more">更多</string>
   <string name="domain">Readhub.me</string>
 
@@ -13,4 +13,8 @@
   <string name="no_more_to_load">已经到底啦~</string>
   <string name="aritcle">文章</string>
   <string name="developer_news">开发者资讯</string>
+
+  <string name="declare">声明：\n该应用非无码科技官方产品,仅为个人兴趣所开发的 Readhub Android 客户端。应用内所有资讯内容均来自无码科技产品
+    Readhub。
+  </string>
 </resources>

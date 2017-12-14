@@ -27,9 +27,9 @@ public class NewsViewHolder extends BaseViewHolder<Topic> {
   @Override public void bindTo(final Topic value) {
     mTxtTitle.setText(value.getTitle());
     mTxtSummary.setText(value.getSummary());
-    mTxtTime.setText(TextUtils.isEmpty(value.getAuthorName()) ? value.getPublishDate() :
+    mTxtTime.setText(TextUtils.isEmpty(value.getAuthorName()) ? value.getFormatPublishDate() :
         ReadhubApplication.mContext.getString(R.string.author_time_format, value.getAuthorName(),
-            value.getPublishDate()));
+            value.getFormatPublishDate()));
     itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         ((SupportActivity) v.getContext()).findFragment(MainFragment.class)

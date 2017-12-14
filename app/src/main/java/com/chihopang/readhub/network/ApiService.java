@@ -12,12 +12,6 @@ public class ApiService {
       .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
       .build();
 
-  private static Retrofit sponsorRetrofit = new Retrofit.Builder()
-      .baseUrl(Navigator.SPONSOR_API_HOST)
-      .addConverterFactory(GsonConverterFactory.create())
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-      .build();
-
   public static HotTopicService createHotTopicService() {
     return retrofit.create(HotTopicService.class);
   }
@@ -28,9 +22,5 @@ public class ApiService {
 
   public static TechNewsService createTechNewsService() {
     return retrofit.create(TechNewsService.class);
-  }
-
-  public static SponsorService createSponsorService() {
-    return sponsorRetrofit.create(SponsorService.class);
   }
 }

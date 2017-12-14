@@ -19,7 +19,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
 
   public void addItem(T value) {
     mItemList.add(value);
-    notifyItemInserted(mItemList.size());
+    //notifyItemInserted(mItemList.size());
   }
 
   public void addItems(Collection<T> valueCollection) {

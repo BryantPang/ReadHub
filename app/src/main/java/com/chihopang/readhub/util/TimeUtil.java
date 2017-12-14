@@ -8,6 +8,7 @@ import java.util.Locale;
 
 public class TimeUtil {
   public static String countDown(String dateString) {
+    if (TextUtils.isEmpty(dateString)) return "";
     Date date;
     try {
       date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA).parse(dateString);
@@ -19,7 +20,7 @@ public class TimeUtil {
     interval = new SimpleDateFormat("yyyy年MM月dd日 HH:mm", Locale.CHINA).format(date);
 
     if (TextUtils.isEmpty(dateString)) return interval;
-    long countdownTime = System.currentTimeMillis() - date.getTime();
+    long countdownTime = System.currentTimeMillis() - date.getTime() - 28800000;//给的时间基于 0 时区
     if (countdownTime < 0) return interval;//传入时间早于当前时间
     if (countdownTime / 1000 < 10) {
       interval = "刚刚";

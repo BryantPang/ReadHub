@@ -63,7 +63,7 @@ import org.parceler.Parcel;
     return newsArray;
   }
 
-  public String getPublishDate() {
+  public String getFormatPublishDate() {
     return TimeUtil.countDown(publishDate);
   }
 

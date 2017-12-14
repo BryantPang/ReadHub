@@ -1,22 +1,16 @@
 package com.chihopang.readhub.model;
 
 public class Sponsor {
-  private String sponsor;
   private String slogan;
   private String pageUrl;
   private String imgUrl;
 
   @Override public String toString() {
     return "Sponsor{" +
-        "sponsor='" + sponsor + '\'' +
-        ", slogan='" + slogan + '\'' +
+        "slogan='" + slogan + '\'' +
         ", pageUrl='" + pageUrl + '\'' +
         ", imgUrl='" + imgUrl + '\'' +
         '}';
-  }
-
-  public String getSponsor() {
-    return sponsor;
   }
 
   public String getSlogan() {
@@ -29,5 +23,17 @@ public class Sponsor {
 
   public String getImgUrl() {
     return imgUrl;
+  }
+
+  public void setSlogan(String slogan) {
+    this.slogan = slogan;
+  }
+
+  public void setPageUrl(String pageUrl) {
+    this.pageUrl = pageUrl;
+  }
+
+  public void setImgUrl(String imgUrl) {
+    this.imgUrl = imgUrl;
   }
 }
