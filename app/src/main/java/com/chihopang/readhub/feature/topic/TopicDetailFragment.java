@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
 import com.chihopang.readhub.feature.news.ArticlePageFragment;
@@ -71,5 +72,9 @@ public class TopicDetailFragment extends SwipeBackFragment {
       });
       mLinearTitleContainer.addView(textView);
     }
+  }
+
+  @OnClick(R.id.img_back) void onCloseClick() {
+    pop();
   }
 }

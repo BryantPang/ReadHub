@@ -6,16 +6,23 @@
   <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
       android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
       android:background="@color/colorPrimary">
+    <ImageView android:id="@+id/img_back"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:src="@drawable/ic_back"/>
     <TextView android:id="@+id/txt_toolbar_title"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_18" android:textColor="@android:color/white"
-        android:text="@string/domain" android:gravity="center_horizontal"
+        android:text="@string/domain"
         android:singleLine="true" android:maxLines="1"/>
   </android.support.v7.widget.Toolbar>
   <ProgressBar android:id="@+id/progress_bar_loading_web"
       android:layout_width="match_parent"
       android:layout_height="@dimen/horizontal_progress_bar_height"
       style="?android:attr/progressBarStyleHorizontal" android:max="100"/>
-  <WebView android:id="@+id/web_view_article_page"
-      android:layout_width="match_parent" android:layout_height="match_parent"/>
+  <android.support.v4.widget.SwipeRefreshLayout android:id="@+id/swipe_refresh_layout"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+    <WebView android:id="@+id/web_view_article_page"
+        android:layout_width="match_parent" android:layout_height="match_parent"/>
+  </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

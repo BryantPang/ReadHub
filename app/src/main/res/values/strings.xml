@@ -17,4 +17,6 @@
   <string name="declare">声明：\n该应用非无码科技官方产品,仅为个人兴趣所开发的 Readhub Android 客户端。应用内所有资讯内容均来自无码科技产品
     Readhub。
   </string>
+
+  <string name="finish_reminder">再按一次返回键退出 Readhub 。</string>
 </resources>

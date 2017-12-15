@@ -3,6 +3,7 @@ package com.chihopang.readhub.feature.more;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,8 @@ public class MoreFragment extends SupportFragment {
   }
 
   @BindView(R.id.recycler_view_sponsors) RecyclerView mRecyclerSponsors;
+  @BindView(R.id.scroll_view) NestedScrollView mScrollView;
+
   private LinearLayoutManager mLayoutManager;
   private BaseAdapter<Sponsor> mAdapter = new BaseAdapter<Sponsor>() {
     @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -66,6 +69,7 @@ public class MoreFragment extends SupportFragment {
       }
 
       @Override protected void onPostExecute(Document document) {
+        if (document == null) return;
         Elements adsContainer3Oeii = document.getElementsByClass("adsContainer___3Oeii");
         if (adsContainer3Oeii == null || adsContainer3Oeii.isEmpty()) return;
         Elements ncClearfix = adsContainer3Oeii.get(0).getElementsByClass("nc_clearfix");
