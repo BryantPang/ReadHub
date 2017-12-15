@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseViewHolder;
-import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Topic;
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -33,8 +32,9 @@ public class HotTopicViewHolder extends BaseViewHolder<Topic> {
 
     itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        ((SupportActivity) v.getContext()).findFragment(MainFragment.class)
-            .start(TopicDetailFragment.newInstance(value));
+        TopicDetailFragment.newInstance(value)
+            .show(((SupportActivity) v.getContext()).getSupportFragmentManager(),
+                TopicDetailFragment.TAG);
       }
     });
   }

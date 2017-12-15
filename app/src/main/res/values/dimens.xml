@@ -1,6 +1,7 @@
 <resources>
   <!-- margin -->
   <dimen name="app_margin">64dp</dimen>
+  <dimen name="margin_60">60dp</dimen>
   <dimen name="margin_30">30dp</dimen>
   <dimen name="margin_20">20dp</dimen>
   <dimen name="margin_10">10dp</dimen>
@@ -17,10 +18,12 @@
   <dimen name="sponsor_logo_height">76dp</dimen>
   <dimen name="horizontal_progress_bar_height">4dp</dimen>
   <dimen name="height_35">35dp</dimen>
+  <dimen name="height_60">60dp</dimen>
   <dimen name="height_70">70dp</dimen>
 
   <!-- width -->
   <dimen name="sponsor_logo_width">120dp</dimen>
+  <dimen name="width_60">60dp</dimen>
 
   <!-- elevation -->
   <dimen name="bottom_navigation_view_elevation">8dp</dimen>

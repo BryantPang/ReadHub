@@ -18,10 +18,10 @@ import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
 import com.chihopang.readhub.model.Topic;
-import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
+import me.yokeyword.fragmentation.SupportFragment;
 import org.parceler.Parcels;
 
-public class ArticlePageFragment extends SwipeBackFragment {
+public class ArticlePageFragment extends SupportFragment {
   @BindView(R.id.txt_toolbar_title) TextView mTxtTitle;
   @BindView(R.id.progress_bar_loading_web) ProgressBar mProgressBar;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
@@ -43,7 +43,7 @@ public class ArticlePageFragment extends SwipeBackFragment {
     View view = inflater.inflate(R.layout.fragment_article_page, container, false);
     ButterKnife.bind(this, view);
     mTopic = Parcels.unwrap(getArguments().getParcelable(Navigator.EXTRA_TOPIC));
-    return attachToSwipeBack(view);
+    return view;
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
