@@ -1,6 +1,7 @@
 package com.chihopang.readhub.base;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -115,6 +116,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
         }
       }
     });
+    mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#607D8B"), Color.BLACK, Color.BLUE);
   }
 
   @Override public void onSuccess(Object t) {

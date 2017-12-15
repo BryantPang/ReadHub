@@ -20,9 +20,11 @@
   <dimen name="height_35">35dp</dimen>
   <dimen name="height_60">60dp</dimen>
   <dimen name="height_70">70dp</dimen>
+  <dimen name="height_140">140dp</dimen>
 
   <!-- width -->
   <dimen name="sponsor_logo_width">120dp</dimen>
+  <dimen name="width_180">180dp</dimen>
   <dimen name="width_60">60dp</dimen>
 
   <!-- elevation -->

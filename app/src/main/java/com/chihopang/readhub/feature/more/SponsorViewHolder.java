@@ -4,11 +4,11 @@ import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.model.Sponsor;
 import com.facebook.drawee.view.SimpleDraweeView;
+import me.yokeyword.fragmentation.SupportActivity;
 
 public class SponsorViewHolder extends BaseViewHolder<Sponsor> {
   private SimpleDraweeView mImgSponsor;
@@ -22,7 +22,9 @@ public class SponsorViewHolder extends BaseViewHolder<Sponsor> {
     mImgSponsor.setImageURI(Uri.parse(value.getImgUrl()));
     mImgSponsor.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View view) {
-        Toast.makeText(mImgSponsor.getContext(), value.getSlogan(), Toast.LENGTH_SHORT).show();
+        SponsorDetailFragment.newInstance(value)
+            .show(((SupportActivity) view.getContext()).getSupportFragmentManager(),
+                SponsorDetailFragment.TAG);
       }
     });
   }

@@ -5,16 +5,18 @@
     android:background="@android:color/white" android:orientation="vertical">
   <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
       android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-      android:background="@color/colorPrimary">
+      android:background="@android:color/white">
     <ImageView android:id="@+id/img_back"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:src="@drawable/ic_back"/>
+        android:src="@drawable/ic_back" android:layout_marginRight="@dimen/margin_10"/>
     <TextView android:id="@+id/txt_toolbar_title"
         android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_18" android:textColor="@android:color/white"
+        android:textSize="@dimen/text_size_18" android:textColor="@color/textDark"
         android:text="@string/domain"
         android:singleLine="true" android:maxLines="1"/>
   </android.support.v7.widget.Toolbar>
+  <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
+      android:background="@color/dividerGrey"/>
   <ProgressBar android:id="@+id/progress_bar_loading_web"
       android:layout_width="match_parent"
       android:layout_height="@dimen/horizontal_progress_bar_height"

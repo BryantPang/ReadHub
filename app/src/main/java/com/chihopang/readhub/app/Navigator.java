@@ -7,4 +7,5 @@ public class Navigator {
       "https://readhub.me";
   //Extra
   public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
+  public static final String EXTRA_SPONSOR = "EXTRA_SPONSOR";
 }

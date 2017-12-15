@@ -72,7 +72,7 @@ public class TopicDetailFragment extends DialogFragment {
       textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_data, 0, 0, 0);
       textView.setCompoundDrawablePadding(15);
       textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
-      textView.setTextColor(Color.parseColor("#000000"));
+      textView.setTextColor(Color.parseColor("#607D8B"));
       textView.setText(topic.getTitle());
       textView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {

@@ -1,9 +1,11 @@
 package com.chihopang.readhub.model;
 
-public class Sponsor {
-  private String slogan;
-  private String pageUrl;
-  private String imgUrl;
+import org.parceler.Parcel;
+
+@Parcel public class Sponsor {
+  String slogan;
+  String pageUrl;
+  String imgUrl;
 
   @Override public String toString() {
     return "Sponsor{" +

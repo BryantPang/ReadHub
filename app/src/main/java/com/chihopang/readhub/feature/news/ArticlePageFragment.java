@@ -1,5 +1,6 @@
 package com.chihopang.readhub.feature.news;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -49,6 +50,7 @@ public class ArticlePageFragment extends SupportFragment {
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     initContent();
+    mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#607D8B"), Color.BLACK, Color.BLUE);
   }
 
   @Override public void onDestroy() {
