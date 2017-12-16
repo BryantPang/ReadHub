@@ -15,8 +15,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.feature.common.WebviewFragment;
 import com.chihopang.readhub.feature.main.MainFragment;
-import com.chihopang.readhub.feature.news.ArticlePageFragment;
 import com.chihopang.readhub.model.Topic;
 import me.yokeyword.fragmentation.SupportActivity;
 import org.parceler.Parcels;
@@ -78,7 +78,7 @@ public class TopicDetailFragment extends DialogFragment {
         @Override public void onClick(View v) {
           dismiss();
           ((SupportActivity) v.getContext()).findFragment(MainFragment.class)
-              .start(ArticlePageFragment.newInstance(topic));
+              .start(WebviewFragment.newInstance(topic));
         }
       });
       mLinearTitleContainer.addView(textView);

@@ -8,4 +8,5 @@ public class Navigator {
   //Extra
   public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
   public static final String EXTRA_SPONSOR = "EXTRA_SPONSOR";
+  public static final String EXTRA_URL = "EXTRA_URL";
 }

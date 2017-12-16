@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.ReadhubApplication;
 import com.chihopang.readhub.base.BaseViewHolder;
+import com.chihopang.readhub.feature.common.WebviewFragment;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Topic;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -33,7 +34,7 @@ public class NewsViewHolder extends BaseViewHolder<Topic> {
     itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
         ((SupportActivity) v.getContext()).findFragment(MainFragment.class)
-            .start(ArticlePageFragment.newInstance(value));
+            .start(WebviewFragment.newInstance(value));
       }
     });
 

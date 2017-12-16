@@ -1,7 +1,5 @@
 package com.chihopang.readhub.feature.more;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +12,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.feature.common.WebviewFragment;
+import com.chihopang.readhub.feature.main.MainActivity;
+import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Sponsor;
 import com.facebook.drawee.view.SimpleDraweeView;
 import org.parceler.Parcels;
@@ -58,15 +59,15 @@ public class SponsorDetailFragment extends DialogFragment {
     mImgSponsor.setImageURI(mSponsor.getImgUrl());
   }
 
-  @OnClick({R.id.img_back, R.id.img_go}) void onViewClick(View v) {
+  @OnClick({R.id.txt_cancel, R.id.txt_go}) void onViewClick(View v) {
     switch (v.getId()) {
-      case R.id.img_back:
+      case R.id.txt_cancel:
         dismiss();
         break;
-      case R.id.img_go:
-        Uri uri = Uri.parse(mSponsor.getPageUrl());
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+      case R.id.txt_go:
+        dismiss();
+        ((MainActivity) getContext()).findFragment(MainFragment.class)
+            .start(WebviewFragment.newInstance(mSponsor.getPageUrl()));
         break;
       default:
         break;

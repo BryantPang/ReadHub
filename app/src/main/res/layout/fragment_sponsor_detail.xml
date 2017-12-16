@@ -29,20 +29,21 @@
       <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
           android:background="@color/dividerGrey"/>
       <LinearLayout android:layout_width="match_parent"
-          android:layout_height="wrap_content"
+          android:layout_height="@dimen/height_60"
           android:orientation="horizontal">
-        <ImageView android:id="@+id/img_back"
-            android:layout_width="0dp" android:layout_height="@dimen/height_60"
+        <TextView android:id="@+id/txt_cancel"
+            android:layout_width="0dp" android:layout_height="match_parent"
             android:layout_weight="1" android:foreground="?attr/selectableItemBackground"
-            android:src="@drawable/ic_close_blue" android:layout_gravity="center_horizontal"
-            android:scaleType="centerInside"/>
+            android:textSize="@dimen/text_size_18" android:textColor="@color/textGrey"
+            android:text="@string/dialog_cancel" android:gravity="center"/>
         <View android:layout_width="@dimen/divider_height"
             android:layout_height="match_parent"
             android:background="@color/dividerGrey"/>
-        <ImageView android:id="@+id/img_go"
-            android:layout_width="0dp" android:layout_height="@dimen/height_60"
+        <TextView android:id="@+id/txt_go"
+            android:layout_width="0dp" android:layout_height="match_parent"
             android:layout_weight="1" android:foreground="?attr/selectableItemBackground"
-            android:src="@drawable/ic_go_blue" android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/text_size_18" android:textColor="@color/textBlue"
+            android:text="@string/dialog_go" android:gravity="center"
             android:scaleType="centerInside"/>
       </LinearLayout>
     </LinearLayout>
