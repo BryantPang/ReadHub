@@ -6,7 +6,7 @@
   <string name="domain">Readhub.me</string>
 
   <string name="author_time_format">%1$s·%2$s</string>
-  <string name="app_author">作者：ChihoPang</string>
+  <string name="app_author">Readhub · Android\nby ChihoPang</string>
   <string name="sponsor">Readhub 赞助商：</string>
   <string name="network_error">网络错误</string>
   <string name="access_success">访问成功</string>
@@ -14,7 +14,7 @@
   <string name="aritcle">文章</string>
   <string name="developer_news">开发者资讯</string>
 
-  <string name="declare">声明：\n该应用非无码科技官方产品,仅为个人兴趣所开发的 Readhub Android 客户端。应用内所有资讯内容均来自无码科技产品
+  <string name="declare">该应用仅为个人兴趣所开发的 Readhub 第三方客户端，非无码科技官方产品。应用内所有资讯内容均来自无码科技产品
     Readhub。
   </string>
 
@@ -28,4 +28,6 @@
 
   <string name="dialog_cancel">取消</string>
   <string name="dialog_go">前往主页</string>
+
+  <string name="personal_page">个人主页</string>
 </resources>

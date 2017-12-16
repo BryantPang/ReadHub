@@ -5,6 +5,7 @@ public class Navigator {
   public static final String API_HOST = "https://api.readhub.me";
   public static final String SPONSOR_API_HOST =
       "https://readhub.me";
+  public static final String PERSONAL_PAGE_URL = "http://chihopang.top/";
   //Extra
   public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
   public static final String EXTRA_SPONSOR = "EXTRA_SPONSOR";

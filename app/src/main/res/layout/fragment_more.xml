@@ -1,32 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll_view"
     android:layout_width="match_parent" android:layout_height="match_parent">
   <LinearLayout
       android:layout_width="match_parent" android:layout_height="wrap_content"
       android:orientation="vertical" android:background="@color/background_grey">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:background="@android:color/white"
-        android:layout_marginTop="@dimen/margin_30">
-      <ImageView android:layout_width="@dimen/avatar_size"
-          android:layout_height="@dimen/avatar_size"
-          android:src="@drawable/ic_avatar" android:layout_margin="@dimen/margin_20"/>
-      <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-          android:layout_gravity="center_vertical" android:text="@string/app_author"
-          android:textSize="@dimen/text_size_16" android:textColor="@color/textGrey"/>
-    </LinearLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_30"
+        app:cardCornerRadius="4dp" app:cardBackgroundColor="@android:color/white">
+      <LinearLayout android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:layout_margin="@dimen/margin_4">
+        <LinearLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:foreground="?attr/selectableItemBackground">
+          <ImageView
+              android:layout_width="@dimen/avatar_size" android:layout_height="@dimen/avatar_size"
+              android:src="@drawable/ic_avatar" android:layout_margin="@dimen/margin_20"/>
+          <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:layout_gravity="center_vertical" android:text="@string/app_author"
+              android:textSize="@dimen/text_size_16" android:textColor="@color/textGrey"
+              android:lineSpacingExtra="@dimen/margin_10"/>
+        </LinearLayout>
+        <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
+            android:background="@color/dividerGrey"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"/>
+        <RelativeLayout android:id="@+id/relative_go_personal_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_background"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:foreground="?attr/selectableItemBackground">
+          <TextView
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textSize="@dimen/text_size_18" android:textColor="@color/textBlue"
+              android:text="@string/personal_page" android:gravity="center"
+              android:padding="@dimen/padding_10"
+              android:drawableRight="@drawable/ic_right_blue"
+              android:drawablePadding="@dimen/padding_10"
+              android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+        <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
+            android:background="@color/dividerGrey"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"/>
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:padding="@dimen/padding_20"
+            android:text="@string/declare" android:lineSpacingExtra="@dimen/margin_4"
+            android:textColor="@color/textGrey" android:textSize="@dimen/text_size_16"/>
+      </LinearLayout>
 
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20" android:padding="@dimen/padding_20"
-        android:background="@android:color/white" android:text="@string/declare"
-        android:textColor="@color/textGrey" android:textSize="@dimen/text_size_16"/>
+    </android.support.v7.widget.CardView>
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <TextView android:id="@+id/txt_sponsor_title"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20" android:layout_marginLeft="@dimen/margin_20"
         android:text="@string/sponsor"
-        android:textColor="@color/textGrey" android:textSize="@dimen/text_size_14"/>
+        android:textColor="@color/textGrey" android:textSize="@dimen/text_size_14"
+        android:visibility="gone"/>
 
     <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view_sponsors"
         android:layout_width="wrap_content" android:layout_height="match_parent"
