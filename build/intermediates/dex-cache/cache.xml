@@ -12,102 +12,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/dda371841d356412c2230a2f123c326e0a4ffc23/output/jars/classes.jar"
+        jar="/Users/joshbryant/.android/build-cache/d0b61cd0b16992218095cc7412da4401c5de85ab/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_456c380c69f445f463a4274dad2a25e3f733e35b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/e58dca65e011ce2b000d7addc0dfd902ad64e99c/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e176fd06c2ad5b50a2f5cb4de6000a83a7cb48f5">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_13ebf08ebf2b424b8509e2b443fbdc0368613f88/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="023ee503b631f69511e335a061ea008f8da60f40">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.0.0-alpha1_e2595292d09ebfcae8a0bf35b054d12b50567da4/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/0563908f072ec962349777ae2b7de30fa25d58bd/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f3a473ba378809ab12cbea78a77a0e57daf94259/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/14472b27b708d3871753fc5206f2a8065c27d639/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_82fc9ad3979bbbcb2fb298465eecaed9e94071a5/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/b274cd3fedd81cf42a1414793f9aabeefb68caa5/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="9935891f23923f39d002087085d9696568a9f657">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_606bfe2decd97b063ef35238843c928c701a4c6f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/b38028a8520746a40a6cd32062d59a4b4cb461ce/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_317793575abf99734f57366fad32113fac9ef8f9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/53cf849d38ec3743317aec7e36538dbd15fb4fbf/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_75b497fbf514a8046441eee0b190c43b3aed7de3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/491ebc56f1b22e7688ba89484de6293de6d4dad1/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_02de0d9a0800eb83a52989c79474f18975146e4f/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/e41cba2ccf0dba522c97f25c661815cda3db81e2/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="952944218ecedea1554a513dec0c14d570642843">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a9aad7a62335af3655b721350e7d0d53e0bb4135/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/17727501c52d71e5f5029df2f7da10ce91aa957f/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9ddc6a234c33d3782aee9d0978b43213c878c96e/classes.dex" />
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e0e79f145f1a72575f09439d76f1907f652ca20c/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -115,26 +25,17 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="1e2df0e5bc32d613d271e54599c420bc0d64810a">
+        sha1="5f22a0d67d0befd9016838344d124fdd4ce3b85d">
         <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c991b5e7a69c37910d27abbf3a18c11766bb0223/classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/d7d6c7ab5a5345b361e08330b7e96dd95b9eb3b1/output/jars/classes.jar"
+        jar="/Users/joshbryant/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.9.1/84b4b7d1c4a238e7899972b7446c250691e65f1f/okhttp-3.9.1.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_49abce88dc0a624a6f5383721d0c7bd3c8c487fe/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/06f319d4b977ad84e20212546ab10b77547509bd/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_83b92149da46bd5394f657b44085f434f0a556cf/classes.dex" />
+        sha1="84b4b7d1c4a238e7899972b7446c250691e65f1f">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.9.1_1023993524d9128932a068d115a5cc380434c34a/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -147,12 +48,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/0dc7af6dfc76ee576266813878b91b37d7016e94/output/jars/classes.jar"
+        jar="/Users/joshbryant/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.9.1/36e71ab9e903fc4d1b4a58d80572a91d9fd60caf/logging-interceptor-3.9.1.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b0baab942dc718b94747321a789a50959609485a/classes.dex" />
+        sha1="36e71ab9e903fc4d1b4a58d80572a91d9fd60caf">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/logging-interceptor-3.9.1_e6f2b05988998d3dcc0aeaefa7b3c82345057934/classes.dex" />
     </item>
 
 </items>

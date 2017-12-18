@@ -5,13 +5,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class TimeUtil {
+  public static Long getTimeStamp(String date) {
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA);
+    format.setTimeZone(TimeZone.getTimeZone("UTC"));
+    try {
+      return format.parse(date).getTime();
+    } catch (ParseException e) {
+      e.printStackTrace();
+      return 0L;
+    }
+  }
+
   public static String countDown(String dateString) {
     if (TextUtils.isEmpty(dateString)) return "";
     Date date;
     try {
-      date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA).parse(dateString);
+      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA);
+      format.setTimeZone(TimeZone.getTimeZone("UTC"));
+      date = format.parse(dateString);
     } catch (ParseException e) {
       e.printStackTrace();
       return "";
@@ -20,7 +34,7 @@ public class TimeUtil {
     interval = new SimpleDateFormat("yyyy年MM月dd日 HH:mm", Locale.CHINA).format(date);
 
     if (TextUtils.isEmpty(dateString)) return interval;
-    long countdownTime = System.currentTimeMillis() - date.getTime() - 28800000;//给的时间基于 0 时区
+    long countdownTime = System.currentTimeMillis() - date.getTime();
     if (countdownTime < 0) return interval;//传入时间早于当前时间
     if (countdownTime / 1000 < 10) {
       interval = "刚刚";

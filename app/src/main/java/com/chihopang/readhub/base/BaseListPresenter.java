@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public abstract class BaseListPresenter<T> implements INetworkPresenter {
   private BaseListFragment<T> mFragment;
-  private long lastCursor;
+  private String lastCursor;
   public BaseListPresenter(BaseListFragment<T> fragment) {
     mFragment = fragment;
   }
@@ -21,12 +21,12 @@ public abstract class BaseListPresenter<T> implements INetworkPresenter {
         .subscribe(new Consumer<ApiData>() {
           @Override public void accept(@NonNull ApiData apiData) throws Exception {
             getView().onSuccess(apiData.getData());
-            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getOrder();
+            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getLastCursor();
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
             throwable.printStackTrace();
-            getView().onError(new Exception("请求错误"));
+            getView().onError(throwable);
           }
         });
   }
@@ -37,11 +37,15 @@ public abstract class BaseListPresenter<T> implements INetworkPresenter {
         .subscribe(new Consumer<ApiData>() {
           @Override public void accept(@NonNull ApiData apiData) throws Exception {
             getView().onSuccess(apiData.getData());
-            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getOrder();
+            if (apiData.getData().isEmpty()) {
+              getView().hasMore = false;
+              return;
+            }
+            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getLastCursor();
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
-            getView().onError(new Exception("请求错误"));
+            getView().onError(throwable);
           }
         });
   }
@@ -54,7 +58,7 @@ public abstract class BaseListPresenter<T> implements INetworkPresenter {
     return mFragment;
   }
 
-  public long getLastCursor() {
+  public String getLastCursor() {
     return lastCursor;
   }
 }

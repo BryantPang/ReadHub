@@ -13,10 +13,6 @@ public class HotTopicFragment extends BaseListFragment<Topic> {
     return new HotTopicFragment();
   }
 
-  @Override public boolean hasMore() {
-    return true;
-  }
-
   @Override public BaseViewHolder<Topic> provideViewHolder(ViewGroup parent, int viewType) {
     return new HotTopicViewHolder(getActivity(), parent);
   }

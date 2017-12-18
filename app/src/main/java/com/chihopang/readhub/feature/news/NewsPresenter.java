@@ -17,6 +17,6 @@ public class NewsPresenter extends BaseListPresenter<Topic> {
   }
 
   @Override public Observable<ApiData> requestMore() {
-    return null;
+    return ApiService.createNewsService().getMoreNews(getLastCursor(), 10);
   }
 }

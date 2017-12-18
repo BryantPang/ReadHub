@@ -8,7 +8,7 @@ import org.parceler.Parcel;
 
 @Parcel public class Topic {
   String id;
-  long order;
+  String order;
   String title;
   String siteName;
   String authorName;
@@ -67,7 +67,15 @@ import org.parceler.Parcel;
     return TimeUtil.countDown(publishDate);
   }
 
-  public long getOrder() {
+  public String getOrder() {
     return order;
+  }
+
+  public String getLastCursor() {
+    if (TextUtils.isEmpty(order)) {
+      return String.valueOf(TimeUtil.getTimeStamp(publishDate));
+    } else {
+      return order;
+    }
   }
 }

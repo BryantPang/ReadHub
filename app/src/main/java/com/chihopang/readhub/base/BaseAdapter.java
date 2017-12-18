@@ -9,8 +9,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
   private List<T> mItemList = new ArrayList<>();
 
   @Override public void onBindViewHolder(BaseViewHolder<T> holder, int position) {
-    if (position + 1 >= mItemList.size()) return;
-    holder.bindTo(mItemList.get(position));
+    if (position < mItemList.size()) holder.bindTo(mItemList.get(position));
   }
 
   @Override public int getItemCount() {
@@ -23,7 +22,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder
   }
 
   public void addItems(Collection<T> valueCollection) {
-    mItemList.addAll(valueCollection);
+    mItemList.addAll(mItemList.size(), valueCollection);
     notifyDataSetChanged();//TODO 所有刷新方法都需要重新检查
   }
 

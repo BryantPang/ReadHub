@@ -13,10 +13,6 @@ public class NewsFragment extends BaseListFragment<Topic> {
     return new NewsFragment();
   }
 
-  @Override public boolean hasMore() {
-    return false;
-  }
-
   @Override public BaseViewHolder<Topic> provideViewHolder(ViewGroup parent, int viewType) {
     return new NewsViewHolder(getActivity(), parent);
   }

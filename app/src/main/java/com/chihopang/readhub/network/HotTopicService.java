@@ -8,6 +8,6 @@ import retrofit2.http.Query;
 public interface HotTopicService {
   @GET("topic") Observable<ApiData> getHotTopic();
 
-  @GET("topic") Observable<ApiData> getMoreHotTopic(@Query("lastCursor") long lastCursor,
+  @GET("topic") Observable<ApiData> getMoreHotTopic(@Query("lastCursor") String lastCursor,
       @Query("pageSize") int pageSize);
 }

@@ -18,6 +18,6 @@ public class TechNewsPresenter extends BaseListPresenter<Topic> {
   }
 
   @Override public Observable<ApiData> requestMore() {
-    return null;
+    return ApiService.createTechNewsService().getMoreTechNews(getLastCursor(), 10);
   }
 }

@@ -27,6 +27,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
   private SupportActivity mActivity;
   private BaseListPresenter<T> mPresenter = createPresenter();
   public DynamicBox mBox;
+  boolean hasMore = true;
 
   @BindView(R.id.fab) FloatingActionButton mFAB;
   @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
@@ -126,9 +127,13 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     mBox.hideAll();
   }
 
-  @Override public void onError(Exception e) {
+  @Override public void onError(Throwable e) {
     mBox.setOtherExceptionMessage(e.getMessage());
     mBox.showExceptionLayout();
+  }
+
+  public RecyclerView.Adapter getAdapter() {
+    return mAdapter;
   }
 
   public BaseListPresenter<T> getPresenter() {
@@ -136,6 +141,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
   }
 
   private void requestData() {
+    hasMore = true;
     getPresenter().start();
   }
 
@@ -143,7 +149,11 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     getPresenter().startRequestMore();
   }
 
-  public abstract boolean hasMore();
+  public boolean hasMore() {
+    return hasMore;
+  }
+
+  ;
 
   public abstract BaseViewHolder<T> provideViewHolder(ViewGroup parent, int viewType);
 

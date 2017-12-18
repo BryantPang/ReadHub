@@ -13,9 +13,6 @@ public class TechNewsFragment extends BaseListFragment<Topic> {
   public static TechNewsFragment newInstance() {
     return new TechNewsFragment();
   }
-  @Override public boolean hasMore() {
-    return false;
-  }
 
   @Override public BaseViewHolder<Topic> provideViewHolder(ViewGroup parent, int viewType) {
     return new NewsViewHolder(getActivity(), parent);
