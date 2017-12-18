@@ -4,6 +4,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +77,17 @@ public class TopicDetailFragment extends DialogFragment {
       textView.setCompoundDrawablePadding(15);
       textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
       textView.setTextColor(Color.parseColor("#607D8B"));
-      textView.setText(topic.getTitle());
+      if (TextUtils.isEmpty(topic.getSiteName())) {
+        textView.setText(topic.getTitle());
+      } else {
+        SpannableString spannableTitle =
+            SpannableString.valueOf(topic.getTitle() + " " + topic.getSiteName());
+        spannableTitle.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),
+            topic.getTitle().length() + 1,
+            topic.getTitle().length() + topic.getSiteName().length() + 1,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableTitle);
+      }
       textView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
           dismiss();

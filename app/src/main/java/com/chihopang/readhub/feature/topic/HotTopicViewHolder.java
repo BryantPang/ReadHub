@@ -23,10 +23,10 @@ public class HotTopicViewHolder extends BaseViewHolder<Topic> {
   @Override public void bindTo(final Topic value) {
     mTxtTitle.setText(value.getTitle());
     mTxtSummary.setText(value.getSummary());
-    mTxtTime.setText(value.getFormatPublishDate());
+    mTxtTime.setText(value.getPublishDateCountDown());
 
     mTxtTitle.setVisibility(
-        TextUtils.isEmpty(value.getFormatPublishDate()) ? View.GONE : View.VISIBLE);
+        TextUtils.isEmpty(value.getPublishDateCountDown()) ? View.GONE : View.VISIBLE);
     mTxtTitle.setVisibility(TextUtils.isEmpty(value.getTitle()) ? View.GONE : View.VISIBLE);
     mTxtSummary.setVisibility(TextUtils.isEmpty(value.getSummary()) ? View.GONE : View.VISIBLE);
 

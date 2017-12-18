@@ -50,4 +50,18 @@ public class TimeUtil {
     }
     return interval;
   }
+
+  public static String getFormatDate(String dateString) {
+    if (TextUtils.isEmpty(dateString)) return "";
+    Date date;
+    try {
+      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.CHINA);
+      format.setTimeZone(TimeZone.getTimeZone("UTC"));
+      date = format.parse(dateString);
+    } catch (ParseException e) {
+      e.printStackTrace();
+      return "";
+    }
+    return new SimpleDateFormat("yyyy年MM月dd日 HH:mm", Locale.CHINA).format(date);
+  }
 }

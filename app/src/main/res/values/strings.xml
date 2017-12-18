@@ -6,8 +6,9 @@
   <string name="domain">Readhub.me</string>
 
   <string name="author_time_format">%1$s·%2$s</string>
+  <string name="site_author_time_format">%1$s/%2$s·%3$s</string>
   <string name="app_author">Readhub · Android\nby ChihoPang</string>
-  <string name="sponsor">Readhub 赞助商：</string>
+  <string name="sponsor">Readhub 赞助商</string>
   <string name="network_error">网络错误</string>
   <string name="access_success">访问成功</string>
   <string name="no_more_to_load">已经到底啦~</string>
@@ -30,4 +31,5 @@
   <string name="dialog_go">前往主页</string>
 
   <string name="personal_page">个人主页</string>
+  <string name="readhub_web">Readhub 网页版</string>
 </resources>

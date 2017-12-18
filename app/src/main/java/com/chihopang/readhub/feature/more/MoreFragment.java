@@ -68,7 +68,7 @@ public class MoreFragment extends SupportFragment {
       @Override protected Document doInBackground(Void... params) {
         Document document = null;
         try {
-          document = Jsoup.connect(Navigator.SPONSOR_API_HOST).get();
+          document = Jsoup.connect(Navigator.READHUB_PAGE_URL).get();
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -97,5 +97,10 @@ public class MoreFragment extends SupportFragment {
   @OnClick(R.id.relative_go_personal_page) void goPersonalPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
         .start(WebviewFragment.newInstance(Navigator.PERSONAL_PAGE_URL));
+  }
+
+  @OnClick(R.id.relative_go_readhub_page) void goReadhubPage() {
+    ((MainActivity) getContext()).findFragment(MainFragment.class)
+        .start(WebviewFragment.newInstance(Navigator.READHUB_PAGE_URL));
   }
 }

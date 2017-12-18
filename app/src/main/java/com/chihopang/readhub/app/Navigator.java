@@ -3,7 +3,7 @@ package com.chihopang.readhub.app;
 public class Navigator {
   //API 网址
   public static final String API_HOST = "https://api.readhub.me";
-  public static final String SPONSOR_API_HOST =
+  public static final String READHUB_PAGE_URL =
       "https://readhub.me";
   public static final String PERSONAL_PAGE_URL = "http://chihopang.top/";
   //Extra

@@ -52,17 +52,35 @@
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginRight="@dimen/margin_20"/>
         <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:padding="@dimen/padding_20"
+            android:paddingTop="@dimen/padding_20" android:paddingLeft="@dimen/padding_20"
+            android:paddingRight="@dimen/padding_20"
             android:text="@string/declare" android:lineSpacingExtra="@dimen/margin_4"
             android:textColor="@color/textGrey" android:textSize="@dimen/text_size_16"/>
+        <RelativeLayout android:id="@+id/relative_go_readhub_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_btn_background"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:foreground="?attr/selectableItemBackground">
+          <TextView
+              android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:textSize="@dimen/text_size_18" android:textColor="@color/textBlue"
+              android:text="@string/readhub_web" android:gravity="center"
+              android:padding="@dimen/padding_10"
+              android:drawableRight="@drawable/ic_right_blue"
+              android:drawablePadding="@dimen/padding_10"
+              android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+
       </LinearLayout>
 
     </android.support.v7.widget.CardView>
 
     <TextView android:id="@+id/txt_sponsor_title"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20" android:layout_marginLeft="@dimen/margin_20"
-        android:text="@string/sponsor"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:text="@string/sponsor" android:layout_gravity="center_horizontal"
         android:textColor="@color/textGrey" android:textSize="@dimen/text_size_14"
         android:visibility="gone"/>
 
