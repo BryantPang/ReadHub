@@ -12,21 +12,21 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8404b4d47ae9bcb6b8de06c6767531ac752a95ed">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c991b5e7a69c37910d27abbf3a18c11766bb0223/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/joshbryant/.android/build-cache/d0b61cd0b16992218095cc7412da4401c5de85ab/output/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="914f5d3e3ace66080e59613708f06d129a222e25">
         <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e0e79f145f1a72575f09439d76f1907f652ca20c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="5f22a0d67d0befd9016838344d124fdd4ce3b85d">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c991b5e7a69c37910d27abbf3a18c11766bb0223/classes.dex" />
     </item>
     <item
         is-multidex="true"

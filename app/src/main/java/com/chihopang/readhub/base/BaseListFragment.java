@@ -59,8 +59,10 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     View view = inflater.inflate(R.layout.fragment_base_list, container, false);
     ButterKnife.bind(this, view);
     initContent();
-    mBox.showLoadingLayout();
-    requestData();
+    if (mAdapter.getItemCount() == 0 || mAdapter.getItemCount() == 1) {
+      requestData();
+      mBox.showLoadingLayout();
+    }
     setRetainInstance(true);
     return view;
   }
