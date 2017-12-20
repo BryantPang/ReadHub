@@ -52,11 +52,11 @@ import org.parceler.Parcel;
   }
 
   public String getTitle() {
-    return title.trim();
+    return TextUtils.isEmpty(title) ? null : title.trim();
   }
 
   public String getSummary() {
-    return summary.trim();
+    return TextUtils.isEmpty(summary) ? null : summary.trim();
   }
 
   public List<Topic> getNewsArray() {

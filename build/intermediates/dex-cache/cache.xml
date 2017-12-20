@@ -12,11 +12,20 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/joshbryant/.android/build-cache/eac96348c523713b0773f589627b21ce95a8d878/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="56b24cbd303368a3dc7a0cf1efbeb4f59b9ad742">
+        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_27def200dd23bb1435edd20397831d95a6cdc48b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="8404b4d47ae9bcb6b8de06c6767531ac752a95ed">
+        sha1="f4b219cea88b8567d1eaa7f6b511802553421658">
         <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c991b5e7a69c37910d27abbf3a18c11766bb0223/classes.dex" />
     </item>
     <item

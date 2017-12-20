@@ -10,4 +10,7 @@ public class Navigator {
   public static final String EXTRA_TOPIC = "EXTRA_TOPIC";
   public static final String EXTRA_SPONSOR = "EXTRA_SPONSOR";
   public static final String EXTRA_URL = "EXTRA_URL";
+
+  //其他
+  public static final String BUGGLY_APP_ID = "547fe840fc";
 }

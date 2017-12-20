@@ -31,7 +31,7 @@ public class TimeUtil {
       return "";
     }
     String interval;
-    interval = new SimpleDateFormat("yyyy年MM月dd日 HH:mm", Locale.CHINA).format(date);
+    interval = new SimpleDateFormat("yyyy年MM月dd日", Locale.CHINA).format(date);
 
     if (TextUtils.isEmpty(dateString)) return interval;
     long countdownTime = System.currentTimeMillis() - date.getTime();
