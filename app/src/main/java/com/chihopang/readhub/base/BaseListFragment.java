@@ -40,7 +40,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     }
 
     @Override public int getItemCount() {
-      return super.getItemCount() + 1;
+      return super.getItemCount() == 0 ? super.getItemCount() : super.getItemCount() + 1;
     }
 
     @Override public int getItemViewType(int position) {
@@ -114,7 +114,6 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
         if (!mSwipeRefreshLayout.isRefreshing()
             && hasMore()
             && mManager.findLastVisibleItemPosition() == mAdapter.getItemCount() - 1) {
-          mSwipeRefreshLayout.setRefreshing(true);
           requestMore();
         }
       }
@@ -155,7 +154,15 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     return hasMore;
   }
 
-  ;
+  public void onTabClick() {
+    if (mManager.findFirstCompletelyVisibleItemPosition() != 0) {
+      mRecyclerView.smoothScrollToPosition(0);
+      return;
+    }
+    mSwipeRefreshLayout.setRefreshing(true);
+    mAdapter.clear();
+    requestData();
+  }
 
   public abstract BaseViewHolder<T> provideViewHolder(ViewGroup parent, int viewType);
 

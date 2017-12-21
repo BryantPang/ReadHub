@@ -7,7 +7,6 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -16,16 +15,15 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
-import com.chihopang.readhub.feature.developer.news.TechNewsFragment;
+import com.chihopang.readhub.base.BaseListFragment;
 import com.chihopang.readhub.feature.more.MoreFragment;
-import com.chihopang.readhub.feature.news.NewsFragment;
-import com.chihopang.readhub.feature.topic.HotTopicFragment;
 import java.lang.reflect.Field;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainFragment extends SupportFragment {
   @BindView(R.id.bottom_navigation_view) BottomNavigationView mBottomNavigationView;
   @BindView(R.id.view_pager_main) ViewPager mViewPager;
+  private MainFragmentPagerAdapter mFragmentAdapter;
 
   public static MainFragment newInstance() {
     MainFragment fragment = new MainFragment();
@@ -47,25 +45,10 @@ public class MainFragment extends SupportFragment {
   }
 
   private void initContent() {
-    mViewPager.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
-      @Override public Fragment getItem(int position) {
-        switch (position) {
-          case 0:
-            return HotTopicFragment.newInstance();
-          case 1:
-            return NewsFragment.newInstance();
-          case 2:
-            return TechNewsFragment.newInstance();
-          case 3:
-            return MoreFragment.newInstance();
-        }
-        return null;
-      }
-
-      @Override public int getCount() {
-        return 4;
-      }
-    });
+    if (mFragmentAdapter == null) {
+      mFragmentAdapter = new MainFragmentPagerAdapter(getFragmentManager());
+    }
+    mViewPager.setAdapter(mFragmentAdapter);
     BottomNavigationMenuView menuView =
         (BottomNavigationMenuView) mBottomNavigationView.getChildAt(0);
     try {
@@ -105,6 +88,17 @@ public class MainFragment extends SupportFragment {
                 break;
               default:
                 currentItem = 0;
+            }
+            if (mViewPager.getCurrentItem() == currentItem) {
+              //当前页面已经为对应页面时，则回到顶部或刷新
+              Fragment currentFragment = mFragmentAdapter.getCurrentFragment();
+              if (currentFragment instanceof BaseListFragment) {
+                ((BaseListFragment) currentFragment).onTabClick();
+              }
+              if (currentFragment instanceof MoreFragment) {
+                ((MoreFragment) currentFragment).onTabClick();
+              }
+              return true;
             }
             mViewPager.setCurrentItem(currentItem);
             return true;

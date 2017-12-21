@@ -103,4 +103,8 @@ public class MoreFragment extends SupportFragment {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
         .start(WebviewFragment.newInstance(Navigator.READHUB_PAGE_URL));
   }
+
+  public void onTabClick() {
+    mScrollView.smoothScrollTo(0, 0);
+  }
 }
