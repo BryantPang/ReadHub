@@ -147,6 +147,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
   }
 
   private void requestMore() {
+    mSwipeRefreshLayout.setRefreshing(true);//同时防止多次 requestMore
     getPresenter().startRequestMore();
   }
 
