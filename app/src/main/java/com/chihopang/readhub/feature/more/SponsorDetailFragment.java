@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
-import com.chihopang.readhub.feature.common.WebviewFragment;
+import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Sponsor;
@@ -67,7 +67,7 @@ public class SponsorDetailFragment extends DialogFragment {
       case R.id.txt_go:
         dismiss();
         ((MainActivity) getContext()).findFragment(MainFragment.class)
-            .start(WebviewFragment.newInstance(mSponsor.getPageUrl()));
+            .start(WebViewFragment.newInstance(mSponsor.getPageUrl()));
         break;
       default:
         break;

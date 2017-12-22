@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+  <android.support.v7.widget.CardView android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      app:cardBackgroundColor="@android:color/white"
+      app:cardElevation="@dimen/cardview_default_elevation"
+      app:cardCornerRadius="4dp"
+      android:layout_marginTop="@dimen/margin_30">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+      <RelativeLayout android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+        <TextView android:id="@+id/txt_instant_source"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textColor="@color/textGrey" android:textSize="@dimen/text_size_18"
+            android:padding="@dimen/padding_10" tools:text="来源：36Kr"/>
+        <TextView android:id="@+id/txt_origin_site"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:textColor="@color/textGrey" android:textSize="@dimen/text_size_18"
+            android:layout_alignParentRight="true" android:text="@string/go_origin_site"
+            android:padding="@dimen/padding_10"
+            android:background="@drawable/selector_btn_background"
+            android:visibility="gone"/>
+      </RelativeLayout>
+      <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
+          android:background="@color/dividerLightGrey"/>
+      <ScrollView android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:fillViewport="true">
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+          <TextView android:id="@+id/txt_topic_title"
+              android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:textSize="@dimen/text_size_20" android:textStyle="bold"
+              android:textColor="@color/textDark"
+              android:layout_marginTop="@dimen/margin_10"
+              android:layout_marginBottom="@dimen/margin_4"
+              android:layout_marginLeft="@dimen/margin_10"
+              android:layout_marginRight="@dimen/margin_10"
+              tools:text="欧盟正考虑采取多项措施 向谷歌亚马逊等公司征收更多的税"/>
+          <WebView android:id="@+id/web_view"
+              android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        </LinearLayout>
+      </ScrollView>
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
+  <ImageView android:id="@+id/img_back"
+      android:layout_width="@dimen/width_60" android:layout_height="@dimen/height_60"
+      android:src="@drawable/ic_close" android:layout_gravity="center_horizontal"
+      android:scaleType="centerInside" android:layout_margin="@dimen/margin_4"/>
+</LinearLayout>
+

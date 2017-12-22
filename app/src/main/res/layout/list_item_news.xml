@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    app:cardBackgroundColor="@android:color/white"
+    android:layout_marginLeft="@dimen/margin_10" android:layout_marginRight="@dimen/margin_10"
+    android:layout_marginTop="@dimen/margin_5" android:layout_marginBottom="@dimen/margin_5">
+  <RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:paddingTop="@dimen/padding_10"
+      android:background="@drawable/selector_btn_background">
 
-    android:paddingTop="@dimen/padding_10">
+    <TextView android:id="@+id/txt_news_title"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark" android:textSize="@dimen/text_size_18"
+        android:paddingLeft="@dimen/padding_10" android:paddingRight="@dimen/padding_10"
+        tools:text="原华为终端 CMO 杨柘加盟魅族，李楠或将担任魅蓝分公司总裁"/>
 
-  <TextView android:id="@+id/txt_news_title"
-      android:layout_width="wrap_content" android:layout_height="wrap_content"
-      android:textColor="@color/colorPrimaryDark" android:textSize="@dimen/text_size_18"
-      android:paddingLeft="@dimen/padding_10" android:paddingRight="@dimen/padding_10"
-      tools:text="原华为终端 CMO 杨柘加盟魅族，李楠或将担任魅蓝分公司总裁"/>
+    <TextView android:id="@+id/txt_news_summary"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textColor="@color/textLightGrey" android:textSize="@dimen/text_size_16"
+        android:layout_below="@id/txt_news_title" android:layout_marginTop="@dimen/margin_10"
+        android:paddingLeft="@dimen/padding_10" android:paddingRight="@dimen/padding_10"
+        android:maxLines="3" android:ellipsize="end"
+        tools:text="这位对道家学说领悟颇深的 CMO，要怎么诠释属于年轻人的高端机呢？"/>
 
-  <TextView android:id="@+id/txt_news_summary"
-      android:layout_width="wrap_content" android:layout_height="wrap_content"
-      android:textColor="@color/textLightGrey" android:textSize="@dimen/text_size_16"
-      android:layout_below="@id/txt_news_title" android:layout_marginTop="@dimen/margin_10"
-      android:paddingLeft="@dimen/padding_10" android:paddingRight="@dimen/padding_10"
-      android:maxLines="3" android:ellipsize="end"
-      tools:text="这位对道家学说领悟颇深的 CMO，要怎么诠释属于年轻人的高端机呢？"/>
+    <TextView android:id="@+id/txt_news_time"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:textColor="@color/textLightGrey" android:textSize="@dimen/text_size_14"
+        android:layout_below="@id/txt_news_summary" android:layout_marginTop="@dimen/margin_10"
+        android:paddingLeft="@dimen/padding_10" android:paddingRight="@dimen/padding_10"
+        android:layout_marginBottom="@dimen/margin_10" tools:text=" 1 天前"/>
 
-  <TextView android:id="@+id/txt_news_time"
-      android:layout_width="wrap_content" android:layout_height="wrap_content"
-      android:textColor="@color/textLightGrey" android:textSize="@dimen/text_size_14"
-      android:layout_below="@id/txt_news_summary" android:layout_marginTop="@dimen/margin_10"
-      android:paddingLeft="@dimen/padding_10" android:paddingRight="@dimen/padding_10"
-      tools:text=" 1 天前"/>
-
-  <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
-      android:background="@color/dividerLightGrey" android:layout_marginTop="@dimen/margin_10"
-      android:layout_below="@id/txt_news_time"/>
-
-</RelativeLayout>
+  </RelativeLayout>
+</android.support.v7.widget.CardView>

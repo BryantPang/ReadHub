@@ -12,57 +12,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/eac96348c523713b0773f589627b21ce95a8d878/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="56b24cbd303368a3dc7a0cf1efbeb4f59b9ad742">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_27def200dd23bb1435edd20397831d95a6cdc48b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="f4b219cea88b8567d1eaa7f6b511802553421658">
+        sha1="947f00b9b6392283ccf091b6999fe879a8a5c5e8">
         <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c991b5e7a69c37910d27abbf3a18c11766bb0223/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.android/build-cache/d0b61cd0b16992218095cc7412da4401c5de85ab/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_e0e79f145f1a72575f09439d76f1907f652ca20c/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.9.1/84b4b7d1c4a238e7899972b7446c250691e65f1f/okhttp-3.9.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="84b4b7d1c4a238e7899972b7446c250691e65f1f">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.9.1_1023993524d9128932a068d115a5cc380434c34a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.gradle/caches/modules-2/files-2.1/org.jsoup/jsoup/1.11.2/e3eeb8a0b4ce1db246059a41e353cd7413dad226/jsoup-1.11.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e3eeb8a0b4ce1db246059a41e353cd7413dad226">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/jsoup-1.11.2_1f6bf9aff782fc4a10e726723b988dde4ba9d1fb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/joshbryant/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.9.1/36e71ab9e903fc4d1b4a58d80572a91d9fd60caf/logging-interceptor-3.9.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="36e71ab9e903fc4d1b4a58d80572a91d9fd60caf">
-        <dex dex="/Users/joshbryant/StudioProjects/ReadHub/app/build/intermediates/transforms/dex/debug/folders/1000/10/logging-interceptor-3.9.1_e6f2b05988998d3dcc0aeaefa7b3c82345057934/classes.dex" />
     </item>
 
 </items>

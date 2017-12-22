@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
-import com.chihopang.readhub.feature.common.WebviewFragment;
+import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Topic;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -71,12 +71,13 @@ public class TopicDetailFragment extends DialogFragment {
       LinearLayout.LayoutParams params =
           new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
               ViewGroup.LayoutParams.WRAP_CONTENT);
-      params.setMargins(10, 16, 10, 16);
       textView.setLayoutParams(params);
+      textView.setPadding(10, 16, 10, 16);
       textView.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_data, 0, 0, 0);
       textView.setCompoundDrawablePadding(15);
       textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
       textView.setTextColor(Color.parseColor("#607D8B"));
+      textView.setBackgroundResource(R.drawable.selector_btn_background);
       if (TextUtils.isEmpty(topic.getSiteName())) {
         textView.setText(topic.getTitle());
       } else {
@@ -92,7 +93,7 @@ public class TopicDetailFragment extends DialogFragment {
         @Override public void onClick(View v) {
           dismiss();
           ((SupportActivity) v.getContext()).findFragment(MainFragment.class)
-              .start(WebviewFragment.newInstance(topic));
+              .start(WebViewFragment.newInstance(topic));
         }
       });
       mLinearTitleContainer.addView(textView);

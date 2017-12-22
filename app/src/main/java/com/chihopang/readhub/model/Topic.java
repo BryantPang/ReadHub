@@ -17,6 +17,7 @@ import org.parceler.Parcel;
   String summary;
   ArrayList<Topic> newsArray;
   String publishDate;
+  Extra extra;
 
   public Topic() {
   }
@@ -81,5 +82,14 @@ import org.parceler.Parcel;
     } else {
       return order;
     }
+  }
+
+  public boolean hasInstantView() {
+    if (extra != null) return extra.instantView;
+    return false;
+  }
+
+  @Parcel public static class Extra {
+    boolean instantView;
   }
 }

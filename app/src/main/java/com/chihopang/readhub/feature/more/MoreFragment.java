@@ -18,7 +18,7 @@ import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
 import com.chihopang.readhub.base.BaseAdapter;
 import com.chihopang.readhub.base.BaseViewHolder;
-import com.chihopang.readhub.feature.common.WebviewFragment;
+import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Sponsor;
@@ -96,12 +96,12 @@ public class MoreFragment extends SupportFragment {
 
   @OnClick(R.id.relative_go_personal_page) void goPersonalPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
-        .start(WebviewFragment.newInstance(Navigator.PERSONAL_PAGE_URL));
+        .start(WebViewFragment.newInstance(Navigator.PERSONAL_PAGE_URL));
   }
 
   @OnClick(R.id.relative_go_readhub_page) void goReadhubPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
-        .start(WebviewFragment.newInstance(Navigator.READHUB_PAGE_URL));
+        .start(WebViewFragment.newInstance(Navigator.READHUB_PAGE_URL));
   }
 
   public void onTabClick() {

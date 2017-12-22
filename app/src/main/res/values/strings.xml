@@ -33,4 +33,8 @@
   <string name="personal_page">个人主页</string>
   <string name="readhub_web">Readhub 网页版</string>
   <string name="readhub_slogan">每天三分钟的科技新闻聚合阅读</string>
+
+  <string name="instant_read">即时查看</string>
+  <string name="go_origin_site">访问原网址 ></string>
+  <string name="source_fromat">来源：%1$s</string>
 </resources>
