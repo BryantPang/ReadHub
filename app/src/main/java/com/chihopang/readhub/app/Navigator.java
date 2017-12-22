@@ -5,6 +5,8 @@ public class Navigator {
   public static final String API_HOST = "https://api.readhub.me";
   public static final String READHUB_PAGE_URL =
       "https://readhub.me";
+  public static final String TOPIC_DETAIL_URL =
+      "https://readhub.me/topic/";
   public static final String PERSONAL_PAGE_URL = "http://chihopang.top/";
   //Extra
   public static final String EXTRA_TOPIC = "EXTRA_TOPIC";

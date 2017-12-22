@@ -89,7 +89,6 @@ public class MoreFragment extends SupportFragment {
           mAdapter.addItem(sponsor);
         }
         mTxtSponsorTitle.setVisibility(View.VISIBLE);
-        mAdapter.notifyDataSetChanged();
       }
     }.execute();
   }

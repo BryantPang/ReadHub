@@ -20,7 +20,7 @@ public class ReadhubApplication extends Application {
         .debug(BuildConfig.DEBUG)
         .handleException(new ExceptionHandler() {
           @Override public void onException(Exception e) {
-
+            //TODO handle exception
           }
         }).install();
     mContext = getApplicationContext();

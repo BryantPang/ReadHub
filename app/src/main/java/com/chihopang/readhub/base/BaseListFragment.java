@@ -21,7 +21,7 @@ import me.yokeyword.fragmentation.SupportActivity;
 import me.yokeyword.fragmentation.SupportFragment;
 import mehdi.sakout.dynamicbox.DynamicBox;
 
-public abstract class BaseListFragment<T> extends SupportFragment implements INetworkView {
+public abstract class BaseListFragment<T> extends SupportFragment implements INetworkView<List> {
   private static final int VIEW_TYPE_LAST_ITEM = 1;
 
   private SupportActivity mActivity;
@@ -40,7 +40,8 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     }
 
     @Override public int getItemCount() {
-      return super.getItemCount() == 0 ? super.getItemCount() : super.getItemCount() + 1;
+      return super.getItemCount() == 0 ? super.getItemCount()
+          : super.getItemCount() + 1;//有数据时，显示 loadingViewHolder
     }
 
     @Override public int getItemViewType(int position) {
@@ -59,24 +60,9 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     View view = inflater.inflate(R.layout.fragment_base_list, container, false);
     ButterKnife.bind(this, view);
     initContent();
-    if (mAdapter.getItemCount() == 0 || mAdapter.getItemCount() == 1) {
-      requestData();
-      mBox.showLoadingLayout();
-    }
+    if (mAdapter.getItemCount() == 0) requestData();
     setRetainInstance(true);
     return view;
-  }
-
-  @Override public void onResume() {
-    super.onResume();
-  }
-
-  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-    super.onViewCreated(view, savedInstanceState);
-  }
-
-  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
   }
 
   @Override public void onAttach(Context context) {
@@ -88,6 +74,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     mBox = new DynamicBox(mActivity, mFrameContainer);
     mBox.setClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
+        //加载失败时的按钮点击事件
         mAdapter.clear();
         requestData();
       }
@@ -106,6 +93,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
         requestData();
       }
     });
+    mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#607D8B"), Color.BLACK, Color.BLUE);
     mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
       @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
@@ -118,14 +106,12 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
         }
       }
     });
-    mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#607D8B"), Color.BLACK, Color.BLUE);
   }
 
-  @Override public void onSuccess(Object t) {
-    List<T> itemList = (List<T>) t;
+  @SuppressWarnings("unchecked") @Override public void onSuccess(List datas) {
     if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
-    mAdapter.addItems(itemList);
     mBox.hideAll();
+    if (datas != null && datas.size() != 0) mAdapter.addItems(datas);
   }
 
   @Override public void onError(Throwable e) {
@@ -133,15 +119,12 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     mBox.showExceptionLayout();
   }
 
-  public RecyclerView.Adapter getAdapter() {
-    return mAdapter;
-  }
-
   public BaseListPresenter<T> getPresenter() {
     return mPresenter;
   }
 
   private void requestData() {
+    mBox.showLoadingLayout();
     hasMore = true;
     getPresenter().start();
   }
@@ -160,9 +143,11 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
       mRecyclerView.smoothScrollToPosition(0);
       return;
     }
-    mSwipeRefreshLayout.setRefreshing(true);
-    mAdapter.clear();
-    requestData();
+    if (!mSwipeRefreshLayout.isRefreshing()) {
+      mSwipeRefreshLayout.setRefreshing(true);
+      mAdapter.clear();
+      requestData();
+    }
   }
 
   public abstract BaseViewHolder<T> provideViewHolder(ViewGroup parent, int viewType);

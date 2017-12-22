@@ -106,10 +106,10 @@ public class InstantReadFragment extends DialogFragment implements INetworkView 
   private void initWebSettings() {
     WebSettings mWebSetting = mWebView.getSettings();
     mWebSetting.setJavaScriptEnabled(true);
-    mWebSetting.setUseWideViewPort(true);  //将图片调整到适合webview的大小
-    mWebSetting.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
-    mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING); //支持内容重新布局
-    mWebSetting.setLoadsImagesAutomatically(true);  //支持自动加载图片
+    mWebSetting.setUseWideViewPort(true);
+    mWebSetting.setLoadWithOverviewMode(true);
+    mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
+    mWebSetting.setLoadsImagesAutomatically(true);
 
     mWebView.setWebViewClient(new WebViewClient() {
       @Override

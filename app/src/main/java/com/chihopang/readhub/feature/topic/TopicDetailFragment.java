@@ -1,6 +1,7 @@
 package com.chihopang.readhub.feature.topic;
 
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -22,7 +23,12 @@ import com.chihopang.readhub.app.Navigator;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Topic;
+import java.io.IOException;
 import me.yokeyword.fragmentation.SupportActivity;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.parceler.Parcels;
 
 public class TopicDetailFragment extends DialogFragment {
@@ -60,6 +66,30 @@ public class TopicDetailFragment extends DialogFragment {
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     setupView();
+    //getTimeLine();
+  }
+
+  private void getTimeLine() {
+    new AsyncTask<Void, Void, Document>() {
+      @Override protected Document doInBackground(Void... params) {
+        Document document = null;
+        try {
+          document = Jsoup.connect(Navigator.TOPIC_DETAIL_URL + mTopic.getId()).get();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        return document;
+      }
+
+      @Override protected void onPostExecute(Document document) {
+        super.onPostExecute(document);
+        Elements timelineContainer = document.getElementsByClass(
+            "timeline__container___3jHS8 timeline__container--PC___1D1r7");
+        for (Element liElement : timelineContainer.select("li")) {
+          //TODO 待完成
+        }
+      }
+    }.execute();
   }
 
   private void setupView() {

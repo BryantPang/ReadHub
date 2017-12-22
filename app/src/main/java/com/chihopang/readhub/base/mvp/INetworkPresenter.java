@@ -10,4 +10,6 @@ public interface INetworkPresenter extends IPresenter {
   Observable request();
 
   Observable requestMore();
+
+  @Override INetworkView getView();
 }

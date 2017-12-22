@@ -20,6 +20,10 @@ public abstract class BaseListPresenter<T> implements INetworkPresenter {
         .subscribeOn(Schedulers.io())
         .subscribe(new Consumer<ApiData>() {
           @Override public void accept(@NonNull ApiData apiData) throws Exception {
+            if (apiData == null || apiData.getData() == null) {
+              getView().onError(new Throwable("请求失败"));
+              return;
+            }
             getView().onSuccess(apiData.getData());
             lastCursor = apiData.getData().get(apiData.getData().size() - 1).getLastCursor();
           }
@@ -36,6 +40,10 @@ public abstract class BaseListPresenter<T> implements INetworkPresenter {
         .subscribeOn(Schedulers.io())
         .subscribe(new Consumer<ApiData>() {
           @Override public void accept(@NonNull ApiData apiData) throws Exception {
+            if (apiData == null || apiData.getData() == null) {
+              getView().onError(new Throwable("请求失败"));
+              return;
+            }
             getView().onSuccess(apiData.getData());
             if (apiData.getData().isEmpty()) {
               getView().hasMore = false;

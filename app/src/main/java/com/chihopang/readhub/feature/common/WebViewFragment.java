@@ -25,7 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
 import com.chihopang.readhub.model.Topic;
@@ -70,12 +69,39 @@ public class WebViewFragment extends SupportFragment {
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    initContent();
+    initView();
+    initWebView();
+  }
+
+  @Override public void onDestroy() {
+    super.onDestroy();
+    mWebView.stopLoading();
+    mWebView.clearHistory();
+    mWebView.destroy();
+    mWebView = null;
+  }
+
+  private void initView() {
     mSwipeRefreshLayout.setColorSchemeColors(Color.parseColor("#607D8B"), Color.BLACK, Color.BLUE);
+    mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      @Override public void onRefresh() {
+        mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        mWebView.reload();
+      }
+    });
+
+    //设置导航图标
+    mToolbar.setNavigationIcon(R.drawable.ic_toolbar_close);
+    mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        pop();
+      }
+    });
+    //设置菜单
     mToolbar.inflateMenu(R.menu.menu_webview_page);
     mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
       @Override public boolean onMenuItemClick(MenuItem item) {
-        String shareUrl = "";
+        String shareUrl;
         if (mWebView != null) {
           shareUrl = mWebView.getUrl();
         } else {
@@ -105,15 +131,7 @@ public class WebViewFragment extends SupportFragment {
     });
   }
 
-  @Override public void onDestroy() {
-    super.onDestroy();
-    mWebView.stopLoading();
-    mWebView.clearHistory();
-    mWebView.destroy();
-    mWebView = null;
-  }
-
-  private void initContent() {
+  private void initWebView() {
     initWebSettings();
     mWebView.setWebViewClient(new WebViewClient() {
       @Override
@@ -124,6 +142,7 @@ public class WebViewFragment extends SupportFragment {
     });
     mWebView.setWebChromeClient(new WebChromeClient() {
       @Override public void onProgressChanged(WebView view, int newProgress) {
+        //更新进度
         super.onProgressChanged(view, newProgress);
         if (newProgress == 100) {
           mProgressBar.setVisibility(View.GONE);
@@ -135,51 +154,35 @@ public class WebViewFragment extends SupportFragment {
       }
 
       @Override public void onReceivedTitle(WebView view, String title) {
+        //更新标题
         super.onReceivedTitle(view, title);
         mTxtTitle.setText(title);
       }
     });
-
-    mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-      @Override public void onRefresh() {
-        mWebView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-        mWebView.reload();
-      }
-    });
+    mWebView.loadUrl(TextUtils.isEmpty(mUrl) ? mTopic.getUrl() : mUrl);
+    mSwipeRefreshLayout.setRefreshing(true);
   }
 
   private void initWebSettings() {
     WebSettings mWebSetting = mWebView.getSettings();
     mWebSetting.setJavaScriptEnabled(true);
-    mWebSetting.setUseWideViewPort(true);  //将图片调整到适合webview的大小
-    mWebSetting.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
-
-    // 开启 DOM storage API 功能
+    mWebSetting.setUseWideViewPort(true);
+    mWebSetting.setLoadWithOverviewMode(true);
     mWebSetting.setDomStorageEnabled(true);
-    //开启 database storage API 功能
     mWebSetting.setDatabaseEnabled(true);
-    ;
-    //设置缓存类型
     mWebSetting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
-    //设置缓存位置
     String cacheDirPath = getContext().getFilesDir().getAbsolutePath() + APP_CACAHE_DIRNAME;
-    //设置数据库缓存路径
     mWebSetting.setDatabasePath(cacheDirPath);
-    //设置  Application Caches 缓存目录
     mWebSetting.setAppCachePath(cacheDirPath);
-    //开启 Application Caches 功能
     mWebSetting.setAppCacheEnabled(true);
-    mWebSetting.setSupportZoom(true);  //支持缩放，默认为true。是下面那个的前提。
-    mWebSetting.setBuiltInZoomControls(true); //设置内置的缩放控件。
-    //若上面是false，则该WebView不可缩放，这个不管设置什么都不能缩放。
-    mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN); //支持内容重新布局
-    mWebSetting.supportMultipleWindows();  //多窗口
-    mWebSetting.setNeedInitialFocus(true); //当webview调用requestFocus时为webview设置节点
-    mWebSetting.setJavaScriptCanOpenWindowsAutomatically(true); //支持通过JS打开新窗口
-    mWebSetting.setLoadsImagesAutomatically(true);  //支持自动加载图片
-    mWebSetting.setDefaultTextEncodingName("utf-8");//设置编码格式
-    mWebView.loadUrl(TextUtils.isEmpty(mUrl) ? mTopic.getUrl() : mUrl);
-    mSwipeRefreshLayout.setRefreshing(true);
+    mWebSetting.setSupportZoom(true);
+    mWebSetting.setBuiltInZoomControls(true);
+    mWebSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+    mWebSetting.supportMultipleWindows();
+    mWebSetting.setNeedInitialFocus(true);
+    mWebSetting.setJavaScriptCanOpenWindowsAutomatically(true);
+    mWebSetting.setLoadsImagesAutomatically(true);
+    mWebSetting.setDefaultTextEncodingName("utf-8");
   }
 
   @Override public boolean onBackPressedSupport() {
@@ -188,9 +191,5 @@ public class WebViewFragment extends SupportFragment {
       return true;
     }
     return super.onBackPressedSupport();
-  }
-
-  @OnClick(R.id.img_back) void onCloseClick() {
-    pop();
   }
 }
