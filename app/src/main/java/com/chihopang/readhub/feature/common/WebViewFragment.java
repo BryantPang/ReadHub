@@ -122,7 +122,7 @@ public class WebViewFragment extends SupportFragment {
           case R.id.menu_item_share:
             Intent share = new Intent(android.content.Intent.ACTION_SEND);
             share.setType("text/plain");
-            share.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_format, shareUrl));
+            share.putExtra(Intent.EXTRA_TEXT, shareUrl);
             startActivity(Intent.createChooser(share, getString(R.string.share)));
             return true;
         }

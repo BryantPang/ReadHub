@@ -5,11 +5,11 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     app:cardBackgroundColor="@android:color/white"
     android:layout_marginLeft="@dimen/margin_10" android:layout_marginRight="@dimen/margin_10"
-    android:layout_marginTop="@dimen/margin_5" android:layout_marginBottom="@dimen/margin_5">
+    android:layout_marginTop="@dimen/margin_5" android:layout_marginBottom="@dimen/margin_5"
+    android:foreground="?attr/selectableItemBackground">
   <LinearLayout
       android:layout_width="match_parent" android:layout_height="wrap_content"
-      android:orientation="vertical" android:paddingTop="@dimen/padding_10"
-      android:background="@drawable/selector_btn_background">
+      android:orientation="vertical" android:paddingTop="@dimen/padding_10">
 
     <TextView android:id="@+id/txt_topic_title"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
     <FrameLayout android:id="@+id/frame_instant_read"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/selector_btn_background">
+        android:foreground="?attr/selectableItemBackground">
       <TextView android:id="@+id/txt_instant_read"
           android:layout_width="wrap_content" android:layout_height="wrap_content"
           android:textSize="@dimen/text_size_14" android:textColor="@color/colorPrimaryDark"

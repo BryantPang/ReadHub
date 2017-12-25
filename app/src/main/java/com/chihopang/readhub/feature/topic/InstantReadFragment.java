@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.URLUtil;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -18,11 +19,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.app.ReadhubApplication;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.InstantReadData;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class InstantReadFragment extends DialogFragment implements INetworkView {
   public static final String TAG = "InstantReadFragment";
@@ -86,10 +90,12 @@ public class InstantReadFragment extends DialogFragment implements INetworkView 
     String htmlHead = "<head>"
         +
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\"> "
-        +
-        "<style>img{max-width:100% !important; width:auto; height:auto;}</style>"
-        +
-        "</head>";
+        + "<link rel=\"stylesheet\" href=\"https://unpkg.com/mobi.css/dist/mobi.min.css\">"
+        + "<style>"
+        + "img{max-width:100% !important; width:auto; height:auto;}"
+        + "body {font-size: 110%;word-spacing:110%；}"
+        + "</style>"
+        + "</head>";
     String htmlContent = "<html>"
         + htmlHead
         + "<body style:'height:auto;max-width: 100%; width:auto;'>"
@@ -120,6 +126,24 @@ public class InstantReadFragment extends DialogFragment implements INetworkView 
               .start(WebViewFragment.newInstance(url));
         }
         return true;
+      }
+
+      @Override
+      public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+        if (url.endsWith("mobi.min.css")) {
+          //使用本地 css 优化阅读视图
+          WebResourceResponse resourceResponse = null;
+          try {
+            InputStream in = ReadhubApplication.mContext.getAssets().open("css/mobi.css");
+            resourceResponse = new WebResourceResponse("text/css", "UTF-8", in);
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          if (resourceResponse != null) {
+            return resourceResponse;
+          }
+        }
+        return super.shouldInterceptRequest(view, url);
       }
     });
   }

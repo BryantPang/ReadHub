@@ -47,7 +47,9 @@
               android:layout_marginRight="@dimen/margin_10"
               tools:text="欧盟正考虑采取多项措施 向谷歌亚马逊等公司征收更多的税"/>
           <WebView android:id="@+id/web_view"
-              android:layout_width="match_parent" android:layout_height="wrap_content"/>
+              android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:layout_marginLeft="@dimen/margin_10"
+              android:layout_marginRight="@dimen/margin_10"/>
         </LinearLayout>
       </ScrollView>
     </LinearLayout>
