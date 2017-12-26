@@ -42,5 +42,6 @@
   <!-- img size -->
   <dimen name="avatar_size">60dp</dimen>
   <dimen name="fab_size">56dp</dimen>
+  <dimen name="time_line_oval_size">5dp</dimen>
 
 </resources>

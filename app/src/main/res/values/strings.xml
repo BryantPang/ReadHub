@@ -35,4 +35,5 @@
   <string name="instant_read">即时查看</string>
   <string name="go_origin_site">访问原网址 ></string>
   <string name="source_fromat">来源：%1$s</string>
+  <string name="events">相关事件</string>
 </resources>

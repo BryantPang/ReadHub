@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import com.chihopang.readhub.feature.developer.news.TechNewsFragment;
 import com.chihopang.readhub.feature.more.MoreFragment;
 import com.chihopang.readhub.feature.news.NewsFragment;
-import com.chihopang.readhub.feature.topic.HotTopicFragment;
+import com.chihopang.readhub.feature.topic.list.HotTopicFragment;
 import java.lang.ref.WeakReference;
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+>
+  <TextView android:id="@+id/txt_date"
+      android:layout_width="@dimen/width_60" android:layout_height="wrap_content"
+      android:textSize="@dimen/text_size_16" android:textColor="@color/textGrey"
+      android:gravity="center_horizontal"
+      tools:text="12.26"/>
+  <LinearLayout android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:gravity="center_horizontal">
+    <View android:id="@+id/view_top_line"
+        android:layout_width="@dimen/divider_height" android:layout_height="0dp"
+        android:layout_weight="1" android:background="@color/background_grey"/>
+    <View android:layout_width="@dimen/time_line_oval_size"
+        android:layout_height="@dimen/time_line_oval_size"
+        android:background="@drawable/drawable_time_line_oval"/>
+    <View android:id="@+id/view_bottom_line"
+        android:layout_width="@dimen/divider_height" android:layout_height="0dp"
+        android:layout_weight="1" android:background="@color/background_grey"/>
+  </LinearLayout>
+  <TextView android:id="@+id/txt_time_line_content"
+      android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:textSize="@dimen/text_size_16" android:textColor="@color/colorPrimary"
+      android:layout_margin="@dimen/margin_10"
+      android:padding="@dimen/margin_5" android:background="?attr/selectableItemBackground"
+      tools:text="与三星等竞争 高通获准在加州测试自动驾驶汽车"/>
+</LinearLayout>
