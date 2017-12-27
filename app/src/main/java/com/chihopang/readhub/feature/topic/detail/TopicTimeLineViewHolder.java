@@ -1,7 +1,6 @@
 package com.chihopang.readhub.feature.topic.detail;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseViewHolder;
-import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.TopicTimeLine;
@@ -37,11 +35,7 @@ public class TopicTimeLineViewHolder extends BaseViewHolder<TopicTimeLine> {
   }
 
   @OnClick(R.id.txt_time_line_content) void onClickContent(View view) {
-    Fragment fragment = ((MainActivity) view.getContext()).getSupportFragmentManager()
-        .findFragmentByTag(TopicDetailFragment.TAG);
-    if (fragment instanceof TopicDetailFragment) ((TopicDetailFragment) fragment).dismiss();
-
     ((MainActivity) view.getContext()).findFragment(MainFragment.class)
-        .start(WebViewFragment.newInstance(mTimeLine.url));
+        .start(TopicDetailFragment.newInstance(mTimeLine.url));
   }
 }

@@ -4,9 +4,10 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -15,38 +16,45 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Navigator;
 import com.chihopang.readhub.base.BaseAdapter;
 import com.chihopang.readhub.base.BaseViewHolder;
+import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
-import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.model.TopicTimeLine;
 import java.io.IOException;
-import me.yokeyword.fragmentation.SupportActivity;
+import me.yokeyword.fragmentation.SupportFragment;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.parceler.Parcels;
 
-public class TopicDetailFragment extends DialogFragment {
+public class TopicDetailFragment extends SupportFragment implements INetworkView<Topic> {
   public static final String TAG = "TopicDetailFragment";
   public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
 
+  @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.txt_topic_title) TextView mTxtTopicTitle;
   @BindView(R.id.txt_topic_time) TextView mTxtTopicTime;
   @BindView(R.id.txt_topic_description) TextView mTxtTopicDescription;
   @BindView(R.id.linear_web_title_container) LinearLayout mLinearTitleContainer;
   @BindView(R.id.linear_time_line_container) LinearLayout mLinearTimelineContainer;
   @BindView(R.id.recycler_time_line) RecyclerView mRecyclerTimeline;
+  @BindView(R.id.txt_toolbar_title) TextView mTxtToolbarTitle;
+  @BindView(R.id.img_toolbar) ImageView mImgToolbar;
+  @BindView(R.id.scroll_view) NestedScrollView mScrollView;
+
   private Topic mTopic;
+  private TopicDetailPresenter mPresenter = new TopicDetailPresenter(this);
   private BaseAdapter<TopicTimeLine> mTimelineAdapter = new BaseAdapter<TopicTimeLine>() {
     @Override
     public BaseViewHolder<TopicTimeLine> onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -68,9 +76,12 @@ public class TopicDetailFragment extends DialogFragment {
     return fragment;
   }
 
-  @Override public void onCreate(@Nullable Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle);
+  public static TopicDetailFragment newInstance(String topicId) {
+    TopicDetailFragment fragment = new TopicDetailFragment();
+    Bundle bundle = new Bundle();
+    bundle.putString(Navigator.BUNDLE_TOPIC_ID, topicId);
+    fragment.setArguments(bundle);
+    return fragment;
   }
 
   @Nullable @Override
@@ -84,8 +95,12 @@ public class TopicDetailFragment extends DialogFragment {
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    setupView();
-    getTimeLine();
+    if (mTopic != null) {
+      onSuccess(mTopic);
+      return;
+    }
+    String topicId = getArguments().getString(Navigator.BUNDLE_TOPIC_ID);
+    getPresenter().getTopicDetail(topicId);
   }
 
   private void getTimeLine() {
@@ -111,8 +126,7 @@ public class TopicDetailFragment extends DialogFragment {
           timeLine.date = liElement.getElementsByClass("date-item___1io1R").text();
           Element contentElement = liElement.getElementsByClass("content-item___3KfMq").get(0);
           timeLine.content = contentElement.getElementsByTag("a").get(0).text();
-          timeLine.url =
-              Navigator.TOPIC_DETAIL_URL + contentElement.getElementsByTag("a").get(0).attr("href");
+          timeLine.url = contentElement.getElementsByTag("a").get(0).attr("href");
           mTimelineAdapter.addItem(timeLine);
         }
         mLinearTimelineContainer.setVisibility(
@@ -122,9 +136,20 @@ public class TopicDetailFragment extends DialogFragment {
   }
 
   private void setupView() {
+    //设置导航图标
+    mToolbar.setNavigationIcon(R.drawable.ic_back);
+    mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+      @Override public void onClick(View v) {
+        pop();
+      }
+    });
     mTxtTopicTitle.setText(mTopic.getTitle());
+    mTxtToolbarTitle.setText(mTopic.getTitle());
     mTxtTopicTime.setText(mTopic.getFormatPublishDate());
     mTxtTopicDescription.setText(mTopic.getSummary());
+    mTxtTopicDescription.setVisibility(
+        TextUtils.isEmpty(mTopic.getSummary()) ? View.GONE : View.VISIBLE);
+    mLinearTitleContainer.removeAllViews();
     for (final Topic topic : mTopic.getNewsArray()) {
       TextView textView = new TextView(getContext());
       LinearLayout.LayoutParams params =
@@ -150,9 +175,7 @@ public class TopicDetailFragment extends DialogFragment {
       }
       textView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          dismiss();
-          ((SupportActivity) v.getContext()).findFragment(MainFragment.class)
-              .start(WebViewFragment.newInstance(topic));
+          start(WebViewFragment.newInstance(topic));
         }
       });
       mLinearTitleContainer.addView(textView);
@@ -160,9 +183,28 @@ public class TopicDetailFragment extends DialogFragment {
     mRecyclerTimeline.setAdapter(mTimelineAdapter);
     mRecyclerTimeline.setLayoutManager(new LinearLayoutManager(getContext()));
     mRecyclerTimeline.setNestedScrollingEnabled(false);
+    mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+      @Override
+      public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX,
+          int oldScrollY) {
+        mTxtToolbarTitle.setVisibility(
+            scrollY > mTxtTopicTime.getBottom() ? View.VISIBLE : View.GONE);
+        mImgToolbar.setVisibility(scrollY > mTxtTopicTime.getBottom() ? View.GONE : View.VISIBLE);
+      }
+    });
   }
 
-  @OnClick(R.id.img_back) void onCloseClick() {
-    dismiss();
+  @Override public void onSuccess(Topic topic) {
+    mTopic = topic;
+    setupView();
+    getTimeLine();
+  }
+
+  @Override public void onError(Throwable e) {
+    Toast.makeText(getContext(), "请求错误", Toast.LENGTH_LONG).show();
+  }
+
+  @Override public TopicDetailPresenter getPresenter() {
+    return mPresenter;
   }
 }
