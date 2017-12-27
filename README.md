@@ -1,7 +1,7 @@
 # ReadHub-每天三分钟的科技新闻聚合阅读
 该应用仅为个人兴趣所开发的 Readhub 第三方客户端，非无码科技官方产品。
 ### 下载地址
-https://github.com/BryantPang/ReadHub/blob/master/app-debug.apk
+https://github.com/BryantPang/ReadHub/raw/master/app-debug.apk
 ### Thanks
 应用内所有资讯内容均来自无码科技产品 [Readhub](https://readhub.me/)。
 
