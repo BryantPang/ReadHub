@@ -2,6 +2,7 @@ package com.chihopang.readhub.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDex;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.tencent.bugly.crashreport.CrashReport;
 import me.yokeyword.fragmentation.BuildConfig;
@@ -24,5 +25,10 @@ public class ReadhubApplication extends Application {
           }
         }).install();
     mContext = getApplicationContext();
+  }
+
+  @Override protected void attachBaseContext(Context base) {
+    super.attachBaseContext(base);
+    MultiDex.install(this);
   }
 }
