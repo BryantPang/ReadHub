@@ -1,10 +1,10 @@
 # ReadHub-每天三分钟的科技新闻聚合阅读
-![](https://raw.githubusercontent.com/BryantPang/ReadHub/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 该应用仅为个人兴趣所开发的 Readhub 第三方客户端，非无码科技官方产品。
 ### 下载地址
 https://github.com/BryantPang/ReadHub/blob/master/app-debug.apk
 ### Thanks
 应用内所有资讯内容均来自无码科技产品 [Readhub](https://readhub.me/)。
+
 应用内大部分图标资源来自[Iconfont-阿里巴巴矢量图标库](http://www.iconfont.cn/)
 
 开发过程中使用的框架有：
