@@ -8,15 +8,6 @@ public class ApiData {
   private int totalItems;
   private int totalPages;
 
-  @Override public String toString() {
-    return "ApiData{" +
-        "data=" + data +
-        ", pageSize=" + pageSize +
-        ", totalItems=" + totalItems +
-        ", totalPages=" + totalPages +
-        '}';
-  }
-
   public List<Topic> getData() {
     return data;
   }

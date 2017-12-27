@@ -64,6 +64,10 @@ public class MoreFragment extends SupportFragment {
     mRecyclerSponsors.setNestedScrollingEnabled(false);
     mTxtSponsorTitle.setVisibility(mAdapter.getItemCount() == 0 ? View.GONE : View.VISIBLE);
     if (mAdapter.getItemCount() != 0) return;
+    getSponsor();
+  }
+
+  private void getSponsor() {
     new AsyncTask<Void, Void, Document>() {
       @Override protected Document doInBackground(Void... params) {
         Document document = null;

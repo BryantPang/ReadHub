@@ -11,17 +11,6 @@ public class ArticlePage {
   String siteName;
   String authorName;
 
-  @Override public String toString() {
-    return "ArticlePage{" +
-        "id=" + id +
-        ", url='" + url + '\'' +
-        ", mobileUrl='" + mobileUrl + '\'' +
-        ", title='" + title + '\'' +
-        ", siteName='" + siteName + '\'' +
-        ", authorName='" + authorName + '\'' +
-        '}';
-  }
-
   public ArticlePage() {
   }
 

@@ -22,19 +22,6 @@ import org.parceler.Parcel;
   public Topic() {
   }
 
-  @Override public String toString() {
-    return "Topic{" +
-        "id=" + id +
-        ", title='" + title + '\'' +
-        ", siteName='" + siteName + '\'' +
-        ", authorName='" + authorName + '\'' +
-        ", url='" + url + '\'' +
-        ", summary='" + summary + '\'' +
-        ", newsArray=" + newsArray +
-        ", publishDate='" + publishDate + '\'' +
-        '}';
-  }
-
   public String getSiteName() {
     return siteName;
   }

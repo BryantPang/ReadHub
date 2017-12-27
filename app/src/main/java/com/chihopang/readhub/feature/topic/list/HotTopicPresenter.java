@@ -5,18 +5,21 @@ import com.chihopang.readhub.base.BaseListPresenter;
 import com.chihopang.readhub.model.ApiData;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.network.ApiService;
+import com.chihopang.readhub.network.HotTopicService;
 import io.reactivex.Observable;
 
 public class HotTopicPresenter extends BaseListPresenter<Topic> {
+  private HotTopicService mService = ApiService.createHotTopicService();
+
   public HotTopicPresenter(BaseListFragment<Topic> fragment) {
     super(fragment);
   }
 
   @Override public Observable<ApiData> request() {
-    return ApiService.createHotTopicService().getHotTopic();
+    return mService.getHotTopic();
   }
 
   @Override public Observable<ApiData> requestMore() {
-    return ApiService.createHotTopicService().getMoreHotTopic(getLastCursor(), 10);
+    return mService.getMoreHotTopic(getLastCursor(), 10);
   }
 }

@@ -7,14 +7,6 @@ import org.parceler.Parcel;
   String pageUrl;
   String imgUrl;
 
-  @Override public String toString() {
-    return "Sponsor{" +
-        "slogan='" + slogan + '\'' +
-        ", pageUrl='" + pageUrl + '\'' +
-        ", imgUrl='" + imgUrl + '\'' +
-        '}';
-  }
-
   public String getSlogan() {
     return slogan;
   }

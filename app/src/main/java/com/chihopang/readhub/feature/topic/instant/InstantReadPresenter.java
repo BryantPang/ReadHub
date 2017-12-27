@@ -1,9 +1,9 @@
 package com.chihopang.readhub.feature.topic.instant;
 
 import com.chihopang.readhub.base.mvp.INetworkPresenter;
-import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.model.InstantReadData;
 import com.chihopang.readhub.network.ApiService;
+import com.chihopang.readhub.network.HotTopicService;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -11,14 +11,15 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class InstantReadPresenter implements INetworkPresenter {
-  private INetworkView mView;
+  private HotTopicService mService = ApiService.createHotTopicService();
+  private InstantReadFragment mView;
   private String mTopicId;
 
-  public InstantReadPresenter(INetworkView mView) {
+  public InstantReadPresenter(InstantReadFragment mView) {
     this.mView = mView;
   }
 
-  @Override public INetworkView getView() {
+  @Override public InstantReadFragment getView() {
     return mView;
   }
 
@@ -41,8 +42,8 @@ public class InstantReadPresenter implements INetworkPresenter {
 
   }
 
-  @Override public Observable request() {
-    return ApiService.createHotTopicService().getInstantRead(mTopicId);
+  @Override public Observable<InstantReadData> request() {
+    return mService.getInstantRead(mTopicId);
   }
 
   @Override public Observable requestMore() {

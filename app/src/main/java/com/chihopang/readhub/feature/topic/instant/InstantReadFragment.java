@@ -28,7 +28,7 @@ import com.chihopang.readhub.model.InstantReadData;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class InstantReadFragment extends DialogFragment implements INetworkView {
+public class InstantReadFragment extends DialogFragment implements INetworkView<InstantReadData> {
   public static final String TAG = "InstantReadFragment";
 
   @BindView(R.id.txt_topic_title) TextView mTxtTopicTitle;
@@ -72,8 +72,8 @@ public class InstantReadFragment extends DialogFragment implements INetworkView 
     return mPresenter;
   }
 
-  @Override public void onSuccess(Object t) {
-    if (!(t instanceof InstantReadData)) return;
+  @Override public void onSuccess(InstantReadData t) {
+    if (t == null) return;
     final InstantReadData data = (InstantReadData) t;
     mTxtTopicTitle.setText(data.getTitle());
     mTxtSource.setText(getString(R.string.source_fromat, data.getSiteName()));

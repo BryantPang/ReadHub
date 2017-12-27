@@ -3,6 +3,7 @@ package com.chihopang.readhub.feature.topic.detail;
 import com.chihopang.readhub.base.mvp.INetworkPresenter;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.network.ApiService;
+import com.chihopang.readhub.network.HotTopicService;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -10,6 +11,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class TopicDetailPresenter implements INetworkPresenter {
+  private HotTopicService mService = ApiService.createHotTopicService();
   private TopicDetailFragment mView;
   private String mTopicId;
 
@@ -37,7 +39,7 @@ public class TopicDetailPresenter implements INetworkPresenter {
   }
 
   @Override public Observable<Topic> request() {
-    return ApiService.createHotTopicService().getHotTopicDetail(mTopicId);
+    return mService.getHotTopicDetail(mTopicId);
   }
 
   @Override public Observable<Topic> requestMore() {
