@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
-import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.base.BaseAdapter;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.feature.common.WebViewFragment;
@@ -72,7 +72,7 @@ public class MoreFragment extends SupportFragment {
       @Override protected Document doInBackground(Void... params) {
         Document document = null;
         try {
-          document = Jsoup.connect(Navigator.READHUB_PAGE_URL).get();
+          document = Jsoup.connect(Constant.READHUB_PAGE_URL).get();
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -99,12 +99,12 @@ public class MoreFragment extends SupportFragment {
 
   @OnClick(R.id.relative_go_personal_page) void goPersonalPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
-        .start(WebViewFragment.newInstance(Navigator.PERSONAL_PAGE_URL));
+        .start(WebViewFragment.newInstance(Constant.PERSONAL_PAGE_URL));
   }
 
   @OnClick(R.id.relative_go_readhub_page) void goReadhubPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
-        .start(WebViewFragment.newInstance(Navigator.READHUB_PAGE_URL));
+        .start(WebViewFragment.newInstance(Constant.READHUB_PAGE_URL));
   }
 
   public void onTabClick() {

@@ -1,6 +1,6 @@
 package com.chihopang.readhub.app;
 
-public class Navigator {
+public interface Constant {
   //API 网址
   public static final String API_HOST = "https://api.readhub.me";
   public static final String READHUB_PAGE_URL =

@@ -1,7 +1,7 @@
 package com.chihopang.readhub.network;
 
 import android.util.Log;
-import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.app.Constant;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiService {
   private static Retrofit retrofit = new Retrofit.Builder()
-      .baseUrl(Navigator.API_HOST)
+      .baseUrl(Constant.API_HOST)
       .client(new OkHttpClient.Builder()
           .addInterceptor(new HttpLoggingInterceptor(
               new HttpLoggingInterceptor.Logger() {

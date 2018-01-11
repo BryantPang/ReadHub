@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
-import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.app.ReadhubApplication;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
@@ -43,7 +43,7 @@ public class InstantReadFragment extends DialogFragment implements INetworkView<
   public static InstantReadFragment newInstance(String topicId) {
     InstantReadFragment fragment = new InstantReadFragment();
     Bundle bundle = new Bundle();
-    bundle.putString(Navigator.BUNDLE_TOPIC_ID, topicId);
+    bundle.putString(Constant.BUNDLE_TOPIC_ID, topicId);
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -58,7 +58,7 @@ public class InstantReadFragment extends DialogFragment implements INetworkView<
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_topic_instant_read, container, false);
     ButterKnife.bind(this, view);
-    mTopicId = getArguments().getString(Navigator.BUNDLE_TOPIC_ID);
+    mTopicId = getArguments().getString(Constant.BUNDLE_TOPIC_ID);
     getPresenter().getInstantRead(mTopicId);
     return view;
   }

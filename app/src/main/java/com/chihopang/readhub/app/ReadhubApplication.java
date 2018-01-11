@@ -15,7 +15,7 @@ public class ReadhubApplication extends Application {
   @Override public void onCreate() {
     super.onCreate();
     Fresco.initialize(this);
-    CrashReport.initCrashReport(getApplicationContext(), Navigator.BUGGLY_APP_ID, false);
+    CrashReport.initCrashReport(getApplicationContext(), Constant.BUGGLY_APP_ID, false);
     Fragmentation.builder()
         .stackViewMode(Fragmentation.BUBBLE)
         .debug(BuildConfig.DEBUG)

@@ -11,7 +11,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
-import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
@@ -30,7 +30,7 @@ public class SponsorDetailFragment extends DialogFragment {
   public static SponsorDetailFragment newInstance(Sponsor sponsor) {
     SponsorDetailFragment fragment = new SponsorDetailFragment();
     Bundle bundle = new Bundle();
-    bundle.putParcelable(Navigator.EXTRA_SPONSOR, Parcels.wrap(sponsor));
+    bundle.putParcelable(Constant.EXTRA_SPONSOR, Parcels.wrap(sponsor));
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -50,7 +50,7 @@ public class SponsorDetailFragment extends DialogFragment {
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    mSponsor = Parcels.unwrap(getArguments().getParcelable(Navigator.EXTRA_SPONSOR));
+    mSponsor = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_SPONSOR));
     setupView();
   }
 

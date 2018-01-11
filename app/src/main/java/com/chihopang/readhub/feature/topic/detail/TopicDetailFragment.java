@@ -1,7 +1,6 @@
 package com.chihopang.readhub.feature.topic.detail;
 
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -23,19 +22,15 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
-import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.base.BaseAdapter;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.model.TopicTimeLine;
-import java.io.IOException;
+import java.util.Collection;
 import me.yokeyword.fragmentation.SupportFragment;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.parceler.Parcels;
 
 public class TopicDetailFragment extends SupportFragment implements INetworkView<Topic> {
@@ -71,7 +66,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
   public static TopicDetailFragment newInstance(Topic topic) {
     TopicDetailFragment fragment = new TopicDetailFragment();
     Bundle bundle = new Bundle();
-    bundle.putParcelable(Navigator.EXTRA_TOPIC, Parcels.wrap(topic));
+    bundle.putParcelable(Constant.EXTRA_TOPIC, Parcels.wrap(topic));
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -79,7 +74,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
   public static TopicDetailFragment newInstance(String topicId) {
     TopicDetailFragment fragment = new TopicDetailFragment();
     Bundle bundle = new Bundle();
-    bundle.putString(Navigator.BUNDLE_TOPIC_ID, topicId);
+    bundle.putString(Constant.BUNDLE_TOPIC_ID, topicId);
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -89,7 +84,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_topic_detail, container, false);
     ButterKnife.bind(this, view);
-    mTopic = Parcels.unwrap(getArguments().getParcelable(Navigator.EXTRA_TOPIC));
+    mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
     return view;
   }
 
@@ -99,40 +94,14 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
       onSuccess(mTopic);
       return;
     }
-    String topicId = getArguments().getString(Navigator.BUNDLE_TOPIC_ID);
+    String topicId = getArguments().getString(Constant.BUNDLE_TOPIC_ID);
     getPresenter().getTopicDetail(topicId);
   }
 
-  private void getTimeLine() {
-    new AsyncTask<Void, Void, Document>() {
-      @Override protected Document doInBackground(Void... params) {
-        Document document = null;
-        try {
-          document = Jsoup.connect(Navigator.TOPIC_DETAIL_URL + mTopic.getId()).get();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        return document;
-      }
-
-      @Override protected void onPostExecute(Document document) {
-        super.onPostExecute(document);
-        if (document == null) return;
-        Elements timelineContainer = document.getElementsByClass(
-            "timeline__container___3jHS8 timeline__container--PC___1D1r7");
-        if (timelineContainer == null || timelineContainer.select("li").isEmpty()) return;
-        for (Element liElement : timelineContainer.select("li")) {
-          TopicTimeLine timeLine = new TopicTimeLine();
-          timeLine.date = liElement.getElementsByClass("date-item___1io1R").text();
-          Element contentElement = liElement.getElementsByClass("content-item___3KfMq").get(0);
-          timeLine.content = contentElement.getElementsByTag("a").get(0).text();
-          timeLine.url = contentElement.getElementsByTag("a").get(0).attr("href");
-          mTimelineAdapter.addItem(timeLine);
-        }
-        mLinearTimelineContainer.setVisibility(
-            mTimelineAdapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
-      }
-    }.execute();
+  protected void onGetTimeLineSuccess(Collection<TopicTimeLine> timeLines) {
+    mTimelineAdapter.addItems(timeLines);
+    mLinearTimelineContainer.setVisibility(
+        mTimelineAdapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
   }
 
   private void setupView() {
@@ -197,7 +166,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
   @Override public void onSuccess(Topic topic) {
     mTopic = topic;
     setupView();
-    getTimeLine();
+    getPresenter().getTimeLine(topic.getId());
   }
 
   @Override public void onError(Throwable e) {

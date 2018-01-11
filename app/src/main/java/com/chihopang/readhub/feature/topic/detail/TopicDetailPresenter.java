@@ -1,7 +1,10 @@
 package com.chihopang.readhub.feature.topic.detail;
 
+import android.os.AsyncTask;
+import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.base.mvp.INetworkPresenter;
 import com.chihopang.readhub.model.Topic;
+import com.chihopang.readhub.model.TopicTimeLine;
 import com.chihopang.readhub.network.ApiService;
 import com.chihopang.readhub.network.HotTopicService;
 import io.reactivex.Observable;
@@ -9,6 +12,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class TopicDetailPresenter implements INetworkPresenter {
   private HotTopicService mService = ApiService.createHotTopicService();
@@ -35,7 +45,6 @@ public class TopicDetailPresenter implements INetworkPresenter {
   }
 
   @Override public void startRequestMore() {
-
   }
 
   @Override public Observable<Topic> request() {
@@ -54,4 +63,37 @@ public class TopicDetailPresenter implements INetworkPresenter {
     mTopicId = topicId;
     start();
   }
+
+  protected void getTimeLine(final String topicId) {
+    new AsyncTask<Void, Void, Document>() {
+      @Override protected Document doInBackground(Void... params) {
+        Document document = null;
+        try {
+          document = Jsoup.connect(Constant.TOPIC_DETAIL_URL + topicId).get();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        return document;
+      }
+
+      @Override protected void onPostExecute(Document document) {
+        super.onPostExecute(document);
+        if (document == null) return;
+        Elements timelineContainer = document.getElementsByClass(
+            "timeline__container___3jHS8 timeline__container--PC___1D1r7");
+        if (timelineContainer == null || timelineContainer.select("li").isEmpty()) return;
+        List<TopicTimeLine> timeLines = new ArrayList<>();
+        for (Element liElement : timelineContainer.select("li")) {
+          TopicTimeLine timeLine = new TopicTimeLine();
+          timeLine.date = liElement.getElementsByClass("date-item___1io1R").text();
+          Element contentElement = liElement.getElementsByClass("content-item___3KfMq").get(0);
+          timeLine.content = contentElement.getElementsByTag("a").get(0).text();
+          timeLine.url = contentElement.getElementsByTag("a").get(0).attr("href");
+          timeLines.add(timeLine);
+        }
+        getView().onGetTimeLineSuccess(timeLines);
+      }
+    }.execute();
+  }
+
 }

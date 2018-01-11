@@ -26,7 +26,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
-import com.chihopang.readhub.app.Navigator;
+import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.model.Topic;
 import me.yokeyword.fragmentation.SupportFragment;
 import org.parceler.Parcels;
@@ -44,7 +44,7 @@ public class WebViewFragment extends SupportFragment {
   public static WebViewFragment newInstance(Topic topic) {
     WebViewFragment fragment = new WebViewFragment();
     Bundle bundle = new Bundle();
-    bundle.putParcelable(Navigator.EXTRA_TOPIC, Parcels.wrap(topic));
+    bundle.putParcelable(Constant.EXTRA_TOPIC, Parcels.wrap(topic));
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -52,7 +52,7 @@ public class WebViewFragment extends SupportFragment {
   public static WebViewFragment newInstance(String url) {
     WebViewFragment fragment = new WebViewFragment();
     Bundle bundle = new Bundle();
-    bundle.putString(Navigator.EXTRA_URL, url);
+    bundle.putString(Constant.EXTRA_URL, url);
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -62,8 +62,8 @@ public class WebViewFragment extends SupportFragment {
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_article_page, container, false);
     ButterKnife.bind(this, view);
-    mTopic = Parcels.unwrap(getArguments().getParcelable(Navigator.EXTRA_TOPIC));
-    mUrl = getArguments().getString(Navigator.EXTRA_URL);
+    mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
+    mUrl = getArguments().getString(Constant.EXTRA_URL);
     return view;
   }
 
@@ -111,7 +111,7 @@ public class WebViewFragment extends SupportFragment {
           case R.id.menu_item_open_by_browser:
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(shareUrl));
-            startActivity(intent);
+            startActivity(Intent.createChooser(intent, getString(R.string.open_by_browser)));
             return true;
           case R.id.menu_item_copy_link:
             ClipboardManager cmb =
