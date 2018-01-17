@@ -21,4 +21,4 @@ https://github.com/BryantPang/ReadHub/raw/master/app-debug.apk
 
 ### TODO
 - 话题、新闻收藏功能
-- 话题生成卡片分享
+- ~~ 话题生成卡片分享 ~~
