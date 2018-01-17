@@ -36,4 +36,9 @@
   <string name="go_origin_site">访问原网址 ></string>
   <string name="source_fromat">来源：%1$s</string>
   <string name="events">相关事件</string>
+  <string name="divider">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</string>
+  <string name="qr_code_to_download">以上资讯内容来自 Readhub.me\n扫码下载 Readhub 第三方客户端</string>
+  <string name="save_success">成功保存至 readhub/ 文件夹下</string>
+  <string name="save_error">保存失败</string>
+  <string name="save_topic_share_view">生成分享图片并保存</string>
 </resources>

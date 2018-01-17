@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/shareCardBackground">
+  <android.support.v7.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="@dimen/margin_20"
+      app:cardBackgroundColor="@android:color/white"
+      app:cardCornerRadius="8dp">
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+      <TextView android:id="@+id/txt_topic_share_title"
+          android:layout_width="wrap_content" android:layout_height="wrap_content"
+          android:textColor="@color/textDarkYellow" android:textStyle="bold"
+          android:textSize="@dimen/text_size_20" android:layout_marginTop="@dimen/margin_30"
+          android:lineSpacingExtra="@dimen/margin_4"
+          android:layout_marginLeft="@dimen/margin_30" android:layout_marginRight="@dimen/margin_30"
+          tools:text="韩国计划禁止加密货币交易 遭民众联名强烈反对"/>
+      <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+          android:textColor="@color/textDarkYellow" android:textSize="@dimen/text_size_20"
+          android:layout_marginLeft="@dimen/margin_30" android:layout_marginRight="@dimen/margin_30"
+          android:singleLine="true" android:maxLines="1"
+          android:ellipsize="none" android:text="@string/divider"/>
+      <TextView android:id="@+id/txt_topic_summary"
+          android:layout_width="wrap_content" android:layout_height="wrap_content"
+          android:textColor="@color/textGrey" android:textSize="@dimen/text_size_16"
+          android:lineSpacingExtra="@dimen/margin_4" android:layout_marginBottom="@dimen/margin_30"
+          android:layout_marginLeft="@dimen/margin_30" android:layout_marginRight="@dimen/margin_30"
+          tools:text="北京时间 1 月 16 日上午消息，据外媒报道，韩国政府试图加大对加密货币交易的管控力度，这一做法引起韩国民众的强烈反对 ... 周一晚间，已有近 20 万韩国民众在总统府官网的请愿书上签名，反对加密货币交易禁令 ... 一旦签名人数达到 20 万，韩国政府将被迫作出回应，可能启动相关调查。"/>
+    </LinearLayout>
+  </android.support.v7.widget.CardView>
+  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal" android:gravity="center_horizontal"
+      android:text="@string/qr_code_to_download"
+      android:drawableTop="@drawable/download_qr_code" android:drawablePadding="@dimen/padding_10"
+      android:layout_marginBottom="@dimen/margin_20"/>
+</LinearLayout>
+

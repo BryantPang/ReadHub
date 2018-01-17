@@ -11,6 +11,8 @@
   <color name="textGrey">#545454</color>
   <color name="textLightGrey">#AAACB4</color>
   <color name="textBlue">#0076ff</color>
+  <color name="textDarkYellow">#736444</color>
 
-  <color name="background_grey">#F7F7F7</color>
+  <color name="backgroundGrey">#F7F7F7</color>
+  <color name="shareCardBackground">#f9f8f5</color>
 </resources>

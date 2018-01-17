@@ -1,6 +1,8 @@
 package com.chihopang.readhub.feature.topic.detail;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -13,6 +15,7 @@ import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -29,6 +32,8 @@ import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.model.TopicTimeLine;
+import com.chihopang.readhub.util.BitmapUtil;
+import com.chihopang.readhub.widget.TopicShareView;
 import java.util.Collection;
 import me.yokeyword.fragmentation.SupportFragment;
 import org.parceler.Parcels;
@@ -47,6 +52,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
   @BindView(R.id.txt_toolbar_title) TextView mTxtToolbarTitle;
   @BindView(R.id.img_toolbar) ImageView mImgToolbar;
   @BindView(R.id.scroll_view) NestedScrollView mScrollView;
+  @BindView(R.id.view_topic_share) TopicShareView mTopicShareView;
 
   private Topic mTopic;
   private TopicDetailPresenter mPresenter = new TopicDetailPresenter(this);
@@ -112,6 +118,13 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
         pop();
       }
     });
+    mToolbar.inflateMenu(R.menu.menu_topic_detail);
+    mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+      @Override public boolean onMenuItemClick(MenuItem item) {
+        new CreateSharePictureTask(getContext(), mTopic).execute(mTopicShareView.getChildAt(0));
+        return true;
+      }
+    });
     mTxtTopicTitle.setText(mTopic.getTitle());
     mTxtToolbarTitle.setText(mTopic.getTitle());
     mTxtTopicTime.setText(mTopic.getFormatPublishDate());
@@ -161,6 +174,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
         mImgToolbar.setVisibility(scrollY > mTxtTopicTime.getBottom() ? View.GONE : View.VISIBLE);
       }
     });
+    mTopicShareView.setup(mTopic);
   }
 
   @Override public void onSuccess(Topic topic) {
@@ -175,5 +189,26 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
 
   @Override public TopicDetailPresenter getPresenter() {
     return mPresenter;
+  }
+
+  public static class CreateSharePictureTask extends AsyncTask<View, Void, Boolean> {
+    private Topic mTopic;
+    private Context mContext;
+
+    public CreateSharePictureTask(Context context, Topic topic) {
+      super();
+      mTopic = topic;
+      mContext = context;
+    }
+
+    @Override protected Boolean doInBackground(View... params) {
+      return BitmapUtil.saveViewAsImage(params[0], "topic_" + mTopic.getId());
+    }
+
+    @Override protected void onPostExecute(Boolean isSuccess) {
+      super.onPostExecute(isSuccess);
+      Toast.makeText(mContext, isSuccess ? R.string.save_success : R.string.save_error,
+          Toast.LENGTH_LONG).show();
+    }
   }
 }

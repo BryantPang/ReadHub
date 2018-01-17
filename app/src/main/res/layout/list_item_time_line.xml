@@ -17,13 +17,13 @@
       android:gravity="center_horizontal">
     <View android:id="@+id/view_top_line"
         android:layout_width="@dimen/divider_height" android:layout_height="0dp"
-        android:layout_weight="1" android:background="@color/background_grey"/>
+        android:layout_weight="1" android:background="@color/backgroundGrey"/>
     <View android:layout_width="@dimen/time_line_oval_size"
         android:layout_height="@dimen/time_line_oval_size"
         android:background="@drawable/drawable_time_line_oval"/>
     <View android:id="@+id/view_bottom_line"
         android:layout_width="@dimen/divider_height" android:layout_height="0dp"
-        android:layout_weight="1" android:background="@color/background_grey"/>
+        android:layout_weight="1" android:background="@color/backgroundGrey"/>
   </LinearLayout>
   <TextView android:id="@+id/txt_time_line_content"
       android:layout_width="wrap_content" android:layout_height="wrap_content"

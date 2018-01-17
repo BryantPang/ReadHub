@@ -134,7 +134,7 @@ public class InstantReadFragment extends DialogFragment implements INetworkView<
           //使用本地 css 优化阅读视图
           WebResourceResponse resourceResponse = null;
           try {
-            InputStream in = ReadhubApplication.mContext.getAssets().open("css/mobi.css");
+            InputStream in = ReadhubApplication.getContext().getAssets().open("css/mobi.css");
             resourceResponse = new WebResourceResponse("text/css", "UTF-8", in);
           } catch (IOException e) {
             e.printStackTrace();

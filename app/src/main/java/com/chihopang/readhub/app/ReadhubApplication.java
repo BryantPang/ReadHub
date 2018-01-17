@@ -10,7 +10,7 @@ import me.yokeyword.fragmentation.Fragmentation;
 import me.yokeyword.fragmentation.helper.ExceptionHandler;
 
 public class ReadhubApplication extends Application {
-  public static Context mContext;
+  private static Context mContext;
 
   @Override public void onCreate() {
     super.onCreate();
@@ -30,5 +30,9 @@ public class ReadhubApplication extends Application {
   @Override protected void attachBaseContext(Context base) {
     super.attachBaseContext(base);
     MultiDex.install(this);
+  }
+
+  public static Context getContext() {
+    return mContext;
   }
 }
