@@ -63,8 +63,9 @@ public class MoreFragment extends SupportFragment {
     mRecyclerSponsors.setLayoutManager(mLayoutManager);
     mRecyclerSponsors.setNestedScrollingEnabled(false);
     mTxtSponsorTitle.setVisibility(mAdapter.getItemCount() == 0 ? View.GONE : View.VISIBLE);
-    if (mAdapter.getItemCount() != 0) return;
-    new SponsorTask().execute();
+    //20180209 暂时去掉赞助商需求
+    //if (mAdapter.getItemCount() != 0) return;
+    //new SponsorTask().execute();
   }
 
   @OnClick(R.id.relative_go_personal_page) void goPersonalPage() {
