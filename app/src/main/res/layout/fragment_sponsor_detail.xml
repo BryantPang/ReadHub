@@ -16,6 +16,7 @@
       <com.facebook.drawee.view.SimpleDraweeView android:id="@+id/img_sponsor"
           android:layout_width="match_parent" android:layout_height="wrap_content"
           android:minHeight="@dimen/sponsor_logo_height"
+          app:placeholderImage="@drawable/ic_sponsor_place_holder"
           android:layout_gravity="center_horizontal"/>
       <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
           android:background="@color/dividerGrey"/>

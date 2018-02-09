@@ -38,7 +38,9 @@
   <string name="events">相关事件</string>
   <string name="divider">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</string>
   <string name="qr_code_to_download">以上资讯内容来自 Readhub.me\n扫码下载 Readhub 第三方客户端</string>
-  <string name="save_success">成功保存至 readhub/ 文件夹下</string>
+  <string name="save_pic_success">成功保存至 /Pictures/readhub/ 文件夹下</string>
   <string name="save_error">保存失败</string>
   <string name="save_topic_share_view">生成分享图片并保存</string>
+
+  <string name="permission_failure_reminder">请授予相关权限，保证应用可正常运行</string>
 </resources>

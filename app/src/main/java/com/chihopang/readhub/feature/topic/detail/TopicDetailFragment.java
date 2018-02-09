@@ -1,5 +1,6 @@
 package com.chihopang.readhub.feature.topic.detail;
 
+import android.Manifest;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -30,6 +31,7 @@ import com.chihopang.readhub.base.BaseAdapter;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
+import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.model.TopicTimeLine;
 import com.chihopang.readhub.util.BitmapUtil;
@@ -38,7 +40,8 @@ import java.util.Collection;
 import me.yokeyword.fragmentation.SupportFragment;
 import org.parceler.Parcels;
 
-public class TopicDetailFragment extends SupportFragment implements INetworkView<Topic> {
+public class TopicDetailFragment extends SupportFragment
+    implements INetworkView<Topic>, Toolbar.OnMenuItemClickListener {
   public static final String TAG = "TopicDetailFragment";
   public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
 
@@ -119,12 +122,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
       }
     });
     mToolbar.inflateMenu(R.menu.menu_topic_detail);
-    mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-      @Override public boolean onMenuItemClick(MenuItem item) {
-        new CreateSharePictureTask(getContext(), mTopic).execute(mTopicShareView.getChildAt(0));
-        return true;
-      }
-    });
+    mToolbar.setOnMenuItemClickListener(this);
     mTxtTopicTitle.setText(mTopic.getTitle());
     mTxtToolbarTitle.setText(mTopic.getTitle());
     mTxtTopicTime.setText(mTopic.getFormatPublishDate());
@@ -191,6 +189,20 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
     return mPresenter;
   }
 
+  @Override public boolean onMenuItemClick(MenuItem item) {
+    if (getContext() instanceof MainActivity) {
+      ((MainActivity) getContext()).requestPermissionWithAction(
+          Manifest.permission.WRITE_EXTERNAL_STORAGE,
+          MainActivity.PERMISSION_STORAGE, new Runnable() {
+            @Override public void run() {
+              new CreateSharePictureTask(getContext(), mTopic).execute(
+                  mTopicShareView.getChildAt(0));
+            }
+          });
+    }
+    return true;
+  }
+
   public static class CreateSharePictureTask extends AsyncTask<View, Void, Boolean> {
     private Topic mTopic;
     private Context mContext;
@@ -207,7 +219,7 @@ public class TopicDetailFragment extends SupportFragment implements INetworkView
 
     @Override protected void onPostExecute(Boolean isSuccess) {
       super.onPostExecute(isSuccess);
-      Toast.makeText(mContext, isSuccess ? R.string.save_success : R.string.save_error,
+      Toast.makeText(mContext, isSuccess ? R.string.save_pic_success : R.string.save_error,
           Toast.LENGTH_LONG).show();
     }
   }

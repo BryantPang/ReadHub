@@ -31,7 +31,7 @@ import com.chihopang.readhub.model.Topic;
 import me.yokeyword.fragmentation.SupportFragment;
 import org.parceler.Parcels;
 
-public class WebViewFragment extends SupportFragment {
+public class WebViewFragment extends SupportFragment implements Toolbar.OnMenuItemClickListener {
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.txt_toolbar_title) TextView mTxtTitle;
   @BindView(R.id.progress_bar_loading_web) ProgressBar mProgressBar;
@@ -99,36 +99,7 @@ public class WebViewFragment extends SupportFragment {
     });
     //设置菜单
     mToolbar.inflateMenu(R.menu.menu_webview_page);
-    mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-      @Override public boolean onMenuItemClick(MenuItem item) {
-        String shareUrl;
-        if (mWebView != null) {
-          shareUrl = mWebView.getUrl();
-        } else {
-          shareUrl = mTopic == null ? mUrl : mTopic.getUrl();
-        }
-        switch (item.getItemId()) {
-          case R.id.menu_item_open_by_browser:
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse(shareUrl));
-            startActivity(Intent.createChooser(intent, getString(R.string.open_by_browser)));
-            return true;
-          case R.id.menu_item_copy_link:
-            ClipboardManager cmb =
-                (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-            cmb.setPrimaryClip(ClipData.newPlainText("simple text", shareUrl));
-            Toast.makeText(getContext(), R.string.copy_success, Toast.LENGTH_SHORT).show();
-            return true;
-          case R.id.menu_item_share:
-            Intent share = new Intent(android.content.Intent.ACTION_SEND);
-            share.setType("text/plain");
-            share.putExtra(Intent.EXTRA_TEXT, shareUrl);
-            startActivity(Intent.createChooser(share, getString(R.string.share)));
-            return true;
-        }
-        return false;
-      }
-    });
+    mToolbar.setOnMenuItemClickListener(this);
   }
 
   private void initWebView() {
@@ -191,5 +162,34 @@ public class WebViewFragment extends SupportFragment {
       return true;
     }
     return super.onBackPressedSupport();
+  }
+
+  @Override public boolean onMenuItemClick(MenuItem item) {
+    String shareUrl;
+    if (mWebView != null) {
+      shareUrl = mWebView.getUrl();
+    } else {
+      shareUrl = mTopic == null ? mUrl : mTopic.getUrl();
+    }
+    switch (item.getItemId()) {
+      case R.id.menu_item_open_by_browser:
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(shareUrl));
+        startActivity(Intent.createChooser(intent, getString(R.string.open_by_browser)));
+        return true;
+      case R.id.menu_item_copy_link:
+        ClipboardManager cmb =
+            (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        cmb.setPrimaryClip(ClipData.newPlainText("simple text", shareUrl));
+        Toast.makeText(getContext(), R.string.copy_success, Toast.LENGTH_SHORT).show();
+        return true;
+      case R.id.menu_item_share:
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT, shareUrl);
+        startActivity(Intent.createChooser(share, getString(R.string.share)));
+        return true;
+    }
+    return false;
   }
 }

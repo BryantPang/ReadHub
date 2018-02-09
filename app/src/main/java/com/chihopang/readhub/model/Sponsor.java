@@ -1,5 +1,6 @@
 package com.chihopang.readhub.model;
 
+import android.text.TextUtils;
 import org.parceler.Parcel;
 
 @Parcel public class Sponsor {
@@ -29,5 +30,9 @@ import org.parceler.Parcel;
 
   public void setImgUrl(String imgUrl) {
     this.imgUrl = imgUrl;
+  }
+
+  public boolean isCompleted() {
+    return !TextUtils.isEmpty(slogan) && !TextUtils.isEmpty(pageUrl);
   }
 }

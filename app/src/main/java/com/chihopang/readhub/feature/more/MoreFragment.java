@@ -64,37 +64,7 @@ public class MoreFragment extends SupportFragment {
     mRecyclerSponsors.setNestedScrollingEnabled(false);
     mTxtSponsorTitle.setVisibility(mAdapter.getItemCount() == 0 ? View.GONE : View.VISIBLE);
     if (mAdapter.getItemCount() != 0) return;
-    getSponsor();
-  }
-
-  private void getSponsor() {
-    new AsyncTask<Void, Void, Document>() {
-      @Override protected Document doInBackground(Void... params) {
-        Document document = null;
-        try {
-          document = Jsoup.connect(Constant.READHUB_PAGE_URL).get();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        return document;
-      }
-
-      @Override protected void onPostExecute(Document document) {
-        if (document == null) return;
-        Elements adsContainer3Oeii = document.getElementsByClass("adsContainer___3Oeii");
-        if (adsContainer3Oeii == null || adsContainer3Oeii.isEmpty()) return;
-        Elements ncClearfix = adsContainer3Oeii.get(0).getElementsByClass("nc_clearfix");
-        if (ncClearfix == null || ncClearfix.select("a") == null) return;
-        for (Element sponsorElement : ncClearfix.select("a")) {
-          Sponsor sponsor = new Sponsor();
-          sponsor.setPageUrl(sponsorElement.attr("href"));
-          sponsor.setImgUrl(sponsorElement.select("img").attr("src"));
-          sponsor.setSlogan(sponsorElement.select("img").attr("alt"));
-          mAdapter.addItem(sponsor);
-        }
-        mTxtSponsorTitle.setVisibility(View.VISIBLE);
-      }
-    }.execute();
+    new SponsorTask().execute();
   }
 
   @OnClick(R.id.relative_go_personal_page) void goPersonalPage() {
@@ -109,5 +79,33 @@ public class MoreFragment extends SupportFragment {
 
   public void onTabClick() {
     mScrollView.smoothScrollTo(0, 0);
+  }
+
+  public class SponsorTask extends AsyncTask<Void, Void, Document> {
+    @Override protected Document doInBackground(Void... params) {
+      Document document = null;
+      try {
+        document = Jsoup.connect(Constant.READHUB_PAGE_URL).get();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      return document;
+    }
+
+    @Override protected void onPostExecute(Document document) {
+      if (document == null) return;
+      Elements adsContainer3Oeii = document.getElementsByClass("adsContainer___3Oeii");
+      if (adsContainer3Oeii == null || adsContainer3Oeii.isEmpty()) return;
+      Elements ncClearfix = adsContainer3Oeii.get(0).getElementsByClass("nc_clearfix");
+      if (ncClearfix == null || ncClearfix.select("a") == null) return;
+      for (Element sponsorElement : ncClearfix.select("a")) {
+        Sponsor sponsor = new Sponsor();
+        sponsor.setPageUrl(sponsorElement.attr("href"));
+        sponsor.setImgUrl(sponsorElement.select("div").attr("src"));
+        sponsor.setSlogan(sponsorElement.select("div").attr("title"));
+        if (sponsor.isCompleted()) mAdapter.addItem(sponsor);
+      }
+      mTxtSponsorTitle.setVisibility(mAdapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
+    }
   }
 }
