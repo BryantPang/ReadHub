@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
+import com.chihopang.readhub.feature.blockchain.BCNewsFragment;
 import com.chihopang.readhub.feature.developer.news.TechNewsFragment;
 import com.chihopang.readhub.feature.more.MoreFragment;
 import com.chihopang.readhub.feature.news.NewsFragment;
@@ -11,7 +12,7 @@ import com.chihopang.readhub.feature.topic.list.HotTopicFragment;
 import java.lang.ref.WeakReference;
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
-  private static int ITEM_COUNT = 4;
+  private static int ITEM_COUNT = 5;
   private WeakReference<Fragment> mFragmentWeakReference;
 
   public MainFragmentPagerAdapter(FragmentManager fm) {
@@ -27,6 +28,8 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
       case 2:
         return TechNewsFragment.newInstance();
       case 3:
+        return BCNewsFragment.newInstance();
+      case 4:
         return MoreFragment.newInstance();
       default:
         return null;

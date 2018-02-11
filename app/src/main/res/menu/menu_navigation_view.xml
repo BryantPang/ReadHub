@@ -13,6 +13,10 @@
       android:icon="@drawable/ic_code"
       android:title="@string/developer_news"/>
 
+  <item android:id="@+id/menu_item_block_chain"
+      android:icon="@drawable/ic_block_chain"
+      android:title="@string/block_chain_news"/>
+
   <item android:id="@+id/menu_item_more"
       android:icon="@drawable/ic_more"
       android:title="@string/more"/>

@@ -83,8 +83,11 @@ public class MainFragment extends SupportFragment {
               case R.id.menu_item_tech_news:
                 currentItem = 2;
                 break;
-              case R.id.menu_item_more:
+              case R.id.menu_item_block_chain:
                 currentItem = 3;
+                break;
+              case R.id.menu_item_more:
+                currentItem = 4;
                 break;
               default:
                 currentItem = 0;
