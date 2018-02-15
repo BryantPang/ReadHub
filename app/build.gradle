@@ -62,6 +62,7 @@ dependencies {
   compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
   compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
   compile 'me.yokeyword:fragmentation:1.2.6'
+  compile 'me.yokeyword:fragmentation-swipeback:1.2.6'
   compile 'org.jsoup:jsoup:1.11.2'
   compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
   compile 'com.tencent.bugly:crashreport_upgrade:latest.release'

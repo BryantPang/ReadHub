@@ -37,10 +37,10 @@ import com.chihopang.readhub.model.TopicTimeLine;
 import com.chihopang.readhub.util.BitmapUtil;
 import com.chihopang.readhub.widget.TopicShareView;
 import java.util.Collection;
-import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 import org.parceler.Parcels;
 
-public class TopicDetailFragment extends SupportFragment
+public class TopicDetailFragment extends SwipeBackFragment
     implements INetworkView<Topic>, Toolbar.OnMenuItemClickListener {
   public static final String TAG = "TopicDetailFragment";
   public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
@@ -94,7 +94,7 @@ public class TopicDetailFragment extends SupportFragment
     View view = inflater.inflate(R.layout.fragment_topic_detail, container, false);
     ButterKnife.bind(this, view);
     mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
-    return view;
+    return attachToSwipeBack(view);
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

@@ -28,10 +28,10 @@ import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.model.Topic;
-import me.yokeyword.fragmentation.SupportFragment;
+import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 import org.parceler.Parcels;
 
-public class WebViewFragment extends SupportFragment implements Toolbar.OnMenuItemClickListener {
+public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenuItemClickListener {
   @BindView(R.id.toolbar) Toolbar mToolbar;
   @BindView(R.id.txt_toolbar_title) TextView mTxtTitle;
   @BindView(R.id.progress_bar_loading_web) ProgressBar mProgressBar;
@@ -64,7 +64,7 @@ public class WebViewFragment extends SupportFragment implements Toolbar.OnMenuIt
     ButterKnife.bind(this, view);
     mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
     mUrl = getArguments().getString(Constant.EXTRA_URL);
-    return view;
+    return attachToSwipeBack(view);
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

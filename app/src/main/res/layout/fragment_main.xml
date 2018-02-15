@@ -26,7 +26,7 @@
       android:layout_below="@id/toolbar" android:orientation="vertical">
     <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
         android:background="@color/dividerGrey"/>
-    <android.support.v4.view.ViewPager android:id="@+id/view_pager_main"
+    <FrameLayout android:id="@+id/view_pager_main"
         android:layout_width="match_parent" android:layout_height="0dp"
         android:layout_weight="1"/>
     <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"

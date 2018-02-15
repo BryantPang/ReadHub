@@ -7,7 +7,6 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,14 +15,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseListFragment;
+import com.chihopang.readhub.feature.blockchain.BCNewsFragment;
+import com.chihopang.readhub.feature.developer.news.TechNewsFragment;
 import com.chihopang.readhub.feature.more.MoreFragment;
+import com.chihopang.readhub.feature.news.NewsFragment;
+import com.chihopang.readhub.feature.topic.list.HotTopicFragment;
 import java.lang.reflect.Field;
 import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainFragment extends SupportFragment {
   @BindView(R.id.bottom_navigation_view) BottomNavigationView mBottomNavigationView;
-  @BindView(R.id.view_pager_main) ViewPager mViewPager;
-  private MainFragmentPagerAdapter mFragmentAdapter;
+  private SupportFragment[] mFragments = new SupportFragment[5];
 
   public static MainFragment newInstance() {
     MainFragment fragment = new MainFragment();
@@ -45,10 +47,21 @@ public class MainFragment extends SupportFragment {
   }
 
   private void initContent() {
-    if (mFragmentAdapter == null) {
-      mFragmentAdapter = new MainFragmentPagerAdapter(getFragmentManager());
+    if (findFragment(HotTopicFragment.class) == null) {
+      mFragments[0] = HotTopicFragment.newInstance();
+      mFragments[1] = NewsFragment.newInstance();
+      mFragments[2] = TechNewsFragment.newInstance();
+      mFragments[3] = BCNewsFragment.newInstance();
+      mFragments[4] = MoreFragment.newInstance();
+      loadMultipleRootFragment(R.id.view_pager_main, 0, mFragments[0], mFragments[1],
+          mFragments[2], mFragments[3], mFragments[4]);
+    } else {
+      mFragments[0] = findFragment(HotTopicFragment.class);
+      mFragments[1] = findFragment(NewsFragment.class);
+      mFragments[2] = findFragment(TechNewsFragment.class);
+      mFragments[3] = findFragment(BCNewsFragment.class);
+      mFragments[4] = findFragment(MoreFragment.class);
     }
-    mViewPager.setAdapter(mFragmentAdapter);
     BottomNavigationMenuView menuView =
         (BottomNavigationMenuView) mBottomNavigationView.getChildAt(0);
     try {
@@ -92,9 +105,9 @@ public class MainFragment extends SupportFragment {
               default:
                 currentItem = 0;
             }
-            if (mViewPager.getCurrentItem() == currentItem) {
+            if (mBottomNavigationView.getSelectedItemId() == item.getItemId()) {
               //当前页面已经为对应页面时，则回到顶部或刷新
-              Fragment currentFragment = mFragmentAdapter.getCurrentFragment();
+              Fragment currentFragment = mFragments[currentItem];
               if (currentFragment instanceof BaseListFragment) {
                 ((BaseListFragment) currentFragment).onTabClick();
               }
@@ -103,23 +116,9 @@ public class MainFragment extends SupportFragment {
               }
               return true;
             }
-            mViewPager.setCurrentItem(currentItem);
+            showHideFragment(mFragments[currentItem]);
             return true;
           }
         });
-    mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-      @Override
-      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-      }
-
-      @Override public void onPageSelected(int position) {
-        mBottomNavigationView.getMenu().getItem(position).setChecked(true);
-      }
-
-      @Override public void onPageScrollStateChanged(int state) {
-
-      }
-    });
   }
 }
