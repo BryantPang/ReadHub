@@ -16,8 +16,9 @@
       android:layout_width="match_parent"
       android:layout_height="@dimen/bottom_navigation_view_height"
       android:layout_alignParentBottom="true" android:background="@android:color/white"
-      app:menu="@menu/menu_navigation_view" app:itemTextColor="@color/colorPrimary"
-      app:elevation="@dimen/bottom_navigation_view_elevation" app:itemIconTint="@color/colorPrimary"
+      app:menu="@menu/menu_navigation_view" app:itemTextColor="@color/selector_nav_bg"
+      app:elevation="@dimen/bottom_navigation_view_elevation"
+      app:itemIconTint="@color/selector_nav_bg"
       app:layout_scrollFlags="scroll|enterAlways"/>
 
   <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"

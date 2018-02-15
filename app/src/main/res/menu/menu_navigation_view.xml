@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
   <item android:id="@+id/menu_item_hot_topic"
-      android:icon="@drawable/ic_topic"
+      android:icon="@drawable/ic_topic_selector"
       android:title="@string/hot_topic"/>
 
   <item android:id="@+id/menu_item_news"
-      android:icon="@drawable/ic_news"
+      android:icon="@drawable/ic_news_selector"
       android:title="@string/news"/>
 
   <item android:id="@+id/menu_item_tech_news"
-      android:icon="@drawable/ic_code"
+      android:icon="@drawable/ic_code_selector"
       android:title="@string/developer_news"/>
 
   <item android:id="@+id/menu_item_block_chain"
-      android:icon="@drawable/ic_block_chain"
+      android:icon="@drawable/ic_block_chain_selector"
       android:title="@string/block_chain_news"/>
 
   <item android:id="@+id/menu_item_more"
-      android:icon="@drawable/ic_more"
+      android:icon="@drawable/ic_more_selector"
       android:title="@string/more"/>
 </menu>
