@@ -53,7 +53,7 @@ public class MainFragment extends SupportFragment {
       mFragments[2] = TechNewsFragment.newInstance();
       mFragments[3] = BCNewsFragment.newInstance();
       mFragments[4] = MoreFragment.newInstance();
-      loadMultipleRootFragment(R.id.view_pager_main, 0, mFragments[0], mFragments[1],
+      loadMultipleRootFragment(R.id.frame_main_content, 0, mFragments[0], mFragments[1],
           mFragments[2], mFragments[3], mFragments[4]);
     } else {
       mFragments[0] = findFragment(HotTopicFragment.class);

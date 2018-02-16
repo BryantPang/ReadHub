@@ -1,35 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-      android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-      android:background="@android:color/white">
-    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:src="@drawable/ic_toolbar_logo"
-        android:layout_gravity="center_horizontal"/>
-  </android.support.v7.widget.Toolbar>
+  <android.support.design.widget.AppBarLayout android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+    <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+        android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
+        android:background="@android:color/white">
+      <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content"
+          android:src="@drawable/ic_toolbar_logo"
+          android:layout_gravity="center_horizontal"/>
+    </android.support.v7.widget.Toolbar>
+  </android.support.design.widget.AppBarLayout>
 
   <android.support.design.widget.BottomNavigationView android:id="@+id/bottom_navigation_view"
       android:layout_width="match_parent"
       android:layout_height="@dimen/bottom_navigation_view_height"
-      android:layout_alignParentBottom="true" android:background="@android:color/white"
+      android:layout_gravity="bottom"
+      android:background="@android:color/white"
       app:menu="@menu/menu_navigation_view" app:itemTextColor="@color/selector_nav_bg"
       app:elevation="@dimen/bottom_navigation_view_elevation"
       app:itemIconTint="@color/selector_nav_bg"
-      app:layout_scrollFlags="scroll|enterAlways"/>
+      app:layout_behavior="com.chihopang.readhub.widget.BottomNavigationBehavior"/>
 
-  <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
-      android:layout_above="@id/bottom_navigation_view"
-      android:layout_below="@id/toolbar" android:orientation="vertical">
-    <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
-        android:background="@color/dividerGrey"/>
-    <FrameLayout android:id="@+id/view_pager_main"
-        android:layout_width="match_parent" android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
-        android:background="@color/dividerGrey"/>
-  </LinearLayout>
-</RelativeLayout>
+  <FrameLayout android:id="@+id/frame_main_content"
+      android:layout_width="match_parent" android:layout_height="match_parent"
+      android:layout_marginTop="?attr/actionBarSize"/>
+</android.support.design.widget.CoordinatorLayout>
