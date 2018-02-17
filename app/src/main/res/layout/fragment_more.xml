@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroll_view"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true">
   <LinearLayout
       android:layout_width="match_parent" android:layout_height="wrap_content"
       android:orientation="vertical" android:background="@color/backgroundGrey"
@@ -32,22 +33,16 @@
             android:background="@color/dividerGrey"
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginRight="@dimen/margin_20"/>
-        <RelativeLayout android:id="@+id/relative_go_personal_page"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_btn_background"
+        <Button android:id="@+id/btn_go_personal_page"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_18" android:textColor="@color/textBlue"
+            android:text="@string/personal_page" android:gravity="center"
+            android:padding="@dimen/padding_10"
+            android:drawableRight="@drawable/ic_right_blue"
+            android:drawablePadding="@dimen/padding_10"
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginRight="@dimen/margin_20"
-            android:foreground="?attr/selectableItemBackground">
-          <TextView
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textSize="@dimen/text_size_18" android:textColor="@color/textBlue"
-              android:text="@string/personal_page" android:gravity="center"
-              android:padding="@dimen/padding_10"
-              android:drawableRight="@drawable/ic_right_blue"
-              android:drawablePadding="@dimen/padding_10"
-              android:layout_centerHorizontal="true"/>
-        </RelativeLayout>
+            android:background="?attr/selectableItemBackground"/>
         <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
             android:background="@color/dividerGrey"
             android:layout_marginLeft="@dimen/margin_20"
@@ -57,37 +52,39 @@
             android:paddingRight="@dimen/padding_20"
             android:text="@string/declare" android:lineSpacingExtra="@dimen/margin_4"
             android:textColor="@color/textGrey" android:textSize="@dimen/text_size_16"/>
-        <RelativeLayout android:id="@+id/relative_go_readhub_page"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_btn_background"
+        <Button android:id="@+id/btn_go_readhub_page"
+            android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_18" android:textColor="@color/textBlue"
+            android:text="@string/readhub_web" android:gravity="center"
+            android:padding="@dimen/padding_10" android:textAllCaps="false"
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginRight="@dimen/margin_20"
-            android:foreground="?attr/selectableItemBackground">
-          <TextView
-              android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:textSize="@dimen/text_size_18" android:textColor="@color/textBlue"
-              android:text="@string/readhub_web" android:gravity="center"
-              android:padding="@dimen/padding_10"
-              android:drawableRight="@drawable/ic_right_blue"
-              android:drawablePadding="@dimen/padding_10"
-              android:layout_centerHorizontal="true"/>
-        </RelativeLayout>
-
+            android:drawableRight="@drawable/ic_right_blue"
+            android:drawablePadding="@dimen/padding_10"
+            android:background="?attr/selectableItemBackground"/>
+        <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
+            android:background="@color/dividerGrey"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"/>
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+          <Button android:id="@+id/btn_check_update"
+              android:layout_width="0dp" android:layout_height="wrap_content"
+              android:layout_weight="1" android:background="?attr/selectableItemBackground"
+              android:drawableTop="@drawable/ic_update" android:text="@string/check_update"
+              android:gravity="center" android:padding="@dimen/padding_10"
+              android:layout_marginLeft="@dimen/margin_20"
+              android:layout_marginRight="@dimen/margin_20"/>
+          <Button android:id="@+id/btn_submit_issue"
+              android:layout_width="0dp" android:layout_height="match_parent"
+              android:layout_weight="1" android:background="?attr/selectableItemBackground"
+              android:drawableTop="@drawable/ic_issue" android:text="@string/submit_issue"
+              android:gravity="center" android:padding="@dimen/padding_10"
+              android:layout_marginLeft="@dimen/margin_20"
+              android:layout_marginRight="@dimen/margin_20"/>
+        </LinearLayout>
       </LinearLayout>
-
     </android.support.v7.widget.CardView>
-
-    <TextView android:id="@+id/txt_sponsor_title"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_20"
-        android:text="@string/sponsor" android:layout_gravity="center_horizontal"
-        android:textColor="@color/textGrey" android:textSize="@dimen/text_size_14"
-        android:visibility="gone"/>
-
-    <android.support.v7.widget.RecyclerView android:id="@+id/recycler_view_sponsors"
-        android:layout_width="wrap_content" android:layout_height="match_parent"
-        android:background="@color/backgroundGrey" android:layout_gravity="center_horizontal"/>
-
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

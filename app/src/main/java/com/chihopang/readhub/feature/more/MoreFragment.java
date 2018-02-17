@@ -1,16 +1,19 @@
 package com.chihopang.readhub.feature.more;
 
-import android.os.AsyncTask;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,12 +25,8 @@ import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.model.Sponsor;
-import java.io.IOException;
+import com.tencent.bugly.beta.Beta;
 import me.yokeyword.fragmentation.SupportFragment;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
 public class MoreFragment extends SupportFragment {
   public static final String TAG = "MoreFragment";
@@ -36,11 +35,9 @@ public class MoreFragment extends SupportFragment {
     return new MoreFragment();
   }
 
-  @BindView(R.id.recycler_view_sponsors) RecyclerView mRecyclerSponsors;
   @BindView(R.id.scroll_view) NestedScrollView mScrollView;
-  @BindView(R.id.txt_sponsor_title) TextView mTxtSponsorTitle;
+  private AlertDialog mIssueDialog;
 
-  private LinearLayoutManager mLayoutManager;
   private BaseAdapter<Sponsor> mAdapter = new BaseAdapter<Sponsor>() {
     @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       return new SponsorViewHolder(getActivity(), parent);
@@ -53,60 +50,56 @@ public class MoreFragment extends SupportFragment {
       @Nullable Bundle savedInstanceState) {
     View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_more, container, false);
     ButterKnife.bind(this, v);
-    initRecycler();
     return v;
   }
 
-  private void initRecycler() {
-    mRecyclerSponsors.setAdapter(mAdapter);
-    mLayoutManager = new GridLayoutManager(getContext(), 2);
-    mRecyclerSponsors.setLayoutManager(mLayoutManager);
-    mRecyclerSponsors.setNestedScrollingEnabled(false);
-    mTxtSponsorTitle.setVisibility(mAdapter.getItemCount() == 0 ? View.GONE : View.VISIBLE);
-    //20180209 暂时去掉赞助商需求
-    //if (mAdapter.getItemCount() != 0) return;
-    //new SponsorTask().execute();
-  }
-
-  @OnClick(R.id.relative_go_personal_page) void goPersonalPage() {
+  @OnClick(R.id.btn_go_personal_page) void goPersonalPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
         .start(WebViewFragment.newInstance(Constant.PERSONAL_PAGE_URL));
   }
 
-  @OnClick(R.id.relative_go_readhub_page) void goReadhubPage() {
+  @OnClick(R.id.btn_go_readhub_page) void goReadhubPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
         .start(WebViewFragment.newInstance(Constant.READHUB_PAGE_URL));
   }
 
-  public void onTabClick() {
-    mScrollView.smoothScrollTo(0, 0);
+  @OnClick(R.id.btn_check_update) void checkUpdate() {
+    Beta.checkUpgrade();
   }
 
-  public class SponsorTask extends AsyncTask<Void, Void, Document> {
-    @Override protected Document doInBackground(Void... params) {
-      Document document = null;
-      try {
-        document = Jsoup.connect(Constant.READHUB_PAGE_URL).get();
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      return document;
+  @OnClick(R.id.btn_submit_issue) void submitIssue() {
+    if (mIssueDialog == null) {
+      mIssueDialog = new AlertDialog.Builder(getContext())
+          .setTitle(R.string.dialog_submit_issue_message)
+          .setItems(new String[] {"1.前往 Github 项目主页提交 issue", "2.发送至开发者个人邮箱"},
+              new DialogInterface.OnClickListener() {
+                @Override public void onClick(DialogInterface dialog, int which) {
+                  switch (which) {
+                    case 0:
+                      Intent intent = new Intent(Intent.ACTION_VIEW);
+                      intent.setData(Uri.parse(Constant.GITHUB_PAGE_URL));
+                      startActivity(Intent.createChooser(intent, getString(R.string.submit_issue)));
+                      break;
+                    case 1:
+                      ClipboardManager cmb =
+                          (ClipboardManager) getContext().getSystemService(
+                              Context.CLIPBOARD_SERVICE);
+                      cmb.setPrimaryClip(
+                          ClipData.newPlainText("simple text", Constant.PERSONAL_EMAIL));
+                      Toast.makeText(getContext(), R.string.copy_email_success, Toast.LENGTH_LONG)
+                          .show();
+                      break;
+                    default:
+                      break;
+                  }
+                }
+              })
+          .create();
     }
+    mIssueDialog.show();
+  }
 
-    @Override protected void onPostExecute(Document document) {
-      if (document == null) return;
-      Elements adsContainer3Oeii = document.getElementsByClass("adsContainer___3Oeii");
-      if (adsContainer3Oeii == null || adsContainer3Oeii.isEmpty()) return;
-      Elements ncClearfix = adsContainer3Oeii.get(0).getElementsByClass("nc_clearfix");
-      if (ncClearfix == null || ncClearfix.select("a") == null) return;
-      for (Element sponsorElement : ncClearfix.select("a")) {
-        Sponsor sponsor = new Sponsor();
-        sponsor.setPageUrl(sponsorElement.attr("href"));
-        sponsor.setImgUrl(sponsorElement.select("div").attr("src"));
-        sponsor.setSlogan(sponsorElement.select("div").attr("title"));
-        if (sponsor.isCompleted()) mAdapter.addItem(sponsor);
-      }
-      mTxtSponsorTitle.setVisibility(mAdapter.getItemCount() != 0 ? View.VISIBLE : View.GONE);
-    }
+  public void onTabClick() {
+    mScrollView.smoothScrollTo(0, 0);
   }
 }

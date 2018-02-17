@@ -17,4 +17,6 @@ public interface Constant {
 
   //其他
   public static final String BUGGLY_APP_ID = "547fe840fc";
+  public static final String GITHUB_PAGE_URL = "https://github.com/BryantPang/ReadHub";
+  public static final String PERSONAL_EMAIL = "chihopang10@gmail.com";
 }
