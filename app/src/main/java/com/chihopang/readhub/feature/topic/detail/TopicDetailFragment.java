@@ -46,7 +46,7 @@ public class TopicDetailFragment extends SwipeBackFragment
   public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
 
   @BindView(R.id.toolbar) Toolbar mToolbar;
-  @BindView(R.id.txt_topic_title) TextView mTxtTopicTitle;
+  @BindView(R.id.txt_topic_detail_title) TextView mTxtTopicTitle;
   @BindView(R.id.txt_topic_time) TextView mTxtTopicTime;
   @BindView(R.id.txt_topic_description) TextView mTxtTopicDescription;
   @BindView(R.id.linear_web_title_container) LinearLayout mLinearTitleContainer;

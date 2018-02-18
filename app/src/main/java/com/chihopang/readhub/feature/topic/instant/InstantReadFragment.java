@@ -1,5 +1,6 @@
 package com.chihopang.readhub.feature.topic.instant;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -31,7 +32,7 @@ import java.io.InputStream;
 public class InstantReadFragment extends DialogFragment implements INetworkView<InstantReadData> {
   public static final String TAG = "InstantReadFragment";
 
-  @BindView(R.id.txt_topic_title) TextView mTxtTopicTitle;
+  @BindView(R.id.txt_topic_instant_title) TextView mTxtTopicTitle;
   @BindView(R.id.web_view) WebView mWebView;
   @BindView(R.id.txt_instant_source) TextView mTxtSource;
   @BindView(R.id.txt_origin_site) TextView mTxtGoOrigin;
@@ -105,7 +106,9 @@ public class InstantReadFragment extends DialogFragment implements INetworkView<
   }
 
   @Override public void onError(Throwable e) {
-    Toast.makeText(getContext(), "请求错误", Toast.LENGTH_LONG).show();
+    Context context = getContext();
+    if (context == null) return;
+    Toast.makeText(context, "请求错误", Toast.LENGTH_LONG).show();
     dismiss();
   }
 

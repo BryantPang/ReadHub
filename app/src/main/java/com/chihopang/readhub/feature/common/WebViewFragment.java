@@ -75,6 +75,7 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
 
   @Override public void onDestroy() {
     super.onDestroy();
+    if (mWebView == null) return;
     mWebView.stopLoading();
     mWebView.clearHistory();
     mWebView.destroy();
@@ -136,12 +137,13 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
 
   private void initWebSettings() {
     WebSettings mWebSetting = mWebView.getSettings();
+    if (mWebSetting == null) return;
     mWebSetting.setJavaScriptEnabled(true);
     mWebSetting.setUseWideViewPort(true);
     mWebSetting.setLoadWithOverviewMode(true);
     mWebSetting.setDomStorageEnabled(true);
     mWebSetting.setDatabaseEnabled(true);
-    mWebSetting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+    mWebSetting.setCacheMode(WebSettings.LOAD_DEFAULT);
     String cacheDirPath = getContext().getFilesDir().getAbsolutePath() + APP_CACAHE_DIRNAME;
     mWebSetting.setDatabasePath(cacheDirPath);
     mWebSetting.setAppCachePath(cacheDirPath);

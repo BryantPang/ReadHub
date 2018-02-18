@@ -37,7 +37,7 @@
         <LinearLayout android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-          <TextView android:id="@+id/txt_topic_title"
+          <TextView android:id="@+id/txt_topic_instant_title"
               android:layout_width="match_parent" android:layout_height="wrap_content"
               android:textSize="@dimen/text_size_20" android:textStyle="bold"
               android:textColor="@color/textDark"
