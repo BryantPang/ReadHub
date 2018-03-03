@@ -1,6 +1,5 @@
 package com.chihopang.readhub.feature.developer.news;
 
-import com.chihopang.readhub.base.BaseListFragment;
 import com.chihopang.readhub.base.BaseListPresenter;
 import com.chihopang.readhub.model.ApiData;
 import com.chihopang.readhub.model.Topic;
@@ -10,11 +9,6 @@ import io.reactivex.Observable;
 
 public class TechNewsPresenter extends BaseListPresenter<Topic> {
   private TechNewsService mService = ApiService.createTechNewsService();
-
-  public TechNewsPresenter(
-      BaseListFragment<Topic> fragment) {
-    super(fragment);
-  }
 
   @Override public Observable<ApiData> request() {
     return mService.getTechNews();

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.github.medyo:dynamicbox-1.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/dynamicbox-1.2.aar/37fd3244c7a79c4f84c70b79b708bc7d/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/dynamicbox-1.2.aar/37fd3244c7a79c4f84c70b79b708bc7d/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.medyo/dynamicbox/1.2/70c7f7c71815911201465b36355c4cef56797ab3/dynamicbox-1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

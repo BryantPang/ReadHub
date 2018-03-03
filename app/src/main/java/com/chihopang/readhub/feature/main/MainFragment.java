@@ -7,13 +7,11 @@ import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
+import com.chihopang.readhub.base.BaseFragment;
 import com.chihopang.readhub.base.BaseListFragment;
 import com.chihopang.readhub.feature.blockchain.BCNewsFragment;
 import com.chihopang.readhub.feature.developer.news.TechNewsFragment;
@@ -23,7 +21,7 @@ import com.chihopang.readhub.feature.topic.list.HotTopicFragment;
 import java.lang.reflect.Field;
 import me.yokeyword.fragmentation.SupportFragment;
 
-public class MainFragment extends SupportFragment {
+public class MainFragment extends BaseFragment {
   @BindView(R.id.bottom_navigation_view) BottomNavigationView mBottomNavigationView;
   private SupportFragment[] mFragments = new SupportFragment[5];
 
@@ -32,12 +30,8 @@ public class MainFragment extends SupportFragment {
     return fragment;
   }
 
-  @Nullable @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_main, container, false);
-    ButterKnife.bind(this, view);
-    return view;
+  @Override public int getFragmentLayout() {
+    return R.layout.fragment_main;
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

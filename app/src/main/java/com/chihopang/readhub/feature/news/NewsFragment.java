@@ -18,6 +18,6 @@ public class NewsFragment extends BaseListFragment<Topic> {
   }
 
   @Override public BaseListPresenter<Topic> createPresenter() {
-    return new NewsPresenter(this);
+    return new NewsPresenter();
   }
 }

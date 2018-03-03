@@ -6,13 +6,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
-import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
-import me.yokeyword.fragmentation.SupportActivity;
+import com.chihopang.readhub.base.BaseActivity;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
-public class MainActivity extends SupportActivity {
+public class MainActivity extends BaseActivity {
   public static final int PERMISSION_STORAGE = 1;
   private boolean isFinish = false;//防止误触返回退出
   private Runnable mRequestPermissionAction;//请求运行时权限成功后的回调，由 requestPermissionWithAction() 传入。
@@ -21,7 +20,6 @@ public class MainActivity extends SupportActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
     if (findFragment(MainFragment.class) == null) {
       loadRootFragment(R.id.frame_main, MainFragment.newInstance(), true, true);
     }

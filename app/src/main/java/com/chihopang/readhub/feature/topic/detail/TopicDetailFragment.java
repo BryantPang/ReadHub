@@ -15,7 +15,6 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +23,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.base.BaseAdapter;
+import com.chihopang.readhub.base.BaseSwipeBackFragment;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
@@ -37,11 +36,10 @@ import com.chihopang.readhub.model.TopicTimeLine;
 import com.chihopang.readhub.util.BitmapUtil;
 import com.chihopang.readhub.widget.TopicShareView;
 import java.util.Collection;
-import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 import org.parceler.Parcels;
 
-public class TopicDetailFragment extends SwipeBackFragment
-    implements INetworkView<Topic>, Toolbar.OnMenuItemClickListener {
+public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresenter>
+    implements INetworkView<TopicDetailPresenter, Topic>, Toolbar.OnMenuItemClickListener {
   public static final String TAG = "TopicDetailFragment";
   public static final int VIEW_TYPE_TOP = 99, VIEW_TYPE_BOTTOM = 98;
 
@@ -58,7 +56,6 @@ public class TopicDetailFragment extends SwipeBackFragment
   @BindView(R.id.view_topic_share) TopicShareView mTopicShareView;
 
   private Topic mTopic;
-  private TopicDetailPresenter mPresenter = new TopicDetailPresenter(this);
   private BaseAdapter<TopicTimeLine> mTimelineAdapter = new BaseAdapter<TopicTimeLine>() {
     @Override
     public BaseViewHolder<TopicTimeLine> onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -88,17 +85,14 @@ public class TopicDetailFragment extends SwipeBackFragment
     return fragment;
   }
 
-  @Nullable @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_topic_detail, container, false);
-    ButterKnife.bind(this, view);
-    mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
-    return attachToSwipeBack(view);
+  @Override public int getFragmentLayout() {
+    return R.layout.fragment_topic_detail;
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    attachPresenter(new TopicDetailPresenter());
+    mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
     if (mTopic != null) {
       onSuccess(mTopic);
       return;
@@ -183,10 +177,6 @@ public class TopicDetailFragment extends SwipeBackFragment
 
   @Override public void onError(Throwable e) {
     Toast.makeText(getContext(), "请求错误", Toast.LENGTH_LONG).show();
-  }
-
-  @Override public TopicDetailPresenter getPresenter() {
-    return mPresenter;
   }
 
   @Override public boolean onMenuItemClick(MenuItem item) {

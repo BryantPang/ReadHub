@@ -1,5 +1,11 @@
 package com.chihopang.readhub.base.mvp;
 
-public interface IPresenter {
-  IView getView();
+import android.support.annotation.Nullable;
+
+public interface IPresenter<V extends IView> {
+  @Nullable V getView();
+
+  void attachView(V view);
+
+  void detachView();
 }

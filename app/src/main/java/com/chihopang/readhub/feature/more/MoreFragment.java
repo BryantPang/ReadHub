@@ -6,29 +6,20 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Constant;
-import com.chihopang.readhub.base.BaseAdapter;
-import com.chihopang.readhub.base.BaseViewHolder;
+import com.chihopang.readhub.base.BaseFragment;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
-import com.chihopang.readhub.model.Sponsor;
 import com.tencent.bugly.beta.Beta;
-import me.yokeyword.fragmentation.SupportFragment;
 
-public class MoreFragment extends SupportFragment {
+public class MoreFragment extends BaseFragment {
   public static final String TAG = "MoreFragment";
 
   public static MoreFragment newInstance() {
@@ -38,19 +29,8 @@ public class MoreFragment extends SupportFragment {
   @BindView(R.id.scroll_view) NestedScrollView mScrollView;
   private AlertDialog mIssueDialog;
 
-  private BaseAdapter<Sponsor> mAdapter = new BaseAdapter<Sponsor>() {
-    @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-      return new SponsorViewHolder(getActivity(), parent);
-    }
-  };
-
-
-  @Nullable @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View v = LayoutInflater.from(getContext()).inflate(R.layout.fragment_more, container, false);
-    ButterKnife.bind(this, v);
-    return v;
+  @Override public int getFragmentLayout() {
+    return R.layout.fragment_more;
   }
 
   @OnClick(R.id.btn_go_personal_page) void goPersonalPage() {

@@ -3,18 +3,18 @@
 ### 应用预览
 应用总览：
 
-![应用总览](https://github.com/BryantPang/ReadHub/raw/master/%E5%BA%94%E7%94%A8%E6%80%BB%E8%A7%88.gif)
+![应用总览](https://github.com/BryantPang/ReadHub/raw/master/apk-preview/%E5%BA%94%E7%94%A8%E6%80%BB%E8%A7%88.gif)
 
 热门话题：
 
-![热门话题](https://github.com/BryantPang/ReadHub/raw/master/%E7%83%AD%E9%97%A8%E8%AF%9D%E9%A2%98.gif)
+![热门话题](https://github.com/BryantPang/ReadHub/raw/master/apk-preview/%E7%83%AD%E9%97%A8%E8%AF%9D%E9%A2%98.gif)
 
 即时阅读：
 
-![即时阅读](https://github.com/BryantPang/ReadHub/raw/master/%E5%8D%B3%E6%97%B6%E9%98%85%E8%AF%BB.gif)
+![即时阅读](https://github.com/BryantPang/ReadHub/raw/master/apk-preview/%E5%8D%B3%E6%97%B6%E9%98%85%E8%AF%BB.gif)
 
 ### 下载地址
-https://github.com/BryantPang/ReadHub/raw/master/app-debug.apk
+https://github.com/BryantPang/ReadHub/raw/master/apk-preview/app-debug.apk
 ### Thanks
 应用内所有资讯内容均来自无码科技产品 [Readhub](https://readhub.me/)。
 

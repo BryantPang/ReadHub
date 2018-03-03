@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.webkit.URLUtil;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -16,11 +14,11 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Constant;
 import com.chihopang.readhub.app.ReadhubApplication;
+import com.chihopang.readhub.base.BaseDialogFragment;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
@@ -29,15 +27,14 @@ import com.chihopang.readhub.model.InstantReadData;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class InstantReadFragment extends DialogFragment implements INetworkView<InstantReadData> {
+public class InstantReadFragment extends BaseDialogFragment<InstantReadPresenter>
+    implements INetworkView<InstantReadPresenter, InstantReadData> {
   public static final String TAG = "InstantReadFragment";
 
   @BindView(R.id.txt_topic_instant_title) TextView mTxtTopicTitle;
   @BindView(R.id.web_view) WebView mWebView;
   @BindView(R.id.txt_instant_source) TextView mTxtSource;
   @BindView(R.id.txt_origin_site) TextView mTxtGoOrigin;
-
-  private InstantReadPresenter mPresenter = new InstantReadPresenter(this);
 
   private String mTopicId;
 
@@ -54,28 +51,20 @@ public class InstantReadFragment extends DialogFragment implements INetworkView<
     setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AlertDialogStyle);
   }
 
-  @Nullable @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_topic_instant_read, container, false);
-    ButterKnife.bind(this, view);
-    mTopicId = getArguments().getString(Constant.BUNDLE_TOPIC_ID);
-    getPresenter().getInstantRead(mTopicId);
-    return view;
+  @Override public int getFragmentLayout() {
+    return R.layout.fragment_topic_instant_read;
   }
 
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    attachPresenter(new InstantReadPresenter());
+    mTopicId = getArguments().getString(Constant.BUNDLE_TOPIC_ID);
+    getPresenter().getInstantRead(mTopicId);
     initWebSettings();
   }
 
-  @Override public InstantReadPresenter getPresenter() {
-    return mPresenter;
-  }
-
-  @Override public void onSuccess(InstantReadData t) {
-    if (t == null) return;
-    final InstantReadData data = (InstantReadData) t;
+  @Override public void onSuccess(final InstantReadData data) {
+    if (data == null) return;
     mTxtTopicTitle.setText(data.getTitle());
     mTxtSource.setText(getString(R.string.source_fromat, data.getSiteName()));
     if (!TextUtils.isEmpty(data.getUrl())) {

@@ -2,6 +2,7 @@ package com.chihopang.readhub.feature.topic.detail;
 
 import android.os.AsyncTask;
 import com.chihopang.readhub.app.Constant;
+import com.chihopang.readhub.base.BasePresenter;
 import com.chihopang.readhub.base.mvp.INetworkPresenter;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.model.TopicTimeLine;
@@ -20,25 +21,23 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class TopicDetailPresenter implements INetworkPresenter {
+public class TopicDetailPresenter extends BasePresenter<TopicDetailFragment>
+    implements INetworkPresenter<TopicDetailFragment> {
   private HotTopicService mService = ApiService.createHotTopicService();
-  private TopicDetailFragment mView;
   private String mTopicId;
-
-  public TopicDetailPresenter(TopicDetailFragment mView) {
-    this.mView = mView;
-  }
 
   @Override public void start() {
     request().observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
         .subscribe(new Consumer<Topic>() {
           @Override public void accept(@NonNull Topic topic) throws Exception {
+            if (getView() == null) return;
             getView().onSuccess(topic);
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
             throwable.printStackTrace();
+            if (getView() == null) return;
             getView().onError(throwable);
           }
         });
@@ -55,45 +54,52 @@ public class TopicDetailPresenter implements INetworkPresenter {
     return null;
   }
 
-  @Override public TopicDetailFragment getView() {
-    return mView;
-  }
-
   public void getTopicDetail(String topicId) {
     mTopicId = topicId;
     start();
   }
 
   protected void getTimeLine(final String topicId) {
-    new AsyncTask<Void, Void, Document>() {
-      @Override protected Document doInBackground(Void... params) {
-        Document document = null;
-        try {
-          document = Jsoup.connect(Constant.TOPIC_DETAIL_URL + topicId).get();
-        } catch (IOException e) {
-          e.printStackTrace();
-        }
-        return document;
-      }
+    new TimeLineAsyncTask(topicId, this).execute();
+  }
 
-      @Override protected void onPostExecute(Document document) {
-        super.onPostExecute(document);
-        if (document == null) return;
-        Elements timelineContainer = document.getElementsByClass(
-            "timeline__container___3jHS8 timeline__container--PC___1D1r7");
-        if (timelineContainer == null || timelineContainer.select("li").isEmpty()) return;
-        List<TopicTimeLine> timeLines = new ArrayList<>();
-        for (Element liElement : timelineContainer.select("li")) {
-          TopicTimeLine timeLine = new TopicTimeLine();
-          timeLine.date = liElement.getElementsByClass("date-item___1io1R").text();
-          Element contentElement = liElement.getElementsByClass("content-item___3KfMq").get(0);
-          timeLine.content = contentElement.getElementsByTag("a").get(0).text();
-          timeLine.url = contentElement.getElementsByTag("a").get(0).attr("href");
-          timeLines.add(timeLine);
-        }
-        getView().onGetTimeLineSuccess(timeLines);
+  public static class TimeLineAsyncTask extends AsyncTask<Void, Void, Document> {
+    private String mTopicId;
+    private TopicDetailPresenter mPresenter;
+
+    public TimeLineAsyncTask(String topicId, TopicDetailPresenter presenter) {
+      mTopicId = topicId;
+      mPresenter = presenter;
+    }
+
+    @Override protected Document doInBackground(Void... params) {
+      Document document = null;
+      try {
+        document = Jsoup.connect(Constant.TOPIC_DETAIL_URL + mTopicId).get();
+      } catch (IOException e) {
+        e.printStackTrace();
       }
-    }.execute();
+      return document;
+    }
+
+    @Override protected void onPostExecute(Document document) {
+      super.onPostExecute(document);
+      if (document == null) return;
+      Elements timelineContainer = document.getElementsByClass(
+          "timeline__container___3jHS8 timeline__container--PC___1D1r7");
+      if (timelineContainer == null || timelineContainer.select("li").isEmpty()) return;
+      List<TopicTimeLine> timeLines = new ArrayList<>();
+      for (Element liElement : timelineContainer.select("li")) {
+        TopicTimeLine timeLine = new TopicTimeLine();
+        timeLine.date = liElement.getElementsByClass("date-item___1io1R").text();
+        Element contentElement = liElement.getElementsByClass("content-item___3KfMq").get(0);
+        timeLine.content = contentElement.getElementsByTag("a").get(0).text();
+        timeLine.url = contentElement.getElementsByTag("a").get(0).attr("href");
+        timeLines.add(timeLine);
+      }
+      if (mPresenter.getView() != null) mPresenter.getView().onGetTimeLineSuccess(timeLines);
+      mPresenter = null;
+    }
   }
 
 }

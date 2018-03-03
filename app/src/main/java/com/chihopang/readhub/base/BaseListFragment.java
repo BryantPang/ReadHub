@@ -8,24 +8,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.mvp.INetworkView;
 import java.util.List;
 import me.yokeyword.fragmentation.SupportActivity;
-import me.yokeyword.fragmentation.SupportFragment;
 import mehdi.sakout.dynamicbox.DynamicBox;
 
-public abstract class BaseListFragment<T> extends SupportFragment implements INetworkView<List> {
+public abstract class BaseListFragment<D> extends BaseFragment<BaseListPresenter> implements
+    INetworkView<BaseListPresenter, List<D>> {
   private static final int VIEW_TYPE_LAST_ITEM = 1;
 
   private SupportActivity mActivity;
-  private BaseListPresenter<T> mPresenter = createPresenter();
   public DynamicBox mBox;
   boolean hasMore = true;
 
@@ -33,7 +30,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
   @BindView(R.id.recycler_view) RecyclerView mRecyclerView;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
   @BindView(R.id.frame_list_container) FrameLayout mFrameContainer;
-  private BaseAdapter<T> mAdapter = new BaseAdapter<T>() {
+  private BaseAdapter<D> mAdapter = new BaseAdapter<D>() {
     @Override public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
       if (viewType == VIEW_TYPE_LAST_ITEM) return new LoadingViewHolder(parent, hasMore());
       return provideViewHolder(parent, viewType);
@@ -54,15 +51,16 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
   };
   private LinearLayoutManager mManager;
 
-  @Nullable @Override
-  public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_base_list, container, false);
-    ButterKnife.bind(this, view);
+  @Override public int getFragmentLayout() {
+    return R.layout.fragment_base_list;
+  }
+
+  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    attachPresenter(createPresenter());
     initContent();
     if (mAdapter.getItemCount() == 0) requestData();
     setRetainInstance(true);
-    return view;
   }
 
   @Override public void onAttach(Context context) {
@@ -112,15 +110,20 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     if (mSwipeRefreshLayout.isRefreshing()) mSwipeRefreshLayout.setRefreshing(false);
     mBox.hideAll();
     if (datas != null && datas.size() != 0) mAdapter.addItems(datas);
+    if (mAdapter.getItemCount() != 0) {
+      RecyclerView.ViewHolder viewHolder =
+          mRecyclerView.findViewHolderForAdapterPosition(mAdapter.getItemCount() - 1);
+      if (viewHolder instanceof LoadingViewHolder) {
+        ((LoadingViewHolder) viewHolder).bindTo(hasMore());
+      } else {
+        mAdapter.notifyItemChanged(mAdapter.getItemCount() - 1);
+      }
+    }
   }
 
   @Override public void onError(Throwable e) {
     mBox.setOtherExceptionMessage(e.getMessage());
     mBox.showExceptionLayout();
-  }
-
-  public BaseListPresenter<T> getPresenter() {
-    return mPresenter;
   }
 
   private void requestData() {
@@ -150,7 +153,7 @@ public abstract class BaseListFragment<T> extends SupportFragment implements INe
     }
   }
 
-  public abstract BaseViewHolder<T> provideViewHolder(ViewGroup parent, int viewType);
+  public abstract BaseViewHolder<D> provideViewHolder(ViewGroup parent, int viewType);
 
-  public abstract BaseListPresenter<T> createPresenter();
+  public abstract BaseListPresenter<D> createPresenter();
 }
