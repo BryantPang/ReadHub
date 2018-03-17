@@ -7,7 +7,8 @@
 
   <string name="author_time_format">%1$s·%2$s</string>
   <string name="site_author_time_format">%1$s/%2$s·%3$s</string>
-  <string name="app_author">Readhub · Android\nby ChihoPang</string>
+  <string name="app_info">Readhub · Android</string>
+  <string name="app_info_format">Readhub · Android\n%1$s</string>
   <string name="network_error">网络错误</string>
   <string name="access_success">访问成功</string>
   <string name="no_more_to_load">已经到底啦~</string>

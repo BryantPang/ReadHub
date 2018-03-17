@@ -6,8 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -17,6 +22,7 @@ import com.chihopang.readhub.base.BaseFragment;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
+import com.chihopang.readhub.util.Utils;
 import com.tencent.bugly.beta.Beta;
 
 public class MoreFragment extends BaseFragment {
@@ -27,15 +33,19 @@ public class MoreFragment extends BaseFragment {
   }
 
   @BindView(R.id.scroll_view) NestedScrollView mScrollView;
+  @BindView(R.id.txt_app_info) TextView mTxtAppInfo;
   private AlertDialog mIssueDialog;
 
   @Override public int getFragmentLayout() {
     return R.layout.fragment_more;
   }
 
-  @OnClick(R.id.btn_go_personal_page) void goPersonalPage() {
-    ((MainActivity) getContext()).findFragment(MainFragment.class)
-        .start(WebViewFragment.newInstance(Constant.PERSONAL_PAGE_URL));
+  @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    String version = Utils.getAppVersionName(getContext());
+    if (!TextUtils.isEmpty(version)) {
+      mTxtAppInfo.setText(getString(R.string.app_info_format, version));
+    }
   }
 
   @OnClick(R.id.btn_go_readhub_page) void goReadhubPage() {
