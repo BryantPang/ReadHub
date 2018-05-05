@@ -48,4 +48,16 @@
   <string name="check_update">检查更新</string>
   <string name="dialog_submit_issue_message">使用过程中如有问题反馈或相关建议，请通过以下方式提交：</string>
   <string name="copy_email_success">已将开发者邮箱复制至剪贴板</string>
+  <string name="favorites">收藏夹</string>
+  <string name="favorite_this_news">收藏该资讯</string>
+  <string name="favorite_this_topic">收藏该话题</string>
+  <string name="empty_remind">暂无内容</string>
+
+  <string-array name="news_item_long_click">
+    <item>收藏该资讯</item>
+  </string-array>
+
+  <string-array name="topic_item_long_click">
+    <item>收藏该话题</item>
+  </string-array>
 </resources>

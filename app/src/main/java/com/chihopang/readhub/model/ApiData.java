@@ -2,13 +2,13 @@ package com.chihopang.readhub.model;
 
 import java.util.List;
 
-public class ApiData {
-  private List<Topic> data;
+public class ApiData<T> {
+  private List<T> data;
   private int pageSize;
   private int totalItems;
   private int totalPages;
 
-  public List<Topic> getData() {
+  public List<T> getData() {
     return data;
   }
 
@@ -25,6 +25,14 @@ public class ApiData {
   }
 
   public String getNextPageUrl() {
-    return "?lastCursor=" + data.get(data.size() - 1).getOrder() + "&pageSize=10";
+    return "?lastCursor=" + getLastCursor() + "&pageSize=10";
+  }
+
+  public String getLastCursor() {
+    String lastCursor = null;
+    Object lastData = data.get(data.size() - 1);
+    if (lastData instanceof Topic) lastCursor = ((Topic) lastData).order;
+    if (lastData instanceof News) lastCursor = ((News) lastData).getLastCursor();
+    return lastCursor;
   }
 }

@@ -22,6 +22,7 @@ import com.chihopang.readhub.base.BaseFragment;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
 import com.chihopang.readhub.feature.main.MainFragment;
+import com.chihopang.readhub.feature.more.favorites.FavoritesFragment;
 import com.chihopang.readhub.util.Utils;
 import com.tencent.bugly.beta.Beta;
 
@@ -51,6 +52,11 @@ public class MoreFragment extends BaseFragment {
   @OnClick(R.id.btn_go_readhub_page) void goReadhubPage() {
     ((MainActivity) getContext()).findFragment(MainFragment.class)
         .start(WebViewFragment.newInstance(Constant.READHUB_PAGE_URL));
+  }
+
+  @OnClick(R.id.btn_favorites) void goFavorite() {
+    ((MainActivity) getContext()).findFragment(MainFragment.class)
+        .start(FavoritesFragment.newInstance());
   }
 
   @OnClick(R.id.btn_check_update) void checkUpdate() {

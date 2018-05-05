@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.chihopang.readhub.R;
 import com.chihopang.readhub.app.Constant;
-import com.chihopang.readhub.model.Topic;
+import com.chihopang.readhub.database.DatabaseUtil;
+import com.chihopang.readhub.model.News;
 import me.yokeyword.fragmentation_swipeback.SwipeBackFragment;
 import org.parceler.Parcels;
 
@@ -37,14 +37,16 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
   @BindView(R.id.progress_bar_loading_web) ProgressBar mProgressBar;
   @BindView(R.id.swipe_refresh_layout) SwipeRefreshLayout mSwipeRefreshLayout;
   @BindView(R.id.web_view_article_page) WebView mWebView;
-  private Topic mTopic;
   private String mUrl;
-  private static final String APP_CACAHE_DIRNAME = "/webcache";
+  private News mNews;
+  private boolean mIsIndependentNews;//如果是独立的新闻资讯，则在菜单中加入收藏选项
+  private static final String APP_CACHE_DIRNAME = "/webcache";
 
-  public static WebViewFragment newInstance(Topic topic) {
+  public static WebViewFragment newInstance(News news, boolean isIndependentNews) {
     WebViewFragment fragment = new WebViewFragment();
     Bundle bundle = new Bundle();
-    bundle.putParcelable(Constant.EXTRA_TOPIC, Parcels.wrap(topic));
+    bundle.putParcelable(Constant.BUNDLE_NEWS, Parcels.wrap(news));
+    bundle.putBoolean(Constant.BUNDLE_IS_INDEPENDENT_NEWS, isIndependentNews);
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -52,7 +54,7 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
   public static WebViewFragment newInstance(String url) {
     WebViewFragment fragment = new WebViewFragment();
     Bundle bundle = new Bundle();
-    bundle.putString(Constant.EXTRA_URL, url);
+    bundle.putString(Constant.BUNDLE_URL, url);
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -62,8 +64,10 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
       @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_article_page, container, false);
     ButterKnife.bind(this, view);
-    mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
-    mUrl = getArguments().getString(Constant.EXTRA_URL);
+    mNews = Parcels.unwrap(getArguments().getParcelable(Constant.BUNDLE_NEWS));
+    mUrl = getArguments().getString(Constant.BUNDLE_URL);
+    mIsIndependentNews = getArguments().getBoolean(Constant.BUNDLE_IS_INDEPENDENT_NEWS);
+    if (mNews != null) mUrl = mNews.getUrl();
     return attachToSwipeBack(view);
   }
 
@@ -99,8 +103,13 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
       }
     });
     //设置菜单
-    mToolbar.inflateMenu(R.menu.menu_webview_page);
+    mToolbar.inflateMenu(
+        mIsIndependentNews ? R.menu.menu_webview_with_favorite : R.menu.menu_webview_page);
     mToolbar.setOnMenuItemClickListener(this);
+    MenuItem item = mToolbar.getMenu().findItem(R.id.menu_item_favorite);
+    if (mIsIndependentNews && item != null) {
+      item.setChecked(DatabaseUtil.isExist(News.class, mNews.id));
+    }
   }
 
   private void initWebView() {
@@ -131,7 +140,7 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
         mTxtTitle.setText(title);
       }
     });
-    mWebView.loadUrl(TextUtils.isEmpty(mUrl) ? mTopic.getUrl() : mUrl);
+    mWebView.loadUrl(mUrl);
     mSwipeRefreshLayout.setRefreshing(true);
   }
 
@@ -144,7 +153,7 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
     mWebSetting.setDomStorageEnabled(true);
     mWebSetting.setDatabaseEnabled(true);
     mWebSetting.setCacheMode(WebSettings.LOAD_DEFAULT);
-    String cacheDirPath = getContext().getFilesDir().getAbsolutePath() + APP_CACAHE_DIRNAME;
+    String cacheDirPath = getContext().getFilesDir().getAbsolutePath() + APP_CACHE_DIRNAME;
     mWebSetting.setDatabasePath(cacheDirPath);
     mWebSetting.setAppCachePath(cacheDirPath);
     mWebSetting.setAppCacheEnabled(true);
@@ -171,7 +180,7 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
     if (mWebView != null) {
       shareUrl = mWebView.getUrl();
     } else {
-      shareUrl = mTopic == null ? mUrl : mTopic.getUrl();
+      shareUrl = mUrl;
     }
     switch (item.getItemId()) {
       case R.id.menu_item_open_by_browser:
@@ -190,6 +199,15 @@ public class WebViewFragment extends SwipeBackFragment implements Toolbar.OnMenu
         share.setType("text/plain");
         share.putExtra(Intent.EXTRA_TEXT, shareUrl);
         startActivity(Intent.createChooser(share, getString(R.string.share)));
+        return true;
+      case R.id.menu_item_favorite:
+        if (!mIsIndependentNews || mNews == null) break;
+        if (!item.isChecked()) {
+          DatabaseUtil.insert(mNews);
+        } else {
+          DatabaseUtil.delete(mNews);
+        }
+        item.setChecked(!item.isChecked());
         return true;
     }
     return false;

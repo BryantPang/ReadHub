@@ -11,7 +11,8 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class BaseListPresenter<T> extends BasePresenter<BaseListFragment> implements
     INetworkPresenter<BaseListFragment> {
   private String lastCursor;
-  @Override public void start() {
+
+  @SuppressWarnings("unchecked") @Override public void start() {
     request().observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
         .subscribe(new Consumer<ApiData>() {
@@ -22,7 +23,7 @@ public abstract class BaseListPresenter<T> extends BasePresenter<BaseListFragmen
               return;
             }
             getView().onSuccess(apiData.getData());
-            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getLastCursor();
+            lastCursor = apiData.getLastCursor();
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
@@ -33,7 +34,7 @@ public abstract class BaseListPresenter<T> extends BasePresenter<BaseListFragmen
         });
   }
 
-  @Override public void startRequestMore() {
+  @SuppressWarnings("unchecked") @Override public void startRequestMore() {
     requestMore().observeOn(AndroidSchedulers.mainThread())
         .subscribeOn(Schedulers.io())
         .subscribe(new Consumer<ApiData>() {
@@ -48,7 +49,7 @@ public abstract class BaseListPresenter<T> extends BasePresenter<BaseListFragmen
               getView().hasMore = false;
               return;
             }
-            lastCursor = apiData.getData().get(apiData.getData().size() - 1).getLastCursor();
+            lastCursor = apiData.getLastCursor();
           }
         }, new Consumer<Throwable>() {
           @Override public void accept(@NonNull Throwable throwable) throws Exception {
@@ -58,9 +59,9 @@ public abstract class BaseListPresenter<T> extends BasePresenter<BaseListFragmen
         });
   }
 
-  @Override public abstract Observable<ApiData> request();
+  @Override public abstract Observable request();
 
-  @Override public abstract Observable<ApiData> requestMore();
+  @Override public abstract Observable requestMore();
 
   public String getLastCursor() {
     return lastCursor;

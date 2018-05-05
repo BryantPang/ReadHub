@@ -7,7 +7,8 @@
   <LinearLayout
       android:layout_width="match_parent" android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:focusable="true" android:focusableInTouchMode="true">
+      android:focusable="true" android:focusableInTouchMode="true"
+      android:paddingBottom="@dimen/bottom_navigation_view_height">
     <ImageView
         android:layout_width="@dimen/avatar_size" android:layout_height="@dimen/avatar_size"
         android:src="@mipmap/ic_launcher"
@@ -38,6 +39,20 @@
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_18" android:textColor="@color/textDark"
         android:text="@string/readhub_web" android:gravity="center_vertical"
+        android:padding="@dimen/padding_10" android:textAllCaps="false"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginRight="@dimen/margin_20"
+        android:drawableRight="@drawable/ic_arrow_right"
+        android:drawablePadding="@dimen/padding_10"
+        android:background="?attr/selectableItemBackground"/>
+    <View android:layout_width="match_parent" android:layout_height="@dimen/divider_height"
+        android:background="@color/dividerGrey"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginRight="@dimen/margin_20"/>
+    <Button android:id="@+id/btn_favorites"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_18" android:textColor="@color/textDark"
+        android:text="@string/favorites" android:gravity="center_vertical"
         android:padding="@dimen/padding_10" android:textAllCaps="false"
         android:layout_marginLeft="@dimen/margin_20"
         android:layout_marginRight="@dimen/margin_20"

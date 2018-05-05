@@ -14,7 +14,7 @@ import com.chihopang.readhub.R;
 import com.chihopang.readhub.base.BaseFragment;
 import com.chihopang.readhub.base.BaseListFragment;
 import com.chihopang.readhub.feature.blockchain.BCNewsFragment;
-import com.chihopang.readhub.feature.developer.news.TechNewsFragment;
+import com.chihopang.readhub.feature.developer.TechNewsFragment;
 import com.chihopang.readhub.feature.more.MoreFragment;
 import com.chihopang.readhub.feature.news.NewsFragment;
 import com.chihopang.readhub.feature.topic.list.HotTopicFragment;

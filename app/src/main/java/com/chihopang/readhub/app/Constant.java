@@ -8,9 +8,12 @@ public interface Constant {
   String TOPIC_DETAIL_URL =
       "https://readhub.me/topic/";
   //Extra
-  String EXTRA_TOPIC = "EXTRA_TOPIC";
-  String EXTRA_URL = "EXTRA_URL";
+  String BUNDLE_TOPIC = "BUNDLE_TOPIC";
+  String BUNDLE_URL = "BUNDLE_URL";
   String BUNDLE_TOPIC_ID = "BUNDLE_TOPIC_ID";
+  String BUNDLE_NEWS = "BUNDLE_NEWS";
+  String BUNDLE_TYPES = "BUNDLE_TYPES";
+  String BUNDLE_IS_INDEPENDENT_NEWS = "BUNDLE_IS_INDEPENDENT_NEWS";
 
   //其他
   String BUGGLY_APP_ID = "547fe840fc";

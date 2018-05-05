@@ -19,6 +19,7 @@ import com.chihopang.readhub.feature.main.MainFragment;
 import com.chihopang.readhub.feature.topic.detail.TopicDetailFragment;
 import com.chihopang.readhub.feature.topic.instant.InstantReadFragment;
 import com.chihopang.readhub.model.Topic;
+import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportActivity;
 
 public class HotTopicViewHolder extends BaseViewHolder<Topic> {
@@ -54,14 +55,20 @@ public class HotTopicViewHolder extends BaseViewHolder<Topic> {
 
     itemView.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
+        ISupportFragment fragment;
+        if (value.newsArray == null) {
+          fragment = TopicDetailFragment.newInstance(value.id);
+        } else {
+          fragment = TopicDetailFragment.newInstance(value);
+        }
         ((MainActivity) v.getContext()).findFragment(MainFragment.class)
-            .start(TopicDetailFragment.newInstance(value));
+            .start(fragment);
       }
     });
 
     mFrameInstantRead.setOnClickListener(new View.OnClickListener() {
       @Override public void onClick(View v) {
-        InstantReadFragment.newInstance(value.getId())
+        InstantReadFragment.newInstance(value.id)
             .show(((SupportActivity) v.getContext()).getSupportFragmentManager(),
                 InstantReadFragment.TAG);
       }

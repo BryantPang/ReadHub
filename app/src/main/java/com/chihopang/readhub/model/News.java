@@ -6,22 +6,31 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import com.chihopang.readhub.util.TimeUtil;
-import java.util.ArrayList;
 import org.parceler.Parcel;
 
-@Entity @Parcel public class Topic {
+@Entity @Parcel public class News {
   @PrimaryKey @NonNull public String id;
-  public String createdAt;
-  public String updatedAt;
-  public String publishDate;
-  public String order;
   public String title;
   public String summary;
+  public String summaryAuto;
+  public String url;
+  public String mobileUrl;
+  public String siteName;
+  public String siteSlug;
+  public String language;
+  public String authorName;
+  public String publishDate;
 
-  @Ignore public ArrayList<News> newsArray;
-  @Ignore public Extra extra;
+  //以下为 Topic.newsArray 多余内容
+  public int groupId;
+  public int duplicateId;
 
-  public Topic() {
+  public News() {
+  }
+
+  @Ignore public String getUrl() {
+    if (!TextUtils.isEmpty(mobileUrl)) return mobileUrl;
+    return url;
   }
 
   @Ignore public String getTitle() {
@@ -40,11 +49,7 @@ import org.parceler.Parcel;
     return TimeUtil.getFormatDate(publishDate);
   }
 
-  @Ignore public boolean hasInstantView() {
-    return extra != null && extra.instantView;
-  }
-
-  @Parcel public static class Extra {
-    boolean instantView;
+  @Ignore public String getLastCursor() {
+    return String.valueOf(TimeUtil.getTimeStamp(publishDate));
   }
 }

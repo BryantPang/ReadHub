@@ -29,8 +29,10 @@ import com.chihopang.readhub.base.BaseAdapter;
 import com.chihopang.readhub.base.BaseSwipeBackFragment;
 import com.chihopang.readhub.base.BaseViewHolder;
 import com.chihopang.readhub.base.mvp.INetworkView;
+import com.chihopang.readhub.database.DatabaseUtil;
 import com.chihopang.readhub.feature.common.WebViewFragment;
 import com.chihopang.readhub.feature.main.MainActivity;
+import com.chihopang.readhub.model.News;
 import com.chihopang.readhub.model.Topic;
 import com.chihopang.readhub.model.TopicTimeLine;
 import com.chihopang.readhub.util.BitmapUtil;
@@ -72,7 +74,7 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
   public static TopicDetailFragment newInstance(Topic topic) {
     TopicDetailFragment fragment = new TopicDetailFragment();
     Bundle bundle = new Bundle();
-    bundle.putParcelable(Constant.EXTRA_TOPIC, Parcels.wrap(topic));
+    bundle.putParcelable(Constant.BUNDLE_TOPIC, Parcels.wrap(topic));
     fragment.setArguments(bundle);
     return fragment;
   }
@@ -92,7 +94,7 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
   @Override public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     attachPresenter(new TopicDetailPresenter());
-    mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.EXTRA_TOPIC));
+    mTopic = Parcels.unwrap(getArguments().getParcelable(Constant.BUNDLE_TOPIC));
     if (mTopic != null) {
       onSuccess(mTopic);
       return;
@@ -117,6 +119,8 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
     });
     mToolbar.inflateMenu(R.menu.menu_topic_detail);
     mToolbar.setOnMenuItemClickListener(this);
+    MenuItem item = mToolbar.getMenu().findItem(R.id.menu_item_favorite);
+    if (item != null) item.setChecked(DatabaseUtil.isExist(Topic.class, mTopic.id));
     mTxtTopicTitle.setText(mTopic.getTitle());
     mTxtToolbarTitle.setText(mTopic.getTitle());
     mTxtTopicTime.setText(mTopic.getFormatPublishDate());
@@ -124,7 +128,7 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
     mTxtTopicDescription.setVisibility(
         TextUtils.isEmpty(mTopic.getSummary()) ? View.GONE : View.VISIBLE);
     mLinearTitleContainer.removeAllViews();
-    for (final Topic topic : mTopic.getNewsArray()) {
+    for (final News news : mTopic.newsArray) {
       TextView textView = new TextView(getContext());
       LinearLayout.LayoutParams params =
           new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -136,20 +140,20 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
       textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
       textView.setTextColor(Color.parseColor("#607D8B"));
       textView.setBackgroundResource(R.drawable.selector_btn_background);
-      if (TextUtils.isEmpty(topic.getSiteName())) {
-        textView.setText(topic.getTitle());
+      if (TextUtils.isEmpty(news.siteName)) {
+        textView.setText(news.getTitle());
       } else {
         SpannableString spannableTitle =
-            SpannableString.valueOf(topic.getTitle() + " " + topic.getSiteName());
+            SpannableString.valueOf(news.getTitle() + " " + news.siteName);
         spannableTitle.setSpan(new ForegroundColorSpan(Color.parseColor("#AAACB4")),
-            topic.getTitle().length() + 1,
-            topic.getTitle().length() + topic.getSiteName().length() + 1,
+            news.getTitle().length() + 1,
+            news.getTitle().length() + news.siteName.length() + 1,
             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(spannableTitle);
       }
       textView.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View v) {
-          start(WebViewFragment.newInstance(topic));
+          start(WebViewFragment.newInstance(news, false));
         }
       });
       mLinearTitleContainer.addView(textView);
@@ -172,7 +176,7 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
   @Override public void onSuccess(Topic topic) {
     mTopic = topic;
     setupView();
-    getPresenter().getTimeLine(topic.getId());
+    getPresenter().getTimeLine(topic.id);
   }
 
   @Override public void onError(Throwable e) {
@@ -180,17 +184,29 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
   }
 
   @Override public boolean onMenuItemClick(MenuItem item) {
-    if (getContext() instanceof MainActivity) {
-      ((MainActivity) getContext()).requestPermissionWithAction(
-          Manifest.permission.WRITE_EXTERNAL_STORAGE,
-          MainActivity.PERMISSION_STORAGE, new Runnable() {
-            @Override public void run() {
-              new CreateSharePictureTask(getContext(), mTopic).execute(
-                  mTopicShareView.getChildAt(0));
-            }
-          });
+    switch (item.getItemId()) {
+      case R.id.menu_item_share:
+        if (getContext() instanceof MainActivity) {
+          ((MainActivity) getContext()).requestPermissionWithAction(
+              Manifest.permission.WRITE_EXTERNAL_STORAGE,
+              MainActivity.PERMISSION_STORAGE, new Runnable() {
+                @Override public void run() {
+                  new CreateSharePictureTask(getContext(), mTopic).execute(
+                      mTopicShareView.getChildAt(0));
+                }
+              });
+        }
+        return true;
+      case R.id.menu_item_favorite:
+        if (!item.isChecked()) {
+          DatabaseUtil.insert(mTopic);
+        } else {
+          DatabaseUtil.delete(mTopic);
+        }
+        item.setChecked(!item.isChecked());
+        return true;
     }
-    return true;
+    return false;
   }
 
   public static class CreateSharePictureTask extends AsyncTask<View, Void, Boolean> {
@@ -204,7 +220,7 @@ public class TopicDetailFragment extends BaseSwipeBackFragment<TopicDetailPresen
     }
 
     @Override protected Boolean doInBackground(View... params) {
-      return BitmapUtil.saveViewAsImage(params[0], "topic_" + mTopic.getId());
+      return BitmapUtil.saveViewAsImage(params[0], "topic_" + mTopic.id);
     }
 
     @Override protected void onPostExecute(Boolean isSuccess) {

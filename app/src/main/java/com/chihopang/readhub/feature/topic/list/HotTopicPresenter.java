@@ -10,11 +10,11 @@ import io.reactivex.Observable;
 public class HotTopicPresenter extends BaseListPresenter<Topic> {
   private HotTopicService mService = ApiService.createHotTopicService();
 
-  @Override public Observable<ApiData> request() {
+  @Override public Observable<ApiData<Topic>> request() {
     return mService.getHotTopic();
   }
 
-  @Override public Observable<ApiData> requestMore() {
+  @Override public Observable<ApiData<Topic>> requestMore() {
     return mService.getMoreHotTopic(getLastCursor(), 10);
   }
 }
